@@ -8,6 +8,8 @@ import Decimal from './Decimal';
 import Logophilia from './Logophilia';
 import Bookshelf from './Bookshelf';
 import Travel from './Travel';
+import Professional from './Professional';
+import Autodidact from './Autodidact';
 
 const styles = theme => ({
   root: {
@@ -16,7 +18,7 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
 	margin: "auto",
     width: "85%",
-    minHeight: 'calc(100vh - 200px)',
+    minHeight: '100vh',
   },
 });
 
@@ -34,6 +36,8 @@ class Main extends Component {
                 <Route path='/logophilia' component={Logophilia}/>
                 <Route path='/books' component={Bookshelf}/>
                 <Route path='/travel' component={Travel}/>
+                <Route path='/professional' component={Professional}/>
+                <Route path='/learning' component={Autodidact}/>
               </Switch>
               </Paper>
             </div>

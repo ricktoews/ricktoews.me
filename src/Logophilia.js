@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import wordlist from './wordlist';
+import { MastheadWrapped } from './cards.js';
 
 const styles = {
 	root: {
@@ -34,7 +35,7 @@ class Logophilia extends Component {
 	render() {
 		return (
             <div>
-			<h1>For Lovers of Words</h1>
+			<MastheadWrapped id="quote" />
             {this.state.wordlist}
             </div>
 		);

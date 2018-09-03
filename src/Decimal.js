@@ -1,10 +1,11 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import DenomInput from './DenomInput';
+import { MastheadWrapped } from './cards.js';
 
 const Decimal = () => (
   <div>
-    <h2>Decimals</h2>
+    <MastheadWrapped id="arithmophile" />
     <Switch>
       <Route path="/decimal/:denom?" component={DenomInput} />
     </Switch>
