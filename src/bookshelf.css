@@ -1,0 +1,32 @@
+.book-item {
+	border: 1px solid #eee;
+	padding-top:3px;
+	margin-bottom:50px;
+	box-shadow: 3px 3px 7px 1px #999;
+}
+.book-image {
+	float: left;
+	margin-right:30px;
+}
+.book-image img {
+	margin-left:3px;
+	margin-bottom:5px;
+}
+.book-info {
+	float: right;
+	width:85%;
+	margin-bottom:5px;
+	color:#999;
+}
+.book-title {
+	font-size:10pt;
+	color:#008;
+	font-weight:bold;
+}
+.book-author {
+	color:#008;
+	font-size:10pt;
+}
+.book-description {
+	font-size:10pt;
+}
