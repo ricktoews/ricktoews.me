@@ -1,6 +1,14 @@
 body {
-  margin: 0;
-  padding: 20px 0;
-  font-family: sans-serif;
-  background: black;
+	margin: 0;
+	padding: 20px 0;
+	font-family: sans-serif;
+	background: black;
 }
+
+@media all and (max-width:480px) {
+	body {
+        padding: 0;
+		background:white;
+	}
+}
+

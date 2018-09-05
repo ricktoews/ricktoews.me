@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Book, { fetchBooks } from './Book.js';
-import { MastheadWrapped } from './cards.js';
+import Masthead from './Masthead';
 
 
 
@@ -22,7 +22,7 @@ class Bookshelf extends Component {
 	render() {
 		return (
             <div>
-			  <MastheadWrapped id="bookshelf"/>
+			  <Masthead id="bookshelf"/>
 			  { this.state.books.map((item, ndx) => {
 			  	return <Book key={ndx} bookData={item} />
 			  }) }

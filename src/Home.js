@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import MediaQuery from 'react-responsive';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import HomeCardWrapped from './HomeCard';
 import green from '@material-ui/core/colors/green';
 import indigo from '@material-ui/core/colors/indigo';
 import './Home.css';
+import MobileHome from './mobile/Home.js';
 
 const theme = createMuiTheme({
 	palette: {
@@ -30,6 +32,7 @@ class Home extends Component {
 		return (
 			<MuiThemeProvider theme={theme}>
 
+            <MediaQuery query="(min-width:960px)">
 			<div style={{ paddingTop: "20px" }}>
             <HomeIntro />
 
@@ -66,6 +69,11 @@ class Home extends Component {
             </div>
 
             </div>
+            </MediaQuery>
+
+            <MediaQuery query="(max-width: 980px)">
+            <MobileHome />
+            </MediaQuery>
 
             </MuiThemeProvider>
 		)

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MediaQuery from 'react-responsive';
 import './bookshelf.css';
 
 function fetchBooks() {
@@ -22,11 +23,19 @@ class Book extends Component {
 		return (
 			<div className="book-item">
 			  <div className="book-image"><img src={bookData.image} alt={bookData.title} /></div>
+              <MediaQuery query="(min-width: 960px)">
 			  <div className="book-info">
 			    <div className="book-title">{bookData.title}</div>
 			    <div className="book-author">{authors}</div>
 			    <div className="book-description">{description}</div>
 			  </div>
+              </MediaQuery>
+
+              <MediaQuery query="(max-width: 960px)">
+			    <div className="book-title">{bookData.title}</div>
+			    <div className="book-author">{authors}</div>
+			    <div className="book-description" dangerouslySetInnerHTML={{__html: description}} />
+              </MediaQuery>
 			  <br style={{clear:"both"}}/>
 			</div>
 		);

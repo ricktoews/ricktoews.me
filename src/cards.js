@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { MuiThemeProvider, withStyles, createMuiTheme } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
-import HomeIcon from '@material-ui/icons/Home';
-import IconButton from '@material-ui/core/IconButton';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 const cards = {
+	home: {
+		title: 'Home',
+		primaryColor: '3f51b5',
+		iconPath: 'M3 5H1v16c0 1.1.9 2 2 2h16v-2H3V5zm11 10h2V5h-4v2h2v8zm7-14H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 16H7V3h14v14z',
+		link: '/',
+	},
 	arithmophile: {
 		title: 'Arithmophile',
 		primaryColor: '3f51b5',
@@ -14,7 +15,7 @@ const cards = {
 	},
 	bookshelf: {
 		title: 'Bookshelf',
-		primaryColor: 'e91e63',
+		primaryColor: '76ff03',
 		iconPath: 'M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z',
 		link: '/books',
 	},
@@ -26,7 +27,7 @@ const cards = {
 	},
 	quote: {
 		title: 'Eye-catching Quote',
-		primaryColor: '76ff03',
+		primaryColor: 'e91e63',
 		iconPath: 'M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z',
 		link: '/logophilia',
 	},
@@ -59,81 +60,4 @@ const homeCardTheme = specs => {
 	});
 }
 
-
-const mastheadTheme = specs => {
-	return createMuiTheme({
-		palette: {
-			primary: {
-				main: '#' + specs.primaryColor,
-			},
-		},
-	});
-}
-
-const styles = (theme) => {
-	return ({
-	root: {
-		position: 'relative',
-		backgroundColor: "#ffffff",
-	},
-	topTrim: {
-		height: 12,
-	},
-	titleBar: {
-    	...theme.mixins.gutters(),
-		height: 64,
-		display: "flex",
-		position: "relative",
-		alignItems: "center",
-		fontSize: "18pt",
-		marginBottom: "20px",
-	},
-	cardContent: {
-		...theme.mixins.gutters(),
-		marginTop: 12,
-		overflowY: "scroll",
-		height: 200,
-	},
-	button: {
-		margin: theme.spacing.unit,
-	},
-	});
-};
-
-
-class Masthead extends Component {
-
-	constructor(props) {
-		super(props);
-		this.handleClick = this.handleClick.bind(this);
-	}
-
-	handleClick() {
-		const { history } = this.props;
-		history.push('/');
-	}
-
-	render() {
-		const { id, classes } = this.props;
-		const title = cards[id].title;
-		const primaryColor = cards[id].primaryColor;
-		const cardTheme = mastheadTheme({ primaryColor });
-		const primary = cardTheme.palette.primary;
-		return (
-		  <MuiThemeProvider theme={cardTheme}>
-		    <div className={ classes.topTrim } style={{backgroundColor: primary.dark}}></div>
-			<div className={ classes.titleBar } style={{color: primary.contrastText, backgroundColor: primary.light}}>
-		      <IconButton color="primary" className={classes.button}>
-		        <HomeIcon onClick={this.handleClick}  />
-		      </IconButton>
-		      { title }
-		    </div>
-		  </MuiThemeProvider>
-		);
-	}
-}
-
-const MastheadWrapped = withRouter(withStyles(styles)(Masthead));
-
-
-export { cards, homeCardTheme, MastheadWrapped };
+export { cards, homeCardTheme };

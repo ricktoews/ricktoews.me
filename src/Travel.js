@@ -5,7 +5,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { MastheadWrapped } from './cards.js';
+import Masthead from './Masthead';
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -153,7 +153,7 @@ class Travel extends Component {
 
 		return (
 		    <div>
-			  <MastheadWrapped id="travel" />
+			  <Masthead id="travel" />
 		      <ExpansionPanel>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                   <Typography className={classes.heading}><TravelIcon place="copenhagen"/>2017 - Copenhagen</Typography>

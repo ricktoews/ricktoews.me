@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { MastheadWrapped } from './cards.js';
+import Masthead from './Masthead';
 
 const styles = {
 	root: {
@@ -9,14 +9,10 @@ const styles = {
 
 class Professional extends Component {
 
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return (
             <div>
-			  <MastheadWrapped id="professional" />
+			  <Masthead id="professional" />
             </div>
 		);
 	}

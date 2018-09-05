@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MediaQuery from 'react-responsive';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -24,25 +25,39 @@ const styles = theme => ({
 
 class Main extends Component {
 
-	render() {
-		const { classes } = this.props;
+  render() {
+    const { classes } = this.props;
 
-		return (
-            <div>
-              <Paper className={classes.root} elevation={1}>
-              <Switch>
-                <Route exact path='/' component={Home}/>
-                <Route path='/decimal' component={Decimal}/>
-                <Route path='/logophilia' component={Logophilia}/>
-                <Route path='/books' component={Bookshelf}/>
-                <Route path='/travel' component={Travel}/>
-                <Route path='/professional' component={Professional}/>
-                <Route path='/learning' component={Autodidact}/>
-              </Switch>
-              </Paper>
-            </div>
-		);
-	}
+    return (
+      <div>
+        <MediaQuery query="(min-width:960px)">
+        <Paper className={classes.root} elevation={1}>
+          <Switch>
+            <Route exact path='/' component={Home}/>
+            <Route path='/decimal' component={Decimal}/>
+            <Route path='/logophilia' component={Logophilia}/>
+            <Route path='/books' component={Bookshelf}/>
+            <Route path='/travel' component={Travel}/>
+            <Route path='/professional' component={Professional}/>
+            <Route path='/learning' component={Autodidact}/>
+          </Switch>
+        </Paper>
+        </MediaQuery>
+
+        <MediaQuery query="(max-width:480px)">
+          <Switch>
+            <Route exact path='/' component={Home}/>
+            <Route path='/decimal' component={Decimal}/>
+            <Route path='/logophilia' component={Logophilia}/>
+            <Route path='/books' component={Bookshelf}/>
+            <Route path='/travel' component={Travel}/>
+            <Route path='/professional' component={Professional}/>
+            <Route path='/learning' component={Autodidact}/>
+          </Switch>
+        </MediaQuery>
+      </div>
+    );
+  }
 }
 
 Main.propTypes = {
