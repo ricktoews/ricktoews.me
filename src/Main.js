@@ -30,7 +30,7 @@ class Main extends Component {
 
     return (
       <div>
-        <MediaQuery query="(min-width:960px)">
+        <MediaQuery query="(max-width:4096px) and (min-width:481px)">
         <Paper className={classes.root} elevation={1}>
           <Switch>
             <Route exact path='/' component={Home}/>

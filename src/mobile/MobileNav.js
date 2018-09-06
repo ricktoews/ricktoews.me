@@ -17,6 +17,7 @@ const styles = {
     position: 'absolute',
     top: 0,
     right: 10,
+	paddingTop: 6,
   }
 };
 

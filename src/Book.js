@@ -23,7 +23,7 @@ class Book extends Component {
 		return (
 			<div className="book-item">
 			  <div className="book-image"><img src={bookData.image} alt={bookData.title} /></div>
-              <MediaQuery query="(min-width: 960px)">
+              <MediaQuery query="(max-width: 4096px) and (min-width:481px)">
 			  <div className="book-info">
 			    <div className="book-title">{bookData.title}</div>
 			    <div className="book-author">{authors}</div>
@@ -31,7 +31,7 @@ class Book extends Component {
 			  </div>
               </MediaQuery>
 
-              <MediaQuery query="(max-width: 960px)">
+              <MediaQuery query="(max-width: 480px)">
 			    <div className="book-title">{bookData.title}</div>
 			    <div className="book-author">{authors}</div>
 			    <div className="book-description" dangerouslySetInnerHTML={{__html: description}} />
