@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import MediaQuery from 'react-responsive';
 import { withRouter } from 'react-router-dom';
 import { MuiThemeProvider, withStyles, createMuiTheme } from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
 import IconButton from '@material-ui/core/IconButton';
 import MobileNav from './mobile/MobileNav';
-import { cards } from './cards';
+import CardIcon from './CardIcon';
+import { cards, homeCardTheme } from './cards';
 
 const mastheadTheme = specs => {
   return createMuiTheme({
@@ -25,6 +27,17 @@ const styles = (theme) => {
     topTrim: {
       height: 12,
     },
+    topTrimMobile: {
+      height: 6,
+    },
+	shadowBarMobile: {
+		position: 'absolute',
+		top: '8px',
+		left: '1px',
+		width: 'calc(100% - 2px)',
+		height: '34px',
+		boxShadow: '0 1px 5px 0px #666',
+	},
     titleBar: {
       ...theme.mixins.gutters(),
       height: 64,
@@ -34,11 +47,14 @@ const styles = (theme) => {
       fontSize: "18pt",
       marginBottom: "20px",
     },
-    cardContent: {
+    titleBarMobile: {
       ...theme.mixins.gutters(),
-      marginTop: 12,
-      overflowY: "scroll",
-      height: 200,
+      height: 36,
+      display: "flex",
+      position: "relative",
+      alignItems: "center",
+      fontSize: "14pt",
+      marginBottom: "20px",
     },
     button: {
       margin: theme.spacing.unit,
@@ -63,15 +79,27 @@ class Masthead extends Component {
     const { id, classes } = this.props;
     const title = cards[id].title;
     const primaryColor = cards[id].primaryColor;
-    const cardTheme = mastheadTheme({ primaryColor });
+    const cardTheme = homeCardTheme({ primaryColor });
     const primary = cardTheme.palette.primary;
     return (
       <MuiThemeProvider theme={cardTheme}>
+      <MediaQuery query="(max-width: 4096px) and (min-width: 481px)">
         <div className={ classes.topTrim } style={{backgroundColor: primary.dark}}></div>
         <div className={ classes.titleBar } style={{color: primary.contrastText, backgroundColor: primary.light}}>
         <MobileNav primaryColor={ primary }/>
         { title }
         </div>
+      </MediaQuery>
+
+      <MediaQuery query="(max-width: 480px)">
+        <div className={ classes.topTrimMobile } style={{backgroundColor: primary.dark}}></div>
+        <div className={ classes.shadowBarMobile }></div>
+        <div className={ classes.titleBarMobile } style={{color: primary.contrastText, backgroundColor: primary.light}}>
+        <MobileNav primaryColor={ primary }/>
+			  <CardIcon id={id} color="secondary" />
+        { title }
+        </div>
+      </MediaQuery>
       </MuiThemeProvider>
     );
   }

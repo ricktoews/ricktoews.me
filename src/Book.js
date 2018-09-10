@@ -14,28 +14,52 @@ function fetchBooks() {
 	}
 export { fetchBooks };
 
+function upArrow() {
+  return (
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <path d="M7 14l5-5 5 5z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+  );
+}
+
+function dnArrow() {
+  return (
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <path d="M7 10l5 5 5-5z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+</svg>
+  );
+}
 
 class Book extends Component {
+	constructor(props) {
+		super(props);
+		this.toggleExpand = this.toggleExpand.bind(this);
+	}
+
+	toggleExpand() {
+		const { props } = this;
+        props.clearExpanded();
+        props.bookData.expanded = true;
+	}
+
 	render() {
 		const { bookData } = this.props;
 		var description = bookData.description;
+		var review = bookData.review;
 		var authors = bookData.authors.join(', ');
 		return (
 			<div className="book-item">
 			  <div className="book-image"><img src={bookData.image} alt={bookData.title} /></div>
-              <MediaQuery query="(max-width: 4096px) and (min-width:481px)">
-			  <div className="book-info">
+			  <div className={bookData.expanded ? 'book-info-expanded' : 'book-info'}>
 			    <div className="book-title">{bookData.title}</div>
 			    <div className="book-author">{authors}</div>
-			    <div className="book-description">{description}</div>
+			    <div className="book-review" dangerouslySetInnerHTML={{ __html: review }}></div>
 			  </div>
-              </MediaQuery>
-
-              <MediaQuery query="(max-width: 480px)">
-			    <div className="book-title">{bookData.title}</div>
-			    <div className="book-author">{authors}</div>
-			    <div className="book-description" dangerouslySetInnerHTML={{__html: description}} />
-              </MediaQuery>
+              <div className="expansion-toggle" onClick={this.toggleExpand}>
+                { bookData.expanded ? upArrow() : dnArrow() }
+              </div>
 			  <br style={{clear:"both"}}/>
 			</div>
 		);

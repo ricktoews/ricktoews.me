@@ -1,12 +1,13 @@
 .book-item {
+	position: relative;
 	border: 1px solid #eee;
 	padding-top:3px;
-	margin-bottom:50px;
+	margin-bottom:20px;
 	box-shadow: 3px 3px 7px 1px #999;
 }
 .book-image {
 	float: left;
-	margin-right:30px;
+	margin-right:20px;
 }
 .book-image img {
 	margin-left:3px;
@@ -14,10 +15,21 @@
 }
 .book-info {
 	float: right;
-	width:85%;
+	width:80%;
+	margin-bottom:5px;
+	color:#999;
+	height:180px;
+	overflow-y: hidden;
+	background: linear-gradient(to bottom, #999, #999 50%, #eee 90%);
+	-webkit-background-clip: text;
+}
+.book-info-expanded {
+	float: right;
+	width:80%;
 	margin-bottom:5px;
 	color:#999;
 }
+
 .book-title {
 	font-size:10pt;
 	color:#008;
@@ -29,4 +41,46 @@
 }
 .book-description {
 	font-size:10pt;
+}
+.book-review {
+    margin-top:10px;
+	font-size:10pt;
+}
+.book-info > .book-description {
+	-webkit-text-fill-color: transparent;
+}
+.book-info-expanded > .book-description {
+}
+.expansion-toggle {
+	position: absolute;
+	width:25px;
+	height:25px;
+	bottom: -13px;
+	background: #ccc;
+	border-radius:20px;
+	cursor:pointer;
+	left: calc(50% - 0px);
+}
+
+@media all and (max-width: 480px) {
+
+	.book-image {
+		float: left;
+		margin-right: 10px;
+	}
+	.book-image img {
+		width:60px;
+		margin-left:3px;
+		margin-bottom:5px;
+	}
+	.book-info {
+		float: right;
+		height: 150px;
+		width: 80%;
+		overflow-y: hidden;
+	}
+	.book-info-expanded {
+		float: right;
+		width:80%;
+	}
 }

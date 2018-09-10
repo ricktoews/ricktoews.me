@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MediaQuery from 'react-responsive';
 import { MuiThemeProvider, withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
@@ -13,8 +14,16 @@ const styles = (theme) => {
 		height: 300,
 		backgroundColor: "#ffffff",
 	},
+	rootMobile: {
+		position: 'relative',
+		width: '100%',
+		backgroundColor: "#ffffff",
+	},
 	topTrim: {
 		height: 12,
+	},
+	topTrimMobile: {
+		height: 6,
 	},
 	shadowBar: {
 		position: 'absolute',
@@ -22,6 +31,14 @@ const styles = (theme) => {
 		left: '3px',
 		width: '294px',
 		height: '60px',
+		boxShadow: '0 1px 5px 0px #666',
+	},
+	shadowBarMobile: {
+		position: 'absolute',
+		top: '8px',
+		left: '1px',
+		width: 'calc(100% - 2px)',
+		height: '33px',
 		boxShadow: '0 1px 5px 0px #666',
 	},
 	titleBar: {
@@ -33,12 +50,32 @@ const styles = (theme) => {
 		fontSize: "18pt",
 		cursor: "pointer",
 	},
+	titleBarMobile: {
+    	...theme.mixins.gutters(),
+		height: 36,
+		display: "flex",
+		position: "relative",
+		alignItems: "center",
+		fontSize: "12pt",
+		fontWeight: "bold",
+		cursor: "pointer",
+	},
 	cardContent: {
 		...theme.mixins.gutters(),
 		marginTop: 12,
 		overflowY: "scroll",
 		height: 200,
-	}
+	},
+	cardContentMobile: {
+		...theme.mixins.gutters(),
+		marginTop: 12,
+		overflowY: 'hidden',
+	},
+    itemImage: {
+        width: 50,
+        float: 'left',
+        marginRight: 5
+    }
 	});
 };
 
@@ -56,15 +93,18 @@ class HomeCard extends Component {
 
 	render() {
 		const { id, children, classes } = this.props;
+        const homeItem = cards[id].homeItem;
+        const itemImage = homeItem.image ? <img class={ classes.itemImage } src={homeItem.image} alt={homeItem.title} /> : '';
 		const title = cards[id].title;
 		const primaryColor = cards[id].primaryColor;
 		const cardTheme = homeCardTheme({ primaryColor });
 		const palette = cardTheme.palette.primary;
-
 		var c = React.Children.toArray(children);
+console.log('HomeCard', cards[id]);
 		const paragraphs = c.map(p => p.props.children);
 		return (
-			<MuiThemeProvider theme={cardTheme}>
+            <MuiThemeProvider theme={cardTheme}>
+            <MediaQuery query="(max-width: 4096px) and (min-width: 481px)">
 			<div className={ classes.root }>
 			  <div className={ classes.topTrim } style={{backgroundColor: palette.dark}}>
               </div>
@@ -79,10 +119,27 @@ class HomeCard extends Component {
 				)) }
 			  </div>
 			</div>
+            </MediaQuery>
+
+            <MediaQuery query="(max-width: 480px)">
+			<div className={ classes.rootMobile }>
+			  <div className={ classes.topTrimMobile } style={{backgroundColor: palette.dark}}>
+              </div>
+			  <div className={ classes.shadowBarMobile }></div>
+			  <div onClick={this.handleClick} className={ classes.titleBarMobile } style={{color: palette.contrastText, backgroundColor: palette.light}}>
+			  <CardIcon id={id} color="secondary" />
+			    { homeItem.title }
+			  </div>
+			  <div className={ classes.cardContentMobile }>
+                { itemImage }
+				{ homeItem.blurb.map((text, key) => (
+				<Typography key={key} variant="body1" gutterBottom dangerouslySetInnerHTML={{ __html: text }}></Typography>
+				)) }
+			  </div>
+			</div>
+            </MediaQuery>
 			</MuiThemeProvider>
 		);
 	}
 }
-const HomeCardWrapped = withRouter(withStyles(styles)(HomeCard));
-
-export default HomeCardWrapped;
+export default withRouter(withStyles(styles)(HomeCard));

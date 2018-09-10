@@ -4,7 +4,7 @@ const cards = {
 	home: {
 		title: 'Home',
 		primaryColor: '3f51b5',
-		iconPath: 'M3 5H1v16c0 1.1.9 2 2 2h16v-2H3V5zm11 10h2V5h-4v2h2v8zm7-14H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 16H7V3h14v14z',
+		iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
 		link: '/',
 	},
 	arithmophile: {
@@ -18,6 +18,16 @@ const cards = {
 		primaryColor: '76ff03',
 		iconPath: 'M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z',
 		link: '/books',
+        homeItem: {
+          title: 'Currently Reading',
+          image: 'https://images.gr-assets.com/books/1431406885l/25524716.jpg',
+          blurb: [
+            "<b>Gormengast</b>, by Mervyn Peake",
+            "The mountain’s head shone in a great vacancy of light. It held within its ugly contour either everything or nothing at all. It awakened the imagination by its peculiar emptiness. And from it came the voice again.",
+            "‘Do you dare? Do you dare?’",
+            "And a host of voices joined. Voices from the sun-blotched glades. From the marshes and the gravel beds. From the birds of the green river reaches. From where the squirrels are and the foxes move and the woodpeckers thicken the drowsy stillness of the day with their far arcadian tapping: from where the rotten hollow of some tree, mellow with richness, glows as though lit from within by the sweet and secret cache of the wild bees."
+          ],
+        }
 	},
 	autodidact: {
 		title: 'Lifelong Autodidact',
@@ -43,6 +53,16 @@ const cards = {
 		primaryColor: '3f51b5',
 		iconPath: 'M2.5 19h19v2h-19zm19.57-9.36c-.21-.8-1.04-1.28-1.84-1.06L14.92 10l-6.9-6.43-1.93.51 4.14 7.17-4.97 1.33-1.97-1.54-1.45.39 1.82 3.16.77 1.33 1.6-.43 5.31-1.42 4.35-1.16L21 11.49c.81-.23 1.28-1.05 1.07-1.85z',
 		link: '/travel',
+        homeItem: {
+          title: 'Travel Plans',
+          image: '/media/images/iceland-selfie.jpg',
+          blurb: [
+            "<b>2018: Vienna and Prague</b>",
+    "A few years ago, I began a project of visiting at least one new country per year, and probably the capital city. This year, I'll be adding two notches: Austria and The Czech Republic. The only specific experience I have lined up is attending a performance of the Mozart Requiem at Karskirche (completed 1737) in Vienna. I've long dreamed of hearing such music in a centuries-old cathedral in Europe, so this will be an occasion to check an item off the bucket list."
+          ],
+          color: "#ff99cc"
+        }
+
 	}
 };
 

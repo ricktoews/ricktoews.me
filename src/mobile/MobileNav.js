@@ -15,20 +15,19 @@ const styles = {
   },
   menuButton: {
     position: 'absolute',
-    top: 0,
+    alignItems: 'center',
     right: 10,
-	paddingTop: 6,
   }
 };
 
 class MobileNav extends Component {
   state = {
-    left: false,
+    right: false,
   };
 
   toggleDrawer = (open) => () => {
     this.setState({
-      left: open,
+      right: open,
     });
   };
 
@@ -47,7 +46,7 @@ class MobileNav extends Component {
         <IconButton onClick={this.toggleDrawer(true)}>
           <MenuIcon style={{ color: iconColor }}/>
         </IconButton>
-        <Drawer open={this.state.left} onClose={this.toggleDrawer(false)}>
+        <Drawer anchor="right" open={this.state.right} onClose={this.toggleDrawer(false)}>
           <div
             tabIndex={0}
             role="button"
