@@ -27,19 +27,65 @@ const styles = theme => ({
   },
 });
 
+class Thumbnail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+    this.state = { showThumb: true };
+  }
+
+  handleClick() {
+    const { props } = this;
+    let initState = this.props.img.showThumb;
+    props.resetState();
+    if (initState === true) this.props.img.showThumb = false;
+    console.log('handleClick', props.img);
+  }
+
+  render() {
+    const { props } = this;
+    let src = props.img.src;
+
+    return (
+      <li onClick={this.handleClick}>
+        <div className={ props.img.showThumb ? 'thumb-show' : 'thumb-hide' } style={{backgroundImage:'url(' + src + ')'}}></div>
+      </li>
+    )
+  }
+}
+
 class Thumbnails extends React.Component {
+  constructor(props) {
+    super(props);
+    this.resetState = this.resetState.bind(this);
+    this.state = {
+      images: [],
+    };
+  }
 
   componentDidMount() {
     // The code in componentDidMount is meant to pre-load images. Technique came from https://stackoverflow.com/questions/42615556/how-to-preload-images-in-react-js
     // Jury's still out on whether this is actually working.
     var places = Object.keys(thumbs);
+    var images = [];
     places.forEach(place => {
       let placePath = '/media/images/' + place + '/';
       thumbs[place].forEach(filename => {
         const img = new Image();
         img.src = placePath + filename;
+        images.push({ src: placePath + filename, showThumb: true });
       });
     });
+    this.setState({ images: images });
+  }
+
+  resetState() {
+    const { place } = this.props;
+    var images = this.state.images;
+    images.forEach((image, ndx) => {
+      images[ndx].showThumb = true;
+    });
+    this.setState({ images: images });
   }
 
   render() {
@@ -49,10 +95,10 @@ class Thumbnails extends React.Component {
       <div>
       <ul>
       {
-        thumbs[place].map(img => {
+        this.state.images.map((img, key) => {
           let src = placePath + img;
           return (
-            <li key={src}><img src={src} className="place-image" alt="Travel Thumb" /></li>
+            <Thumbnail key={key} img={img} resetState={this.resetState}></Thumbnail>
           );
         })
       }
