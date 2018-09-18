@@ -90,13 +90,12 @@ class Thumbnails extends React.Component {
 
   render() {
     const { place } = this.props;
-    const placePath = '/media/images/' + place + '/';
+    const images = this.state.images.filter(img => { return img.src.indexOf(place) !== -1});
     return (
       <div>
       <ul>
       {
-        this.state.images.map((img, key) => {
-          let src = placePath + img;
+        images.map((img, key) => {
           return (
             <Thumbnail key={key} img={img} resetState={this.resetState}></Thumbnail>
           );

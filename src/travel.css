@@ -3,6 +3,7 @@ li {
 	margin: 0;
 	float: left;
 	margin-right: 5px;
+	margin-bottom: 5px;
 }
 li .thumb-show {
 	width: 50px;
