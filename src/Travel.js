@@ -31,15 +31,15 @@ class Thumbnail extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    this.state = { showThumb: true };
   }
 
   handleClick() {
     const { props } = this;
-    let initState = this.props.img.showThumb;
-    props.resetState();
-    if (initState === true) this.props.img.showThumb = false;
-    console.log('handleClick', props.img);
+
+    var el = document.getElementsByClassName('close')[0];
+	var photoEl = document.getElementsByClassName('photo')[0];
+    photoEl.style.backgroundImage = 'url(' + props.img.src + ')';
+    el.parentNode.classList.remove('photo-hide');
   }
 
   render() {
@@ -48,7 +48,7 @@ class Thumbnail extends React.Component {
 
     return (
       <li onClick={this.handleClick}>
-        <div className={ props.img.showThumb ? 'thumb-show' : 'thumb-hide' } style={{backgroundImage:'url(' + src + ')'}}></div>
+        <div className="thumb-show" style={{backgroundImage:'url(' + src + ')'}}></div>
       </li>
     )
   }
@@ -57,7 +57,6 @@ class Thumbnail extends React.Component {
 class Thumbnails extends React.Component {
   constructor(props) {
     super(props);
-    this.resetState = this.resetState.bind(this);
     this.state = {
       images: [],
     };
@@ -73,17 +72,8 @@ class Thumbnails extends React.Component {
       thumbs[place].forEach(filename => {
         const img = new Image();
         img.src = placePath + filename;
-        images.push({ src: placePath + filename, showThumb: true });
+        images.push({ src: placePath + filename });
       });
-    });
-    this.setState({ images: images });
-  }
-
-  resetState() {
-    const { place } = this.props;
-    var images = this.state.images;
-    images.forEach((image, ndx) => {
-      images[ndx].showThumb = true;
     });
     this.setState({ images: images });
   }
@@ -97,7 +87,7 @@ class Thumbnails extends React.Component {
       {
         images.map((img, key) => {
           return (
-            <Thumbnail key={key} img={img} resetState={this.resetState}></Thumbnail>
+            <Thumbnail key={key} img={img}></Thumbnail>
           );
         })
       }
@@ -109,12 +99,23 @@ class Thumbnails extends React.Component {
 
 class Travel extends Component {
 
+  constructor(props) {
+    super(props);
+    this.handleClose = this.handleClose.bind(this);
+  }
+
+  handleClose() {
+    var el = document.getElementsByClassName('close')[0];
+    el.parentNode.classList.add('photo-hide');
+  }
+
   render() {
     const { classes } = this.props;
 
     return (
       <div>
       <Masthead id="travel" />
+      <div className="photo-hide overlay"><div className="photo"></div><div onClick={this.handleClose} className="close"></div></div>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.heading}><TravelIcon place="copenhagen"/>2017 - Copenhagen</Typography>
