@@ -37,6 +37,7 @@ class Nav extends React.Component {
       >
         <BottomNavigationAction component={Link} to="/" label="Home" icon={<HomeIcon />} />
         <BottomNavigationAction component={Link} to="/decimal" label="Math" icon={<QueueIcon />} />
+        <BottomNavigationAction component={Link} to="/arithmo" label="Math" icon={<QueueIcon />} />
         <BottomNavigationAction component={Link} to="/logophilia" label="Logophila" icon={<SpellcheckIcon />} />
         <BottomNavigationAction component={Link} to="/books" label="Books" icon={<SpellcheckIcon />} />
         <BottomNavigationAction component={Link} to="/travel" label="Travel" icon={<TravelIcon />} />

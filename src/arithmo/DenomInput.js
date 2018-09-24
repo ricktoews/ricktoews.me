@@ -47,7 +47,6 @@ class DenomInput extends Component {
 		const { history } = this.props;
 		var denom = this.state.denom;;
 		calcDecimals(denom).then((res) => {
-console.log(res);
 			this.setState({ data: res });
 		});
 		let newUrl = '/decimal/' + denom;

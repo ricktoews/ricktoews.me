@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import DenomInput from './DenomInput';
-import Masthead from './Masthead';
+import Masthead from '../Masthead';
 
 const Decimal = () => (
   <div>

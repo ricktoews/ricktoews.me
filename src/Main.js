@@ -5,7 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
-import Decimal from './Decimal';
+import Decimal from './arithmo/Decimal';
+import Arithmo from './arithmo/Arithmo';
 import Logophilia from './Logophilia';
 import Bookshelf from './Bookshelf';
 import Travel from './Travel';
@@ -35,6 +36,7 @@ class Main extends Component {
           <Switch>
             <Route exact path='/' component={Home}/>
             <Route path='/decimal' component={Decimal}/>
+            <Route path='/arithmo' component={Arithmo}/>
             <Route path='/logophilia' component={Logophilia}/>
             <Route path='/books' component={Bookshelf}/>
             <Route path='/travel' component={Travel}/>
@@ -48,6 +50,7 @@ class Main extends Component {
           <Switch>
             <Route exact path='/' component={Home}/>
             <Route path='/decimal' component={Decimal}/>
+            <Route path='/arithmo' component={Arithmo}/>
             <Route path='/logophilia' component={Logophilia}/>
             <Route path='/books' component={Bookshelf}/>
             <Route path='/travel' component={Travel}/>
