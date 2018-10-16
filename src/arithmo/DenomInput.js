@@ -8,8 +8,6 @@ import DecimalData from './DecimalData';
 
 const styles = theme => ({
 	textField: {
-		marginLeft: theme.spacing.unit,
-		marginRight: theme.spacing.unit,
 		width:50,
 	},
 });
@@ -62,12 +60,14 @@ class DenomInput extends Component {
 
 		return (
 			<div>
+			  <article>
 			  <TextField id="denom" label="Denominator" 
                  type="number" 
                  onChange={this.handleChange}
                  className={classes.textField}
                  InputLabelProps={{ shrink: true, }} margin="normal" />
               <Button  onClick={this.handleClick}><CheckCircle /></Button>
+			  </article>
               {dataRows}
 			</div>
 		);

@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import Decimal from './arithmo/Decimal';
+import Pythag from './arithmo/Pythag';
 import Arithmo from './arithmo/Arithmo';
 import Logophilia from './Logophilia';
 import Bookshelf from './Bookshelf';
@@ -35,6 +36,7 @@ class Main extends Component {
         <Paper className={classes.root} elevation={1}>
           <Switch>
             <Route exact path='/' component={Home}/>
+            <Route path='/pythag' component={Pythag}/>
             <Route path='/decimal' component={Decimal}/>
             <Route path='/arithmo' component={Arithmo}/>
             <Route path='/logophilia' component={Logophilia}/>
@@ -49,6 +51,7 @@ class Main extends Component {
         <MediaQuery query="(max-width:480px)">
           <Switch>
             <Route exact path='/' component={Home}/>
+            <Route path='/pythag' component={Pythag}/>
             <Route path='/decimal' component={Decimal}/>
             <Route path='/arithmo' component={Arithmo}/>
             <Route path='/logophilia' component={Logophilia}/>

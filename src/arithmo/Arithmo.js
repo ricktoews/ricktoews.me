@@ -13,6 +13,7 @@ const Arithmo = () => (
 
     <ul>
       <li><Link to="./decimal">Decimals</Link></li>
+      <li><Link to="./pythag">Pythagorean Stuff</Link></li>
     </ul>
     </article>
   </div>
