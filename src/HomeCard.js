@@ -131,7 +131,7 @@ class HomeCard extends Component {
 			  </div>
 			  <div className={ classes.cardContentMobile }>
                 { itemImage }
-				{ homeItem.blurb.map((text, key) => (
+				{ homeItem.blurb && homeItem.blurb.map((text, key) => (
 				<Typography key={key} variant="body1" gutterBottom dangerouslySetInnerHTML={{ __html: text }}></Typography>
 				)) }
 			  </div>

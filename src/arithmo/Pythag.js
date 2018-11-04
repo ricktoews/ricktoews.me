@@ -12,4 +12,4 @@ const Decimal = () => (
   </div>
 );
 
-export default Decimal;
+export default Pythag;
