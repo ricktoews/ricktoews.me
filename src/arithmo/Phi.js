@@ -1,15 +1,15 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import DenomInput from './DenomInput';
 import Masthead from '../Masthead';
+import PhiInput from './PhiInput';
 
-const Decimal = () => (
+const Phi = () => (
   <div>
     <Masthead id="arithmophile" />
     <Switch>
-      <Route path="/arithmo/decimal/:denom?" component={DenomInput} />
+      <Route path="/arithmo/phi/:nth?" component={PhiInput} />
     </Switch>
   </div>
 );
 
-export default Decimal;
+export default Phi;

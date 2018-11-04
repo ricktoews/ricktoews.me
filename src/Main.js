@@ -5,7 +5,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
+import Phi from './arithmo/Phi';
 import Decimal from './arithmo/Decimal';
+import Pythag from './arithmo/Pythag';
 import Arithmo from './arithmo/Arithmo';
 import Logophilia from './Logophilia';
 import Bookshelf from './Bookshelf';
@@ -35,8 +37,10 @@ class Main extends Component {
         <Paper className={classes.root} elevation={1}>
           <Switch>
             <Route exact path='/' component={Home}/>
-            <Route path='/decimal' component={Decimal}/>
-            <Route path='/arithmo' component={Arithmo}/>
+            <Route path='/arithmo/phi' component={Phi}/>
+            <Route path='/arithmo/decimal' component={Decimal}/>
+            <Route path='/arithmo/pythagorean' component={Pythag}/>
+            <Route exact path='/arithmo' component={Arithmo}/>
             <Route path='/logophilia' component={Logophilia}/>
             <Route path='/books' component={Bookshelf}/>
             <Route path='/travel' component={Travel}/>
@@ -49,8 +53,10 @@ class Main extends Component {
         <MediaQuery query="(max-width:480px)">
           <Switch>
             <Route exact path='/' component={Home}/>
-            <Route path='/decimal' component={Decimal}/>
-            <Route path='/arithmo' component={Arithmo}/>
+            <Route path='/arithmo/phi' component={Phi}/>
+            <Route path='/arithmo/decimal' component={Decimal}/>
+            <Route path='/arithmo/pythagorean' component={Pythag}/>
+            <Route exact path='/arithmo' component={Arithmo}/>
             <Route path='/logophilia' component={Logophilia}/>
             <Route path='/books' component={Bookshelf}/>
             <Route path='/travel' component={Travel}/>

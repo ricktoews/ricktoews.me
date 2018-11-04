@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import DecimalData from './DecimalData';
+import PhiData from './PhiData';
 
 const styles = theme => ({
 	textField: {
@@ -14,42 +14,49 @@ const styles = theme => ({
 	},
 });
 
-function calcDecimals(denom) {
-	return fetch('//arithmo-rest.toewsweb.net/dc/' + denom)
+function calcPhi(nth) {
+	return fetch('//arithmo-rest.toewsweb.net/phi/powers/' + nth)
 	.then(res => {
 		return res.json();
 	})
 	.then(res => {
-		return res;
+        res.forEach((row, ndx) => {
+            res[ndx].phi = '(' + row.phi_num.whole + ' + ' + row.phi_num.sqrt_5_coef + '√5) / 2';
+            let term = row.phi_num.sqrt_5_coef*Math.pow(5, .5);
+            term = Math.round(term*10000) / 10000;
+            res[ndx].terms = row.phi_num.whole + ', ' + term;
+            res[ndx].fibonacci = row.phi_num.sqrt_5_coef;
+        });
+        return res;
 	});
 }
 
-class DenomInput extends Component {
+class PhiInput extends Component {
 	constructor(props) {
 		super(props);
-		let denom = props.match ? props.match.params.denom : '';
+		let nth = props.match ? props.match.params.nth : '';
 		this.state = {
-			denom: denom,
+			nth: nth,
 		};
-		if (denom) {
-			calcDecimals(denom).then((res) => {
+		if (nth) {
+			calcPhi(nth).then((res) => {
 				this.setState({ data: res });
 			});
 		}
 	}
 
 	handleChange = event => {
-		this.setState({ denom: event.target.value });
+		this.setState({ nth: event.target.value });
 	}
 
 
 	handleClick = event => {
 		const { history } = this.props;
-		var denom = this.state.denom;;
-		calcDecimals(denom).then((res) => {
+		var nth = this.state.nth;
+		calcPhi(nth).then((res) => {
 			this.setState({ data: res });
 		});
-		let newUrl = '/arithmo/decimal/' + denom;
+		let newUrl = '/arithmo/phi/' + nth;
 		history.push(newUrl);
 	};
 
@@ -57,12 +64,12 @@ class DenomInput extends Component {
 		const { classes } = this.props;
 		let dataRows = <div></div>;
 		if (this.state.data ) {
-			dataRows = <div><DecimalData classes={this.props.classes} denom={this.state.denom} rows={this.state.data} /></div>
+			dataRows = <div><PhiData classes={this.props.classes} nth={this.state.nth} rows={this.state.data} /></div>
 		}
 
 		return (
 			<div>
-			  <TextField id="denom" label="Denominator" 
+			  <TextField id="nth" label="Power" 
                  type="number" 
                  onChange={this.handleChange}
                  className={classes.textField}
@@ -74,4 +81,4 @@ class DenomInput extends Component {
 	}
 }
 
-export default withRouter(withStyles(styles)(DenomInput));
+export default withRouter(withStyles(styles)(PhiInput));

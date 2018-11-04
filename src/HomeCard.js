@@ -93,14 +93,13 @@ class HomeCard extends Component {
 
 	render() {
 		const { id, children, classes } = this.props;
-        const homeItem = cards[id].homeItem;
+        const homeItem = cards[id].homeItem || cards.default.homeItem;
         const itemImage = homeItem.image ? <img class={ classes.itemImage } src={homeItem.image} alt={homeItem.title} /> : '';
 		const title = cards[id].title;
 		const primaryColor = cards[id].primaryColor;
 		const cardTheme = homeCardTheme({ primaryColor });
 		const palette = cardTheme.palette.primary;
 		var c = React.Children.toArray(children);
-console.log('HomeCard', cards[id]);
 		const paragraphs = c.map(p => p.props.children);
 		return (
             <MuiThemeProvider theme={cardTheme}>
