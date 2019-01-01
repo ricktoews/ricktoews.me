@@ -5,8 +5,8 @@
 .grid-layout {
 	position:absolute;
 	right:0;
-	width: 620px;
+	width: calc(100% - 400px);
 	display: grid;
-	grid-template-columns: 320px 300px;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	grid-template-rows: 320px 320px 320px;
 }

@@ -19,9 +19,11 @@ const theme = createMuiTheme({
 class HomeIntro extends Component {
 	render() {
 		return (
-			<div style={{ float: "left" }}>
+			<div style={{ float: "left", width: 400 }}>
 			  <img src="/media/images/iceland-selfie.jpg" width="200" alt="Iceland Selfie" />
 			  <Typography variant="body1" gutterBottom>Akureyri, Iceland, 2017</Typography>
+			  <Typography variant="body1" gutterBottom>I got a late start, but I decided a few years ago that I wanted to visit at least one new country per year. I launched this project in December 2014 with my first trip to London, where I stayed for a little over a week. Since then, I've traveled to Reykjavik, Akureyri, Paris, Copenhagen, Austria, and Prague.</Typography>
+			  <Typography variant="body1" gutterBottom>I've felt privileged to experience the inside of the Notre Dame cathedral, to join the crowds viewing masterpieces of art at the Louvre or the Musee d'Orse; to climb to the abbey at the top of Mont-St-Michel; to sit in Karlskirche in Vienna and listen to a concert of classical music; to walk among the monuments in the floor of Westminster Abbey; to snowmobile over the largest glacier in Europe; to ride an exciting rollercoaster in Tivoli Gardens...</Typography>
 			</div>
 		);
 	}
@@ -33,7 +35,7 @@ class Home extends Component {
 		return (
 			<MuiThemeProvider theme={theme}>
 
-            <MediaQuery query="(min-width:960px)">
+            <MediaQuery query="(min-width:481px) and (max-width:4096px)">
 			<div style={{ paddingTop: "20px" }}>
             <HomeIntro />
 
