@@ -16,7 +16,7 @@ const styles = {
   menuButton: {
     position: 'absolute',
     alignItems: 'center',
-    right: 10,
+    left: 10,
   }
 };
 
@@ -46,7 +46,7 @@ class MobileNav extends Component {
         <IconButton onClick={this.toggleDrawer(true)}>
           <MenuIcon style={{ color: iconColor }}/>
         </IconButton>
-        <Drawer anchor="right" open={this.state.right} onClose={this.toggleDrawer(false)}>
+        <Drawer anchor="left" open={this.state.right} onClose={this.toggleDrawer(false)}>
           <div
             tabIndex={0}
             role="button"

@@ -5,7 +5,7 @@
 .grid-layout {
 	position:absolute;
 	right:0;
-	width: calc(100% - 400px);
+	width: calc(100% - 650px);
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	grid-template-rows: 320px 320px 320px;

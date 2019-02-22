@@ -87,7 +87,7 @@ class Masthead extends Component {
         <div className={ classes.topTrim } style={{backgroundColor: primary.dark}}></div>
         <div className={ classes.titleBar } style={{color: primary.contrastText, backgroundColor: primary.light}}>
         <MobileNav primaryColor={ primary }/>
-        { title }
+          <span style={{display: "inline-block", width:"40px"}}></span>{ title }
         </div>
       </MediaQuery>
 
@@ -96,8 +96,9 @@ class Masthead extends Component {
         <div className={ classes.shadowBarMobile }></div>
         <div className={ classes.titleBarMobile } style={{color: primary.contrastText, backgroundColor: primary.light}}>
         <MobileNav primaryColor={ primary }/>
+          <span style={{ display: "inline-block", width: "40px" }}></span>
 			  <CardIcon id={id} color="secondary" />
-        { title }
+          { title }
         </div>
       </MediaQuery>
       </MuiThemeProvider>

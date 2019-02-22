@@ -94,13 +94,14 @@ class HomeCard extends Component {
 	render() {
 		const { id, children, classes } = this.props;
         const homeItem = cards[id].homeItem || cards.default.homeItem;
-        const itemImage = homeItem.image ? <img class={ classes.itemImage } src={homeItem.image} alt={homeItem.title} /> : '';
+        const itemImage = homeItem.image ? <img className={ classes.itemImage } src={homeItem.image} alt={homeItem.title} /> : '';
 		const title = cards[id].title;
 		const primaryColor = cards[id].primaryColor;
 		const cardTheme = homeCardTheme({ primaryColor });
 		const palette = cardTheme.palette.primary;
 		var c = React.Children.toArray(children);
 		const paragraphs = c.map(p => p.props.children);
+console.log('HomeCard paragraphs', paragraphs);
 		return (
             <MuiThemeProvider theme={cardTheme}>
             <MediaQuery query="(max-width: 4096px) and (min-width: 481px)">
@@ -128,6 +129,11 @@ class HomeCard extends Component {
 			  <div onClick={this.handleClick} className={ classes.titleBarMobile } style={{color: palette.contrastText, backgroundColor: palette.light}}>
 			  <CardIcon id={id} color="secondary" />
 			    { homeItem.title }
+			  </div>
+			  <div className={ classes.cardContentMobile }>
+				{ paragraphs.map((text, key) => (
+				<Typography key={key} variant="body1" gutterBottom>{ text }</Typography>
+				)) }
 			  </div>
 			  <div className={ classes.cardContentMobile }>
                 { itemImage }

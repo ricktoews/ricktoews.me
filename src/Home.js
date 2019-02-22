@@ -19,7 +19,7 @@ const theme = createMuiTheme({
 class HomeIntro extends Component {
 	render() {
 		return (
-			<div style={{ float: "left", width: 400 }}>
+			<div style={{ float: "left", width: 550 }}>
 			  <img src="/media/images/iceland-selfie.jpg" width="200" alt="Iceland Selfie" />
 			  <Typography variant="body1" gutterBottom>Akureyri, Iceland, 2017</Typography>
 			  <Typography variant="body1" gutterBottom>I got a late start, but I decided a few years ago that I wanted to visit at least one new country per year. I launched this project in December 2014 with my first trip to London, where I stayed for a little over a week. Since then, I've traveled to Reykjavik, Akureyri, Paris, Copenhagen, Austria, and Prague.</Typography>
