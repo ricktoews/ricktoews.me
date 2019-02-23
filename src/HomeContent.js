@@ -4,30 +4,47 @@ import HomeContentItem from './HomeContentItem';
 import HomeCard from './HomeCard';
 
 const homeContent = {};
-const blurbs = ['reading', 'learning', 'travel'];
-blurbs.forEach(b => {
-  let blurb = require('./home-content/' + b + '.json');
-  homeContent[b] = blurb;
+const topics = ['reading', 'learning', 'travel'];
+topics.forEach(t => {
+  let item = require('./home-content/' + t + '.json');
+  homeContent[t] = item;
 });
 
 console.log('homeContent', homeContent);
+
+class Topic extends Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
+
+  render() {
+    let item = this.props.id;
+    let date = homeContent[item].date || 'Today';
+    let title = homeContent[item].title;
+    let paragraphs = homeContent[item].blurb;
+
+    return <div>
+      <div>
+        <div style={{"float": "left", "fontWeight": "bold"}}>{ title }</div>
+        <div style={{"float": "right", "fontSize": ".75rem"}}>{ date }</div>
+        <div style={{"borderTop": "1px dotted gray","clear": "both"}}></div>
+      </div>
+
+      <div>
+      { paragraphs.map((p, key) => <p key={key}>{p}</p>) }
+      </div>
+    </div>
+  }
+}
+
 
 class HomeContent extends Component {
   render() {
 
     return (
       <div>
-        <HomeCard id="home">
-        <p>February 21, 2019</p>
-        <p>Today, I practice more on the Un Sospiro, by Liszt. The technique seems to be improving, and I'm confident I'll continue to make good progress.</p>
-        <p>I also drilled myself on the dates of presidential terms.</p>
-        </HomeCard>
-        <HomeCard id="bookshelf">
-          <p>What books I'm on, and any thoughts I might have so far.</p>
-        </HomeCard>
-        <HomeCard id="travel">
-          <p>Where I'm going.</p>
-        </HomeCard>
+        { topics.map((item, key) => <Topic id={item}></Topic>) }
       </div>
     );
   }

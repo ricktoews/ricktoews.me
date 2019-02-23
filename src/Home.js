@@ -6,6 +6,7 @@ import HomeCard from './HomeCard';
 import green from '@material-ui/core/colors/green';
 import indigo from '@material-ui/core/colors/indigo';
 import './Home.css';
+import HomeContent from './HomeContent';
 import MobileHome from './mobile/Home.js';
 
 const theme = createMuiTheme({
