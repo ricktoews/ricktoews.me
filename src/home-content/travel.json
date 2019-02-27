@@ -1,10 +1,20 @@
 {
-  "date": "2019-02-12",
-  "title": "Travel Plans",
-  "image": "/media/images/iceland-selfie.jpg",
-  "blurb": [
-    "A few years ago, I began a project of visiting at least one new country per year, and probably the capital city. This year, I'll be adding two notches: Austria and The Czech Republic. The only specific experience I have lined up is attending a performance of the Mozart Requiem at Karskirche (completed 1737) in Vienna. I've long dreamed of hearing such music in a centuries-old cathedral in Europe, so this will be an occasion to check an item off the bucket list."
-  ],
-  "color": "#ff99cc"
+  "items": [{
+    "date": "2019-02-12",
+    "title": "Travel Plans",
+    "image": "/media/images/iceland-selfie.jpg",
+    "blurb": [
+      "A few years ago, I began a project of visiting at least one new country per year, and probably the capital city. This year, I'll be adding two notches: Austria and The Czech Republic. The only specific experience I have lined up is attending a performance of the Mozart Requiem at Karskirche (completed 1737) in Vienna. I've long dreamed of hearing such music in a centuries-old cathedral in Europe, so this will be an occasion to check an item off the bucket list."
+    ],
+    "color": "#ff99cc"
+  }, {
+    "date": "2019-02-26",
+    "title": "Travel Plans",
+    "image": "/media/images/iceland-selfie.jpg",
+    "blurb": [
+      "I'm beginning to formulate plans to visit Amsterdam, Brussels, and Luxembourg in 2019. This might be my first trip for which I book a multi-city flight, since it might be inconvenient to fly into and out of the same city at the beginning and end of my trip."
+    ],
+    "color": "#ff99cc"
+  }]
 }
 

@@ -42,7 +42,6 @@ const styles = (theme) => {
       position: "relative",
       alignItems: "center",
       fontSize: "14pt",
-      marginBottom: "20px",
     },
     button: {
       margin: theme.spacing.unit,
@@ -72,11 +71,13 @@ class Masthead extends Component {
     return (
       <MuiThemeProvider theme={cardTheme}>
       <MediaQuery query="(max-width: 4096px) and (min-width: 481px)">
+    <div style={{ position: "sticky", top: 0 }}>
         <div className={ classes.topTrim } style={{backgroundColor: primary.dark}}></div>
         <div className={ classes.titleBar } style={{color: primary.contrastText, backgroundColor: primary.light}}>
-        <MobileNav primaryColor={ primary }/>
-          <span style={{display: "inline-block", width:"40px"}}></span>{ title }
+          <MobileNav primaryColor={ primary }/>
+          <span style={{display: "inline-block", width:"40px"}}></span>
         </div>
+    </div>
       </MediaQuery>
 
       <MediaQuery query="(max-width: 480px)">

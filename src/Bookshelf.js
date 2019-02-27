@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Book, { fetchBooks } from './Book.js';
-import Masthead from './Masthead';
 
 class Bookshelf extends Component {
 
@@ -13,6 +12,8 @@ class Bookshelf extends Component {
 	}
 
 	componentDidMount() {
+        console.log('Bookshelf component did mount.', this.props);
+        this.props.callback('bookshelf');
 		fetchBooks().then(books => {
 			this.setState({ books });
 		});
@@ -30,7 +31,6 @@ class Bookshelf extends Component {
 	render() {
 		return (
             <div>
-			  <Masthead id="bookshelf"/>
 			  { this.state.books.map((item, ndx) => {
 			  	return <Book key={ndx} bookData={item} clearExpanded={this.clearExpanded} />
 			  }) }

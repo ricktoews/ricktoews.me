@@ -14,6 +14,7 @@ import Bookshelf from './Bookshelf';
 import Travel from './Travel';
 import Professional from './Professional';
 import Autodidact from './Autodidact';
+import Masthead from './Masthead';
 
 const styles = theme => ({
   root: {
@@ -30,22 +31,26 @@ class Main extends Component {
 
   render() {
     const { classes } = this.props;
+	const callback = (id) => { console.log('Main callback function', id); this.setState({ id: id }); };
+
+	const id = this.state && this.state.id ? this.state.id : 'home';
 
     return (
       <div id="router">
         <MediaQuery query="(max-width:4096px) and (min-width:481px)">
+	<Masthead id={id}/>
         <Paper className={classes.root} elevation={1}>
           <Switch>
-            <Route exact path='/' component={Home}/>
-            <Route path='/arithmo/phi' component={Phi}/>
-            <Route path='/arithmo/decimal' component={Decimal}/>
-            <Route path='/arithmo/pythagorean' component={Pythag}/>
-            <Route exact path='/arithmo' component={Arithmo}/>
-            <Route path='/logophilia' component={Logophilia}/>
-            <Route path='/books' component={Bookshelf}/>
-            <Route path='/travel' component={Travel}/>
-            <Route path='/professional' component={Professional}/>
-            <Route path='/learning' component={Autodidact}/>
+            <Route exact path='/' render={(props) => <Home callback={callback}/>}/>
+            <Route path='/arithmo/phi' render={(props) => <Phi callback={callback}/>}/>
+            <Route path='/arithmo/decimal' render={(props) => <Decimal callback={callback}/>}/>
+            <Route path='/arithmo/pythagorean' render={(props) => <Pythag callback={callback}/>}/>
+            <Route exact path='/arithmo' render={(props) => <Arithmo callback={callback}/>}/>
+            <Route path='/logophilia' render={(props) => <Logophilia callback={callback}/>}/>
+            <Route path='/books' render={(props) => <Bookshelf callback={callback}/>}/>
+            <Route path='/travel' render={(props) => <Travel callback={callback}/>}/>
+            <Route path='/professional' render={(props) => <Professional callback={callback}/>}/>
+            <Route path='/learning' render={(props) => <Autodidact callback={callback}/>}/>
           </Switch>
         </Paper>
         </MediaQuery>

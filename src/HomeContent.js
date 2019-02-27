@@ -5,7 +5,6 @@ const homeContent = [];
 const topics = ['bookshelf', 'autodidact', 'travel'];
 topics.forEach(t => {
   let item = require('./home-content/' + t + '.json');
-  console.log('content', item);
   if (item.items) {
     item.items.forEach(i => { i.topic = t; homeContent.push(i); });
   } else {
@@ -49,7 +48,6 @@ class Topic extends Component {
     var date = homeContent[ndx].date ? formatDate(homeContent[ndx].date) : 'Today';
     var title = homeContent[ndx].title;
     var paragraphs = homeContent[ndx].blurb || [];
-	console.log('Topic', ndx, homeContent[ndx]);
 	var item = homeContent[ndx].topic;
     var primaryColor = cards[item].primaryColor;
     var cardTheme = homeCardTheme({ primaryColor });

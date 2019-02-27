@@ -3,7 +3,6 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/styles/hljs';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import Masthead from './Masthead';
 import './App.css';
 
 const styles = {
@@ -41,11 +40,14 @@ function getTripleOdd(corner) {
 
 
 class Professional extends Component {
+    componentDidMount() {
+        console.log('Professional component did mount.', this.props);
+        this.props.callback('professional');
+	}
 
 	render() {
 		return (
             <div>
-			  <Masthead id="professional" />
               <article>
 			  <h2>Linux</h2>
               <h3>Linux find</h3>

@@ -6,7 +6,6 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Masthead from './Masthead';
 import TravelIcon, { thumbs } from './TravelIcon';
 
 import './travel.css';
@@ -109,12 +108,15 @@ class Travel extends Component {
     el.parentNode.classList.add('photo-hide');
   }
 
+  componentDidMount() {
+    this.props.callback('travel');
+  }
+
   render() {
     const { classes } = this.props;
 
     return (
       <div>
-      <Masthead id="travel" />
       <div className="photo-hide overlay"><div className="photo"></div><div onClick={this.handleClose} className="close"></div></div>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>

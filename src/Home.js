@@ -16,6 +16,10 @@ const theme = createMuiTheme({
 
 
 class Home extends Component {
+    componentDidMount() {
+        console.log('Home component did mount.', this.props);
+        this.props.callback('home');
+	}
 
 	render() {
 		return (
