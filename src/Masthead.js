@@ -1,22 +1,10 @@
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import { withRouter } from 'react-router-dom';
-import { MuiThemeProvider, withStyles, createMuiTheme } from '@material-ui/core/styles';
-import HomeIcon from '@material-ui/icons/Home';
-import IconButton from '@material-ui/core/IconButton';
+import { MuiThemeProvider, withStyles } from '@material-ui/core/styles';
 import MobileNav from './mobile/MobileNav';
 import CardIcon from './CardIcon';
 import { cards, homeCardTheme } from './cards';
-
-const mastheadTheme = specs => {
-  return createMuiTheme({
-    palette: {
-      primary: {
-        main: '#' + specs.primaryColor,
-      },
-    },
-  });
-}
 
 const styles = (theme) => {
   return ({

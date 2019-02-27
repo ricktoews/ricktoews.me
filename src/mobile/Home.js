@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Typography from '@material-ui/core/Typography';
 import MobileNav from './MobileNav';
 import HomeContent from '../HomeContent';
 import './Home.css';

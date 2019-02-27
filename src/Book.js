@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MediaQuery from 'react-responsive';
 import './bookshelf.css';
 
 function fetchBooks() {
@@ -46,7 +45,6 @@ class Book extends Component {
 
 	render() {
 		const { bookData } = this.props;
-		var description = bookData.description;
 		var review = bookData.review;
 		var authors = bookData.authors.join(', ');
 		return (

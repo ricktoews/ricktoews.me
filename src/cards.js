@@ -86,7 +86,7 @@ const homeCardTheme = specs => {
 				main: '#' + specs.primaryColor,
 			},
 			secondary: {
-				main: '#' + specs.secondaryColor,
+				main: '#' + (specs.secondaryColor || 'ccc'),
 			},
 		},
 	});

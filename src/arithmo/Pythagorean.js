@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import CheckCircle from '@material-ui/icons/CheckCircle';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
 	textField: {
@@ -15,20 +12,16 @@ const styles = theme => ({
 });
 
 class Pythagorean extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	handleChange = event => {
 	}
 
 
 	handleClick = event => {
-		const { history } = this.props;
+//		const { history } = this.props;
 	};
 
 	render() {
-		const { classes } = this.props;
+//		const { classes } = this.props;
 
 		return (
 			<div>
