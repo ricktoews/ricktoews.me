@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import wordlist from './wordlist';
-import Masthead from './Masthead';
 
 const styles = {
 	root: {
@@ -35,7 +34,6 @@ class Logophilia extends Component {
 	render() {
 		return (
             <div>
-			<Masthead id="quote" />
             {this.state.wordlist}
             </div>
 		);

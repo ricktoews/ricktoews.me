@@ -48,7 +48,7 @@ class Topic extends Component {
     var date = homeContent[ndx].date ? formatDate(homeContent[ndx].date) : 'Today';
     var title = homeContent[ndx].title;
     var paragraphs = homeContent[ndx].blurb || [];
-	var item = homeContent[ndx].topic;
+    var item = homeContent[ndx].topic;
     var primaryColor = cards[item].primaryColor;
     var cardTheme = homeCardTheme({ primaryColor });
     var palette = cardTheme.palette.primary;
@@ -61,7 +61,7 @@ class Topic extends Component {
         <div style={{ clear: "both"}}></div>
       </div>
 
-      <div style={{ fontSize: ".9rem", lineHeight: 1.5, color: text.primary }}>
+      <div style={{ fontSize: ".8rem", lineHeight: 1.8, color: text.primary }}>
       { paragraphs.map((p, key) => <p key={key}>{p}</p>) }
       </div>
     </div>
