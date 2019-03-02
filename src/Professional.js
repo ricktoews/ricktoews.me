@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/styles/hljs';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import './App.css';
@@ -9,6 +10,9 @@ const styles = {
 	root: {
 	}
 };
+
+const theme = createMuiTheme({
+});
 
 const generatorCode = 
 `// Generator function to provide, on demand, the next odd square.
@@ -47,7 +51,7 @@ class Professional extends Component {
 
 	render() {
 		return (
-            <div>
+            <MuiThemeProvider theme={theme}>
               <article>
 			  <h2>Linux</h2>
               <h3>Linux find</h3>
@@ -78,7 +82,7 @@ class Professional extends Component {
 			  {generatorCode}
 			  </SyntaxHighlighter>
 			  </article>
-            </div>
+            </MuiThemeProvider>
 		);
 	}
 }
