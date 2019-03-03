@@ -1,26 +1,7 @@
 import React, { Component } from 'react';
 import { cards, homeCardTheme } from './cards';
+import Typography from '@material-ui/core/Typography';
 
-const homeContent = [];
-const topics = ['bookshelf', 'autodidact', 'travel'];
-topics.forEach(t => {
-  let item = require('./home-content/' + t + '.json');
-  if (item.items) {
-    item.items.forEach(i => { i.topic = t; homeContent.push(i); });
-  } else {
-    item.topic = t;
-    homeContent.push(item);
-  }
-});
-
-homeContent.sort((a, b) => { 
-  var dateA = new Date(a.date);
-  var dateB = new Date(b.date);
-  if (dateA < dateB) return 1;
-  else return -1;
-});
-
-console.log('homeContent', homeContent);
 
 var monthName = ['January', 'February', 'March',
                  'April', 'May', 'June',
@@ -37,45 +18,69 @@ function formatDate(date) {
 }
 
 
-class Topic extends Component {
+function formatContent(content) {
+  var p = content.split("\n");
+  return p;
+}
+
+function fetchContent() {
+		var url = 'https://rest.toewsweb.net/index.php/content';
+		return fetch(url)
+			.then(res => {
+				return res.json();
+			})
+			.then(res => {
+				return res.data;
+			})
+	}
+
+
+class Post extends Component {
   constructor(props) {
     super(props);
-    this.props = props;
+	this.props = props;
   }
 
   render() {
-    var ndx = this.props.ndx;
-    var date = homeContent[ndx].date ? formatDate(homeContent[ndx].date) : 'Today';
-    var title = homeContent[ndx].title;
-    var paragraphs = homeContent[ndx].blurb || [];
-    var item = homeContent[ndx].topic;
-    var primaryColor = cards[item].primaryColor;
-    var cardTheme = homeCardTheme({ primaryColor });
-    var palette = cardTheme.palette.primary;
-    var text = cardTheme.palette.text;
+    var post = this.props.post;
+    var date = post.date ? formatDate(post.date) : 'Today';
+    var title = post.topic;
+    var paragraphs = post.content || '';
+	var p = formatContent(paragraphs);
+	var topic = post.topic;
+	var primaryColor = cards[topic].primaryColor;
+	var topicTheme = homeCardTheme({ primaryColor });
+	var primary = topicTheme.palette.primary;
 
-    return <div>
-      <div style={{ padding: "5px", color: palette.contrastText, backgroundColor: palette.light }}>
-        <div style={{ float: "left" }}>{ title }</div>
-        <div style={{ float: "right", fontSize: ".75rem"}}>{ date }</div>
-        <div style={{ clear: "both"}}></div>
-      </div>
-
-      <div style={{ fontSize: ".8rem", lineHeight: 1.8, color: text.primary }}>
-      { paragraphs.map((p, key) => <p key={key}>{p}</p>) }
-      </div>
-    </div>
+    return (
+	  <div>
+        <div style={{ padding: "5px", color: primary.contrastText, backgroundColor: primary.light }}>
+          <div style={{ float: "left" }}>{ title }</div>
+          <div style={{ float: "right", fontSize: ".75rem"}}>{ date }</div>
+          <div style={{ clear: "both"}}></div>
+        </div>
+        { p.map((para, n) => <Typography key={n} variant="body1" gutterBottom>{para}</Typography>) }
+	  </div>
+	);
   }
 }
 
 
 class HomeContent extends Component {
-  render() {
+  constructor(props) {
+    super(props);
+	this.state = { content: [] };
+	fetchContent().then(data => {
+	  this.setState({ content: data });
+	});
+  }
 
+  render() {
+    
     return (
       <div>
-        {/* topics.map((item, key) => <Topic key={key} id={item}></Topic>) */}
-		{ homeContent.map((item, key) => <Topic key={key} ndx={key}></Topic>) }
+		{/* homeContent.map((item, key) => <Topic key={key} ndx={key}></Topic>) */}
+		{ this.state.content.map((post, key) => <Post key={key} post={post}/>)}
       </div>
     );
   }
