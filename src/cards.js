@@ -15,13 +15,13 @@ const cards = {
 	},
 	logophile: {
 		title: 'Home',
-		primaryColor: '3f51b5',
+		primaryColor: '455f8e',
 		iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
 		link: '/',
 	},
 	arithmophile: {
 		title: 'Arithmophile',
-		primaryColor: '3f51b5',
+		primaryColor: '0e9338',
 		iconPath: 'M3 5H1v16c0 1.1.9 2 2 2h16v-2H3V5zm11 10h2V5h-4v2h2v8zm7-14H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 16H7V3h14v14z',
 		link: '/arithmo',
         homeItem: {
@@ -33,7 +33,7 @@ const cards = {
 	},
 	bookshelf: {
 		title: 'Bookshelf',
-		primaryColor: '76ff03',
+		primaryColor: '458e53',
 		iconPath: 'M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z',
 		link: '/books',
         homeItem: {
@@ -68,7 +68,7 @@ const cards = {
 
 	travel: {
 		title: 'Travel',
-		primaryColor: '3f51b5',
+		primaryColor: 'e83e99',
 		iconPath: 'M2.5 19h19v2h-19zm19.57-9.36c-.21-.8-1.04-1.28-1.84-1.06L14.92 10l-6.9-6.43-1.93.51 4.14 7.17-4.97 1.33-1.97-1.54-1.45.39 1.82 3.16.77 1.33 1.6-.43 5.31-1.42 4.35-1.16L21 11.49c.81-.23 1.28-1.05 1.07-1.85z',
 		link: '/travel',
         homeItem: {

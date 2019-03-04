@@ -18,21 +18,45 @@ function formatDate(date) {
 }
 
 
+var re = {
+  title: /^_title_ (.*)/,
+  image: /^_img_ (.*)/,
+  imageFloat: /^_img-float_ (.*)/
+};
+
 function formatContent(content) {
-  var p = content.split("\n");
-  return p;
+  var lines = content.split("\n\n");
+  var item = {};
+  var contentRows = [];
+  lines.forEach(l => {
+    var hasTitle = l.match(re.title);
+    var hasImage = l.match(re.image);
+    var hasImageFloat = l.match(re.imageFloat);
+    if (hasTitle) {
+      item.title = hasTitle[1];
+    } else if (hasImage) {
+      item.image = { __html: hasImage[1] };
+    } else if (hasImageFloat) {
+      item.imageFloat = hasImageFloat[1];
+    } else {
+      contentRows.push(l);
+    }
+  });
+  item.text = contentRows;
+  return item;
 }
 
+
 function fetchContent() {
-		var url = 'https://rest.toewsweb.net/index.php/content';
-		return fetch(url)
-			.then(res => {
-				return res.json();
-			})
-			.then(res => {
-				return res.data;
-			})
-	}
+  var url = 'https://rest.toewsweb.net/index.php/content';
+  return fetch(url)
+    .then(res => {
+      return res.json();
+    })
+    .then(res => {
+      return res.data;
+    })
+}
 
 
 class Post extends Component {
@@ -44,22 +68,29 @@ class Post extends Component {
   render() {
     var post = this.props.post;
     var date = post.date ? formatDate(post.date) : 'Today';
-    var title = post.topic;
     var paragraphs = post.content || '';
-	var p = formatContent(paragraphs);
+	var item = formatContent(paragraphs);
 	var topic = post.topic;
 	var primaryColor = cards[topic].primaryColor;
 	var topicTheme = homeCardTheme({ primaryColor });
 	var primary = topicTheme.palette.primary;
+    var photoClass = item.imageFloat ? 'photo-' + item.imageFloat : 'photo-left';
+    var topicClass = topic === 'logophile' ? 'logophile-style' : '';
 
     return (
-	  <div>
-        <div style={{ padding: "5px", color: primary.contrastText, backgroundColor: primary.light }}>
-          <div style={{ float: "left" }}>{ title }</div>
-          <div style={{ float: "right", fontSize: ".75rem"}}>{ date }</div>
+	  <div className={topicClass}>
+        <div className="home-topic-banner" style={{ color: primary.contrastText, backgroundColor: primary.dark }}>
+          <div className="home-topic-title">{ item.title }</div>
+          <div className="home-topic-date">{ date }</div>
           <div style={{ clear: "both"}}></div>
         </div>
-        { p.map((para, n) => <Typography key={n} variant="body1" gutterBottom>{para}</Typography>) }
+        { item.image ? (
+        <div className={photoClass} dangerouslySetInnerHTML={ item.image } />
+        ) : <span /> }
+        <div className="home-topic-text">
+        { item.text.map((para, n) => <p>{para}</p>) }
+        </div>
+        <br clear="both"/>
 	  </div>
 	);
   }
