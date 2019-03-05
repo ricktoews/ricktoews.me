@@ -9,7 +9,8 @@ var monthName = ['January', 'February', 'March',
                  'October', 'November', 'December',
                 ];
 function formatDate(date) {
-  var dt = new Date(date);
+  var parts = date.split('-');
+  var dt = new Date(parts[0], parts[1] - 1, parts[2]);
   var mo = monthName[dt.getMonth()];
   var da = dt.getDate();
   var yr = dt.getFullYear();
@@ -71,6 +72,7 @@ class Post extends Component {
     var paragraphs = post.content || '';
 	var item = formatContent(paragraphs);
 	var topic = post.topic;
+    var card = cards[topic];
 	var primaryColor = cards[topic].primaryColor;
 	var topicTheme = homeCardTheme({ primaryColor });
 	var primary = topicTheme.palette.primary;
@@ -79,8 +81,8 @@ class Post extends Component {
 
     return (
 	  <div className={topicClass}>
-        <div className="home-topic-banner" style={{ color: primary.contrastText, backgroundColor: primary.dark }}>
-          <div className="home-topic-title">{ item.title }</div>
+        <div className="home-topic-banner" style={{ backgroundColor: primary.dark }}>
+          <div className="home-topic-title">{ card.title } - { item.title }</div>
           <div className="home-topic-date">{ date }</div>
           <div style={{ clear: "both"}}></div>
         </div>
@@ -88,7 +90,7 @@ class Post extends Component {
         <div className={photoClass} dangerouslySetInnerHTML={ item.image } />
         ) : <span /> }
         <div className="home-topic-text">
-        { item.text.map((para, n) => <p>{para}</p>) }
+        { item.text.map((para, n) => <p key={n}>{para}</p>) }
         </div>
         <br clear="both"/>
 	  </div>

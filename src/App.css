@@ -7,6 +7,7 @@ article {
   border-bottom-right-radius: 15px;
   box-shadow: 1px 1px 1px gray;
   padding: 5px 12px;
+  color: white;
 }
 
 .home-topic-title {
@@ -55,4 +56,10 @@ article {
 }
 
 .logophile-style .home-topic-banner {
+}
+
+.general-content {
+  font-family: arial, helvetica;
+  font-size: .8rem;
+  line-height: 2;
 }

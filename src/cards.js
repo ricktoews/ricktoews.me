@@ -13,8 +13,20 @@ const cards = {
 		iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
 		link: '/',
 	},
+	perambulations: {
+		title: 'Local Wanderings',
+		primaryColor: 'aaccff',
+		iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
+		link: '/',
+	},
+	thoughts: {
+		title: 'A Thought',
+		primaryColor: '455f8e',
+		iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
+		link: '/',
+	},
 	logophile: {
-		title: 'Home',
+		title: 'Logophile',
 		primaryColor: '455f8e',
 		iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
 		link: '/',
