@@ -4,7 +4,6 @@ import Typography from '@material-ui/core/Typography';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Masthead from '../Masthead';
 import './arithmo.css';
 
 const styles = theme => ({
@@ -41,6 +40,8 @@ class CornerInput extends Component {
 
 	handleChange = event => {
 		this.setState({ corner: event.target.value });
+		var abcVals = this.getABC();
+		this.setState({ abcs: abcVals });
 	}
 
 	handleClick() {
