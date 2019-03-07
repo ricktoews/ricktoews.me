@@ -45,15 +45,6 @@ class CornerInput extends Component {
 	}
 
 	handleClick(event) {
-/*
-		const { history } = this.props;
-		var abcVals = this.getABC();
-		this.setState(abcVals[0]);
-		this.setState({ abcs: abcVals });
-		console.log(`Corner ${this.state.corner}; a values: `, abcVals);
-		let newUrl = '/pythag/' + this.state.corner;
-		history.push(newUrl);
-*/
       console.log('handleClick', event.target);
       var el = event.target;
       el.style.left = (parseInt(el.style.left, 10) + 10) + 'px';
@@ -76,6 +67,36 @@ class CornerInput extends Component {
 		}
 		return abcVals;
 	}
+
+    calcACoords(i, a) {
+      let topPos = Math.floor(i / a);
+      let leftPos = i % a;
+      let top = topPos * 12;
+      let left = leftPos * 12;
+      let style={ top: top + 'px', left: left + 'px' };
+      return style;
+    }
+
+    calcBCoords(i, a, b) {
+      let topPos = Math.floor(i / b);
+      let leftPos = i % b;
+      let top = (12*(a-b)) + topPos * 12;
+      let left = leftPos * 12;
+      let style={ top: top + 'px', left: left + 'px' };
+      return style;
+    }
+
+    calcWrapCoords(i, a, b, sqW, leftOffset, thickness) {
+      let topPos = Math.floor(i / b);
+      let leftPos = i % b;
+
+      let top = i <= a ? (a - i - 1) * sqW : -1 * sqW;
+      let left = i <= a ? (leftOffset - sqW) : leftOffset + (i - a - 1) * sqW;
+
+console.log('b*b', b*b, 'a', a, 'i', i, 'top', top,  'left', left, 'thickness', thickness);
+      let style={ top: top + 'px', left: left + 'px' };
+      return style;
+    }
 
 	render() {
 		const { classes } = this.props;
@@ -121,12 +142,8 @@ class CornerInput extends Component {
                 <div id="a-square" style={{ left: "200px", marginTop: "10px", position: "relative" }}>
                   { a && [...Array(a*a)].map((e, i) => {
                     if (a > 2) {
-                    let topPos = Math.floor(i / a);
-                    let leftPos = i % a;
-                    let top = topPos * 12;
-                    let left = leftPos * 12;
-                    let style={ top: top + 'px', left: left + 'px' };
-                    return <div key={i} style={style} className="standalone a-square"></div>
+                      let style = this.calcACoords(i, a);
+                      return <div key={i} style={style} className="standalone a-square"></div>
                     } else { return <span /> }
                   })}
                 </div>
@@ -134,12 +151,8 @@ class CornerInput extends Component {
                 <div style={{ marginTop: "10px", position: "relative" }}>
                   { b && [...Array(b*b)].map((e, i) => {
                     if (b > 2) {
-                    let topPos = Math.floor(i / b);
-                    let leftPos = i % b;
-                    let top = (12*(a-b)) + topPos * 12;
-                    let left = leftPos * 12;
-                    let style={ top: top + 'px', left: left + 'px' };
-                    return <div key={i} onClick={(e) => this.handleClick(e)} style={style} className="standalone b-square"></div>
+                      let style = this.calcBCoords(i, a, b);
+                      return <div key={i} onClick={(e) => this.handleClick(e)} style={style} className="standalone b-square"></div>
                     } else { return <span /> }
                   })}
                 </div>
@@ -147,13 +160,8 @@ class CornerInput extends Component {
                 <div style={{ marginTop: "10px", position: "relative" }}>
                   { b && [...Array(b*b)].map((e, i) => {
                     if (b > 2) {
-                    let topPos = Math.floor(i / b);
-                    let leftPos = i % b;
-                    let top = i <= a ? (a - i - 1) * 12 : -12;
-                    let left = i <= a ? (200 - 12) : 200 + (i - a - 1) * 12;
-console.log('b*b', b*b, 'a', a, 'i', i, 'top', top,  'left', left);
-                    let style={ top: top + 'px', left: left + 'px' };
-                    return <div key={i} onClick={(e) => this.handleClick(e)} style={style} className="standalone b-square"></div>
+                      let style = this.calcWrapCoords(i, a, b, 12, 200, c-a);
+                      return <div key={i} onClick={(e) => this.handleClick(e)} style={style} className="standalone b-square"></div>
                     } else { return <span /> }
                   })}
                 </div>
