@@ -20,12 +20,15 @@ class CornerInput extends Component {
 		this.state = {
 			corner: corner
 		};
+		/*
 		let abcVals = this.getABC();
 		this.setState(abcVals[0]);
+		*/
 		this.handleClick = this.handleClick.bind(this);
 	}
 
 	handleHover(cls) {
+	/*
 		var areaInfo;
 		const { a, b, c } = this.state;
 		
@@ -36,6 +39,7 @@ class CornerInput extends Component {
 		} else {
 			areaInfo = `A squared: ${Math.pow(a, 2)}`;
 		}
+		*/
 	}
 
 	handleChange = event => {
@@ -87,13 +91,40 @@ class CornerInput extends Component {
     }
 
     calcWrapCoords(i, a, b, sqW, leftOffset, thickness) {
-      let topPos = Math.floor(i / b);
-      let leftPos = i % b;
+/*
+i   Top    Left
+0   24     -12
+1   24     -24
+2   12     -12
+3   12     -24
+4   0      -12
+5   0      -24
+6   -12    -12
+7   -12    -24
+8   -24    -12
+9   -24    -24
+10  -12      0
+11  -24      0
+12  -12     12
+13  -24     12
+14  -12     24
+15  -24     24
+*/
+      let growVertically = a * thickness + thickness*thickness;
+	  var top, left;
 
-      let top = i <= a ? (a - i - 1) * sqW : -1 * sqW;
-      let left = i <= a ? (leftOffset - sqW) : leftOffset + (i - a - 1) * sqW;
+	  if (i < growVertically) {
+        top = sqW * (a*a - parseInt(i/thickness, 10));
+		left = leftOffset + -1 * (i%thickness+1) * sqW;
+	  } else {
+	    top = sqW * (a*a - i%thickness+1) + a - 1;
+		left = leftOffset + parseInt((i-a*a-1)/thickness, 10);
+	  }
 
-console.log('b*b', b*b, 'a', a, 'i', i, 'top', top,  'left', left, 'thickness', thickness);
+console.log('i', i, 'top', top,  'left', left);
+//      top = i <= a ? (a - i - 1) * sqW : -1 * sqW;
+//      left = i <= a ? (leftOffset - sqW) : leftOffset + (i - a - 1) * sqW;
+
       let style={ top: top + 'px', left: left + 'px' };
       return style;
     }
@@ -104,8 +135,6 @@ console.log('b*b', b*b, 'a', a, 'i', i, 'top', top,  'left', left, 'thickness', 
 		const { a, b, c, abcs } = this.state;
 		console.log('render', a, b, c, abcs);
 		const bThick = c - a;
-
-        var bTop = 0;
 
 		return (
 			<div>
