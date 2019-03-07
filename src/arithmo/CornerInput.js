@@ -44,7 +44,8 @@ class CornerInput extends Component {
 		this.setState({ abcs: abcVals });
 	}
 
-	handleClick() {
+	handleClick(event) {
+/*
 		const { history } = this.props;
 		var abcVals = this.getABC();
 		this.setState(abcVals[0]);
@@ -52,6 +53,10 @@ class CornerInput extends Component {
 		console.log(`Corner ${this.state.corner}; a values: `, abcVals);
 		let newUrl = '/pythag/' + this.state.corner;
 		history.push(newUrl);
+*/
+      console.log('handleClick', event.target);
+      var el = event.target;
+      el.style.left = (parseInt(el.style.left, 10) + 10) + 'px';
 	}
 
 	chooseTriple(triple) {
@@ -78,6 +83,8 @@ class CornerInput extends Component {
 		const { a, b, c, abcs } = this.state;
 		console.log('render', a, b, c, abcs);
 		const bThick = c - a;
+
+        var bTop = 0;
 
 		return (
 			<div>
@@ -110,7 +117,48 @@ class CornerInput extends Component {
 				</div>
 
 				<br style={{clear:"both"}}/>
-				<Typography variant="body1" gutterBottom>Description of square's configuration.</Typography>
+
+                <div id="a-square" style={{ left: "200px", marginTop: "10px", position: "relative" }}>
+                  { a && [...Array(a*a)].map((e, i) => {
+                    if (a > 2) {
+                    let topPos = Math.floor(i / a);
+                    let leftPos = i % a;
+                    let top = topPos * 12;
+                    let left = leftPos * 12;
+                    let style={ top: top + 'px', left: left + 'px' };
+                    return <div key={i} style={style} className="standalone a-square"></div>
+                    } else { return <span /> }
+                  })}
+                </div>
+
+                <div style={{ marginTop: "10px", position: "relative" }}>
+                  { b && [...Array(b*b)].map((e, i) => {
+                    if (b > 2) {
+                    let topPos = Math.floor(i / b);
+                    let leftPos = i % b;
+                    let top = (12*(a-b)) + topPos * 12;
+                    let left = leftPos * 12;
+                    let style={ top: top + 'px', left: left + 'px' };
+                    return <div key={i} onClick={(e) => this.handleClick(e)} style={style} className="standalone b-square"></div>
+                    } else { return <span /> }
+                  })}
+                </div>
+
+                <div style={{ marginTop: "10px", position: "relative" }}>
+                  { b && [...Array(b*b)].map((e, i) => {
+                    if (b > 2) {
+                    let topPos = Math.floor(i / b);
+                    let leftPos = i % b;
+                    let top = i <= a ? (a - i - 1) * 12 : -12;
+                    let left = i <= a ? (200 - 12) : 200 + (i - a - 1) * 12;
+console.log('b*b', b*b, 'a', a, 'i', i, 'top', top,  'left', left);
+                    let style={ top: top + 'px', left: left + 'px' };
+                    return <div key={i} onClick={(e) => this.handleClick(e)} style={style} className="standalone b-square"></div>
+                    } else { return <span /> }
+                  })}
+                </div>
+
+				<br style={{clear:"both"}}/>
 			</article>
 			</div>
 			
