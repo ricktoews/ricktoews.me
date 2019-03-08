@@ -57,6 +57,7 @@ class CornerInput extends Component {
 	chooseTriple(triple) {
 		console.log('chooseTriple', this);
 		this.setState(triple);
+        var t = setTimeout(() => { this.wrap(0, triple.a, triple.b, triple.c); }, 1000);
 	}
 
 	getABC() {
@@ -90,6 +91,20 @@ class CornerInput extends Component {
       return style;
     }
 
+    wrap(i, a, b, c) {
+//console.log('Wrap:', a, b, c);
+      var numSquares = b*b-1;
+      if (b && i <= numSquares) {
+        var style = this.calcWrapCoords(numSquares - i, a, b, 12, 200, c-a);
+        var el = document.getElementById('sq' + i);
+        el.style.top = style.top;
+        el.style.left = style.left;
+        i++;
+        var t = setTimeout(() => { this.wrap(i, a, b, c); }, 100);
+      }
+      
+    }
+
     calcWrapCoords(i, a, b, sqW, leftOffset, thickness) {
       let growVertically = a * thickness + thickness*thickness;
 	  var top, left;
@@ -102,7 +117,7 @@ class CornerInput extends Component {
 		left = leftOffset + parseInt((i - growVertically) / thickness, 10) * sqW; // This is correct.
 	  }
 
-console.log('i', i, 'top', top,  'left', left, 'leftOffset', leftOffset);
+//console.log('i', i, 'top', top,  'left', left, 'leftOffset', leftOffset);
       let style={ top: top + 'px', left: left + 'px' };
       return style;
     }
@@ -111,13 +126,12 @@ console.log('i', i, 'top', top,  'left', left, 'leftOffset', leftOffset);
 		const { classes } = this.props;
 
 		const { a, b, c, abcs } = this.state;
-		console.log('render', a, b, c, abcs);
 		const bThick = c - a;
 
 		return (
 			<div>
 			<article>
-				<Typography variant="body1" gutterBottom>Input side of corner square. For Pythagorean Triple primitives, the corner must be 2 or an odd square.</Typography>
+				<p className="general-content">Input side of corner square. For Pythagorean Triple primitives, the corner must be 2 or an odd square.</p>
 				<TextField id="corner" 
                  type="number" 
                  onChange={this.handleChange}
@@ -155,20 +169,11 @@ console.log('i', i, 'top', top,  'left', left, 'leftOffset', leftOffset);
                   })}
                 </div>
 
-                <div style={{ marginTop: "10px", position: "relative" }}>
+                <div id="b-squared" style={{ marginTop: "10px", position: "relative" }}>
                   { b && [...Array(b*b)].map((e, i) => {
                     if (b > 2) {
                       let style = this.calcBCoords(i, a, b);
-                      return <div key={i} onClick={(e) => this.handleClick(e)} style={style} className="standalone b-square"></div>
-                    } else { return <span /> }
-                  })}
-                </div>
-
-                <div style={{ marginTop: "10px", position: "relative" }}>
-                  { b && [...Array(b*b)].map((e, i) => {
-                    if (b > 2) {
-                      let style = this.calcWrapCoords(i, a, b, 12, 200, c-a);
-                      return <div key={i} onClick={(e) => this.handleClick(e)} style={style} className="standalone b-square"></div>
+                      return <div id={'sq' + i} key={i} style={style} className="standalone b-square"></div>
                     } else { return <span /> }
                   })}
                 </div>
