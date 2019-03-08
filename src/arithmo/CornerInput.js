@@ -91,40 +91,18 @@ class CornerInput extends Component {
     }
 
     calcWrapCoords(i, a, b, sqW, leftOffset, thickness) {
-/*
-i   Top    Left
-0   24     -12
-1   24     -24
-2   12     -12
-3   12     -24
-4   0      -12
-5   0      -24
-6   -12    -12
-7   -12    -24
-8   -24    -12
-9   -24    -24
-10  -12      0
-11  -24      0
-12  -12     12
-13  -24     12
-14  -12     24
-15  -24     24
-*/
       let growVertically = a * thickness + thickness*thickness;
 	  var top, left;
 
 	  if (i < growVertically) {
-        top = sqW * (a*a - parseInt(i/thickness, 10));
-		left = leftOffset + -1 * (i%thickness+1) * sqW;
+        top = sqW * (thickness*-1 + parseInt(i/thickness, 10)); // This is correct.
+		left = leftOffset + -1 * (i%thickness+1) * sqW; // This is correct.
 	  } else {
-	    top = sqW * (a*a - i%thickness+1) + a - 1;
-		left = leftOffset + parseInt((i-a*a-1)/thickness, 10);
+	    top = -1 * (i%thickness+1) * sqW; // This appears to be correct.
+		left = leftOffset + parseInt((i - growVertically) / thickness, 10) * sqW; // This is correct.
 	  }
 
-console.log('i', i, 'top', top,  'left', left);
-//      top = i <= a ? (a - i - 1) * sqW : -1 * sqW;
-//      left = i <= a ? (leftOffset - sqW) : leftOffset + (i - a - 1) * sqW;
-
+console.log('i', i, 'top', top,  'left', left, 'leftOffset', leftOffset);
       let style={ top: top + 'px', left: left + 'px' };
       return style;
     }
