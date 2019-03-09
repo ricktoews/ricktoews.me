@@ -173,6 +173,15 @@ class CornerInput extends Component {
                   { b && [...Array(b*b)].map((e, i) => {
                     if (b > 2) {
                       let style = this.calcBCoords(i, a, b);
+                      return <div key={i} style={style} className="standalone b-square-ghost"></div>
+                    } else { return <span /> }
+                  })}
+                </div>
+
+                <div id="b-squared" style={{ marginTop: "10px", position: "relative" }}>
+                  { b && [...Array(b*b)].map((e, i) => {
+                    if (b > 2) {
+                      let style = this.calcBCoords(i, a, b);
                       return <div id={'sq' + i} key={i} style={style} className="standalone b-square"></div>
                     } else { return <span /> }
                   })}
