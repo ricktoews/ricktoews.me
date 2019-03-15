@@ -1,0 +1,14 @@
+article {
+  font-family: arial, helvetica;
+  font-size: .8rem;
+  line-height: 2;
+  padding-bottom:5px;
+  clear: both;
+}
+
+article > div.content {
+  font-family: arial, helvetica;
+  font-size: .8rem;
+  line-height: 2;
+  padding: 0px 10px;
+}

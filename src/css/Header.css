@@ -1,0 +1,86 @@
+/* General header formatting */
+article > header {
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  box-shadow: 1px 1px 1px gray;
+  padding: 3px 12px;
+  color: white;
+}
+
+article > header .title {
+  font-weight: bold;
+  font-size: .75rem;
+  text-shadow: 1px 1px 1px black;
+}
+
+article > header .date {
+  font-size: .75rem;
+  text-shadow: 1px 1px 1px black;
+}
+
+
+/* Autodidact header */
+article.autodidact > header .title::before {
+  content: 'Autodidact - ';
+}
+
+article.autodidact > header {
+  background-color: #EB4511;
+}
+
+/* Arithmophile header */
+article.arithmophile > header .title::before {
+  content: 'Arithmophile - ';
+}
+
+article.arithmophile > header {
+  background-color: #8EB1C7;
+}
+
+/* Bookshelf header */
+article.bookshelf > header .title::before {
+  content: 'Bookshelf - ';
+}
+
+article.bookshelf > header {
+  background-color: #A2C69F;
+}
+
+/* Logophile header */
+article.logophile > header .title::before {
+  content: 'Logophile - ';
+}
+
+article.logophile > header {
+  background-color: #777DA7;
+}
+
+/* Perambulation header */
+article.perambulation > header .title::before {
+  content: 'Out and About - ';
+}
+
+article.perambulations > header {
+  color:white;
+  background-color: #E08E45;
+}
+
+/* Professional header */
+article.professional > header .title::before {
+  content: 'Professional - ';
+}
+
+article.professional > header {
+  color:white;
+  background-color: #FE5F55;
+}
+
+/* Travel header */
+article.travel > header .title::before {
+  content: 'Travel - ';
+}
+
+article.travel > header {
+  color:white;
+  background-color: #6B2737;
+}

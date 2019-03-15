@@ -22,7 +22,7 @@ const styles = theme => ({
 	backgroundColor: "#eeeeee",
     paddingBottom: theme.spacing.unit * 2,
 	margin: "auto",
-    width: "85%",
+    width: "768px",
     minHeight: '100vh',
   },
 });

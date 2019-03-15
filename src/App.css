@@ -1,49 +1,17 @@
-article {
-  margin: 10px;
-}
-
-.home-topic-banner {
-  border-top-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  box-shadow: 1px 1px 1px gray;
-  padding: 5px 12px;
-  color: white;
-}
-
-.home-topic-title {
-  float: left;
-  font-weight: bold;
-  font-size: .75rem;
-  text-shadow: 1px 1px 1px black;
-}
-
-.home-topic-date {
-  float: right;
-  font-size: .75rem;
-  text-shadow: 1px 1px 1px black;
-}
-
-.home-topic-text {
-  font-family: arial, helvetica;
-  font-size: .8rem;
-  line-height: 2;
-  padding: 0px 10px;
-}
-
-.photo-left {
+.float-left {
   float: left;
 }
 
-.photo-left img {
+.float-left img {
   padding:10px;
   width: 150px;
 }
 
-.photo-right {
+.float-right {
   float: right;
 }
 
-.photo-right img {
+.float-right img {
   padding:10px;
   width: 150px;
 }
@@ -62,4 +30,5 @@ article {
   font-family: arial, helvetica;
   font-size: .8rem;
   line-height: 2;
+  color: black;
 }

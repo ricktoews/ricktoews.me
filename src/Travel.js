@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TravelIcon, { thumbs } from './TravelIcon';
 
-import './travel.css';
+//import './travel.css';
 
 const styles = theme => ({
   root: {
