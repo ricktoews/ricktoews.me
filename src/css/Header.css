@@ -3,7 +3,7 @@ article > header {
   border-top-left-radius: 15px;
   border-bottom-right-radius: 15px;
   box-shadow: 1px 1px 1px gray;
-  padding: 3px 12px;
+  padding: 0px 12px;
   color: white;
 }
 
@@ -43,7 +43,7 @@ article.bookshelf > header .title::before {
 }
 
 article.bookshelf > header {
-  background-color: #A2C69F;
+  background-color: #28AFB0;
 }
 
 /* Logophile header */
