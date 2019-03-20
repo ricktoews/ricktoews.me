@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './css/HomeContent.css';
 import './css/Header.css';
 import './css/Logophile.css';
+import './css/Professional.css';
 
 
 function fetchContent() {
@@ -43,8 +44,7 @@ class HomeContent extends Component {
   render() {
     
     return (
-      <div>
-		{/* homeContent.map((item, key) => <Topic key={key} ndx={key}></Topic>) */}
+      <div className="home-container">
 		{ this.state.content.map((post, key) => <Post key={key} post={post}/>)}
       </div>
     );

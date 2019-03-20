@@ -1,3 +1,8 @@
+.home-container {
+  width: calc(50% - 40px);
+  margin-left: calc(50% + 20px);
+}
+
 article {
   font-family: arial, helvetica;
   font-size: .8rem;
@@ -10,5 +15,6 @@ article > div.content {
   font-family: arial, helvetica;
   font-size: .8rem;
   line-height: 2;
-  padding: 0px 10px;
+  color: white;
+/*  padding: 0px 10px; */
 }

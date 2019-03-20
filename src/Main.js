@@ -18,11 +18,7 @@ import Masthead from './Masthead';
 
 const styles = theme => ({
   root: {
-    ...theme.mixins.gutters(),
-	backgroundColor: "#eeeeee",
     paddingBottom: theme.spacing.unit * 2,
-	margin: "auto",
-    width: "768px",
     minHeight: '100vh',
   },
 });
@@ -39,7 +35,7 @@ class Main extends Component {
       <div id="router">
         <MediaQuery query="(max-width:4096px) and (min-width:481px)">
           <Masthead id={id}/>
-          <Paper className={classes.root} elevation={1}>
+          <div className={classes.root}>
             <Switch>
               <Route exact path='/' render={(props) => <Home callback={callback}/>}/>
               <Route path='/arithmo/phi' render={(props) => <Phi callback={callback}/>}/>
@@ -52,7 +48,7 @@ class Main extends Component {
               <Route path='/professional' render={(props) => <Professional callback={callback}/>}/>
               <Route path='/learning' render={(props) => <Autodidact callback={callback}/>}/>
             </Switch>
-          </Paper>
+          </div>
         </MediaQuery>
 
         <MediaQuery query="(max-width:480px)">

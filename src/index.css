@@ -1,8 +1,7 @@
 body {
 	margin: 0;
-	padding: 20px 0;
 	font-family: sans-serif;
-	background: black;
+	background: linear-gradient(90deg, #825B56 50%, #052439 50%);
 }
 
 @media all and (max-width:480px) {
