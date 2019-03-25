@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/styles/hljs';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -43,7 +44,22 @@ function getTripleOdd(corner) {
 `;
 
 
+function detectPath(loc, postPaths) {
+    console.log('location', loc.pathname, postPaths.indexOf(loc.pathname));
+    return postPaths.indexOf(loc.pathname) > -1;
+}
+
 class Professional extends Component {
+    constructor(props) {
+        super(props);
+        var postPaths = this.props.content.map(p => '/' + p.topic + '/' + p.title);
+        if (detectPath(props.location, postPaths)) {
+            console.log('Professional; should render', props.location.pathname);
+        } else {
+            console.log('Professional; unrecognized path');
+        }
+    }
+
     componentDidMount() {
         console.log('Professional component did mount.', this.props);
         this.props.callback('professional');
@@ -87,5 +103,5 @@ class Professional extends Component {
 	}
 }
 
-export default withStyles(styles)(Professional);
+export default withRouter(withStyles(styles)(Professional));
 

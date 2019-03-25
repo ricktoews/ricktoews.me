@@ -6,18 +6,6 @@ import './css/Logophile.css';
 import './css/Professional.css';
 
 
-function fetchContent() {
-  var url = 'https://rest.toewsweb.net/index.php/content';
-  return fetch(url)
-    .then(res => {
-      return res.json();
-    })
-    .then(res => {
-      return res.data;
-    })
-}
-
-
 class Post extends Component {
   constructor(props) {
     super(props);
@@ -57,10 +45,8 @@ class Post extends Component {
 class HomeContent extends Component {
   constructor(props) {
     super(props);
-	this.state = { content: [] };
-	fetchContent().then(data => {
-	  this.setState({ content: data });
-	});
+	this.state = { content: props.content };
+console.log('HomeContent content', props.content);
   }
 
   render() {

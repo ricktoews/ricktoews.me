@@ -5,6 +5,12 @@ import HomeContent from './HomeContent';
 import MobileHome from './mobile/Home.js';
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.content = props.content;
+console.log('Home content', this.content);
+    }
+
     componentDidMount() {
         console.log('Home component did mount.', this.props);
         this.props.callback('home');
@@ -15,11 +21,11 @@ class Home extends Component {
             <div>
 
             <MediaQuery query="(min-width:481px) and (max-width:4096px)">
-              <HomeContent />
+              <HomeContent content={this.content}/>
             </MediaQuery>
 
             <MediaQuery query="(max-width: 480px)">
-              <MobileHome />
+              <MobileHome content={this.content}/>
             </MediaQuery>
 
             </div>
