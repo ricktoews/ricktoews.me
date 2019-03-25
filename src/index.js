@@ -12,6 +12,7 @@ function fetchContent() {
       return res.json();
     })
     .then(res => {
+      res.data = res.data.map(d => { d.path = '/' + d.topic + '/' + d.title; return d; });
       return res.data;
     })
 }

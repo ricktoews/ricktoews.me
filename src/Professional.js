@@ -44,17 +44,21 @@ function getTripleOdd(corner) {
 `;
 
 
-function detectPath(loc, postPaths) {
-    console.log('location', loc.pathname, postPaths.indexOf(loc.pathname));
-    return postPaths.indexOf(loc.pathname) > -1;
+function detectPost(loc, content) {
+    var path = loc.pathname;
+    var post = content.filter(p => path === '/' + p.topic + '/' + p.title);
+    console.log('detectPath, post', post)
+    return post;
 }
 
 class Professional extends Component {
     constructor(props) {
         super(props);
-        var postPaths = this.props.content.map(p => '/' + p.topic + '/' + p.title);
-        if (detectPath(props.location, postPaths)) {
+        var request = detectPost(props.location, props.content);
+        this.post = { content: '' };
+        if (request.length > 0) {
             console.log('Professional; should render', props.location.pathname);
+            this.post = request[0];
         } else {
             console.log('Professional; unrecognized path');
         }
@@ -66,8 +70,9 @@ class Professional extends Component {
 	}
 
 	render() {
-		return (
-            <MuiThemeProvider theme={theme}>
+        var post = { __html: this.post.content };
+		var defaultPost = (
+            <div>
               <article>
 			  <h2>Linux</h2>
               <h3>Linux find</h3>
@@ -98,8 +103,14 @@ class Professional extends Component {
 			  {generatorCode}
 			  </SyntaxHighlighter>
 			  </article>
-            </MuiThemeProvider>
+            </div>
 		);
+
+        if (this.post) {
+            return <div dangerouslySetInnerHTML={post}></div>
+        } else {
+            return defaultPost;
+        }
 	}
 }
 

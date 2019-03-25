@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import SideCalendar from './SideCalendar';
 import './css/HomeContent.css';
 import './css/Header.css';
@@ -36,7 +37,10 @@ class Post extends Component {
 
     return <div className="post">
              <div className="post-side"><SideCalendar postDate={postDateObj}></SideCalendar></div>
-             <div className="post-content" dangerouslySetInnerHTML={html}></div>
+             <div className="post-content">
+               <div dangerouslySetInnerHTML={html}></div>
+               <div className="post-article-link"><Link to={post.path}>Link to Article</Link></div>
+             </div>
            </div>
   }
 }
