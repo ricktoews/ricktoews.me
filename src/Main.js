@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import Phi from './arithmo/Phi';

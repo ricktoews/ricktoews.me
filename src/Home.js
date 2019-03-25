@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
-import { MuiThemeProvider } from '@material-ui/core/styles';
 import './Home.css';
 import HomeContent from './HomeContent';
 import MobileHome from './mobile/Home.js';
@@ -13,7 +12,7 @@ class Home extends Component {
 
 	render() {
 		return (
-            <MuiThemeProvider>
+            <div>
 
             <MediaQuery query="(min-width:481px) and (max-width:4096px)">
               <HomeContent />
@@ -23,7 +22,7 @@ class Home extends Component {
               <MobileHome />
             </MediaQuery>
 
-            </MuiThemeProvider>
+            </div>
 		)
 	}
 }

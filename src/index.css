@@ -1,7 +1,11 @@
 body {
 	margin: 0;
 	font-family: sans-serif;
-	background: linear-gradient(90deg, #825B56 50%, #052439 50%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top -500px left 0;
+	background-image: url(/media/images/mont-st-michel.jpg);
 }
 
 @media all and (max-width:480px) {

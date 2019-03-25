@@ -71,7 +71,7 @@ class Masthead extends Component {
     return (
       <MuiThemeProvider theme={cardTheme}>
       <MediaQuery query="(max-width: 4096px) and (min-width: 481px)">
-    <div style={{ position: "sticky", top: 0 }}>
+    <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
         <div className={ classes.topTrim } style={{backgroundColor: primary.dark}}></div>
         <div className={ classes.titleBar } style={{color: primary.contrastText, backgroundColor: primary.light}}>
           <MobileNav primaryColor={ primary }/>

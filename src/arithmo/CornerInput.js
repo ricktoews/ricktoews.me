@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -57,7 +56,7 @@ class CornerInput extends Component {
 	chooseTriple(triple) {
 		console.log('chooseTriple', this);
 		this.setState(triple);
-        var t = setTimeout(() => { this.wrap(0, triple.a, triple.b, triple.c); }, 1000);
+        //var t = setTimeout(() => { this.wrap(0, triple.a, triple.b, triple.c); }, 1000);
 	}
 
 	getABC() {
@@ -100,7 +99,7 @@ class CornerInput extends Component {
         el.style.top = style.top;
         el.style.left = style.left;
         i++;
-        var t = setTimeout(() => { this.wrap(i, a, b, c); }, 100);
+        //var t = setTimeout(() => { this.wrap(i, a, b, c); }, 100);
       }
       
     }

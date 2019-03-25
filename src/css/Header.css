@@ -1,7 +1,7 @@
 /* General header formatting */
 article > header {
-  border-top-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-radius: 3px;
+  border-bottom-right-radius: 10px;
   box-shadow: 1px 1px 1px gray;
   padding: 0px 12px;
   color: white;
