@@ -32,6 +32,7 @@ class Main extends Component {
     super(props);
     this.content = props.content;
     this.posts = this.organizeContent();
+console.log('this.posts', this.posts);
   }
 
   organizeContent() {
@@ -62,12 +63,12 @@ class Main extends Component {
               <Route path='/arithmo/phi' render={(props) => <Phi callback={callback}/>}/>
               <Route path='/arithmo/decimal' render={(props) => <Decimal callback={callback}/>}/>
               <Route path='/arithmo/pythagorean' render={(props) => <Pythag callback={callback}/>}/>
-              <Route exact path='/arithmo' render={(props) => <Arithmo callback={callback}/>}/>
-              <Route path='/logophilia' render={(props) => <Logophilia callback={callback}/>}/>
-              <Route path='/books' render={(props) => <Bookshelf callback={callback}/>}/>
-              <Route path='/travel' render={(props) => <Travel callback={callback}/>}/>
+              <Route path='/arithmo' render={(props) => <Arithmo callback={callback}/>} content={this.posts.arithmophile}/>
+              <Route path='/logophilia' render={(props) => <Logophilia callback={callback} content={this.posts.logophile}/>}/>
+              <Route path='/books' render={(props) => <Bookshelf callback={callback} content={this.posts.bookshelf}/>}/>
+              <Route path='/travel' render={(props) => <Travel callback={callback} content={this.posts.travel}/>}/>
               <Route path='/professional' render={(props) => <Professional callback={callback} content={this.posts.professional}/>}/>
-              <Route path='/learning' render={(props) => <Autodidact callback={callback}/>}/>
+              <Route path='/learning' render={(props) => <Autodidact callback={callback} content={this.posts.autodidact}/>}/>
             </Switch>
           </div>
         </MediaQuery>

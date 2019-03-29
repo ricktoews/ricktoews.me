@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { detectPost } from './helpers/content-helpers.js';
 import wordlist from './wordlist';
 
 const styles = {

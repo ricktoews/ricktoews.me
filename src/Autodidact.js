@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { detectPost } from './helpers/content-helpers.js';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {

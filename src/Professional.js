@@ -5,6 +5,7 @@ import { docco } from 'react-syntax-highlighter/dist/styles/hljs';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import { detectPost } from './helpers/content-helpers.js';
 import './App.css';
 
 const styles = {
@@ -43,13 +44,6 @@ function getTripleOdd(corner) {
 
 `;
 
-
-function detectPost(loc, content) {
-    var path = loc.pathname;
-    var post = content.filter(p => path === '/' + p.topic + '/' + p.title);
-    console.log('detectPath, post', post)
-    return post;
-}
 
 class Professional extends Component {
     constructor(props) {

@@ -1,6 +1,40 @@
 .home-container {
 }
 
+.post {
+  display:flex;
+}
+.post-side {
+  flex-basis:200px;
+  border-right: 1px dotted black;
+}
+
+/* Apply this to only the home page. */
+.post-content article > div.content {
+  height:300px;
+  overflow-y: hidden;
+}
+
+.post-content {
+  margin-top:20px;
+  flex-basis:100%;
+  padding-left: 20px;
+}
+
+.post-article-link {
+  font-size:.8em;
+  text-align:right;
+}
+
+.post-article-link a {
+  text-decoration:none;
+}
+
+.post-article-link a:hover {
+  text-decoration:underline;
+}
+
+/* Apply to both home and full article. */
 article {
   font-family: arial, helvetica;
   font-size: .8rem;
@@ -15,30 +49,4 @@ article > div.content {
   line-height: 2;
 }
 
-article > div.content {
-  height:300px;
-  overflow-y: scroll;
-}
 
-.post {
-  display:flex;
-}
-.post-side {
-  flex-basis:200px;
-  border-right: 1px dotted black;
-}
-.post-content {
-  margin-top:20px;
-  flex-basis:100%;
-  padding-left: 20px;
-}
-.post-article-link {
-  font-size:.8em;
-  text-align:right;
-}
-.post-article-link a {
-  text-decoration:none;
-}
-.post-article-link a:hover {
-  text-decoration:underline;
-}
