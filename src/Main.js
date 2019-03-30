@@ -12,6 +12,7 @@ import Logophilia from './Logophilia';
 import Bookshelf from './Bookshelf';
 import Travel from './Travel';
 import Professional from './Professional';
+import Article from './Article';
 import Autodidact from './Autodidact';
 import Masthead from './Masthead';
 
@@ -32,7 +33,6 @@ class Main extends Component {
     super(props);
     this.content = props.content;
     this.posts = this.organizeContent();
-console.log('this.posts', this.posts);
   }
 
   organizeContent() {
@@ -46,8 +46,6 @@ console.log('this.posts', this.posts);
   }
 
   render() {
-    var url = /^\/professional\/.+/;
-
     const { classes } = this.props;
 	const callback = (id) => { console.log('Main callback function', id); this.setState({ id: id }); };
 
@@ -69,6 +67,7 @@ console.log('this.posts', this.posts);
               <Route path='/travel' render={(props) => <Travel callback={callback} content={this.posts.travel}/>}/>
               <Route path='/professional' render={(props) => <Professional callback={callback} content={this.posts.professional}/>}/>
               <Route path='/learning' render={(props) => <Autodidact callback={callback} content={this.posts.autodidact}/>}/>
+              <Route path='/article' render={(props) => <Article callback={callback} content={this.posts}/>}/>
             </Switch>
           </div>
         </MediaQuery>

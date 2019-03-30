@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/styles/hljs';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { detectPost } from './helpers/content-helpers.js';
@@ -12,9 +11,6 @@ const styles = {
 	root: {
 	}
 };
-
-const theme = createMuiTheme({
-});
 
 const generatorCode = 
 `// Generator function to provide, on demand, the next odd square.
