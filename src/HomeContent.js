@@ -5,6 +5,7 @@ import './css/HomeContent.css';
 import './css/Header.css';
 import './css/Logophile.css';
 import './css/Professional.css';
+import FibRatios from './helpers/fib-ratios';
 
 
 class Post extends Component {
@@ -51,6 +52,22 @@ class HomeContent extends Component {
     super(props);
 	this.state = { content: props.content };
 console.log('HomeContent content', props.content);
+  }
+
+  componentDidMount() {
+    var els = Array.from(document.getElementsByClassName('post-content'));
+	console.log('els', els);
+	els.forEach(el => {
+	  if (el.offsetHeight > 350) {
+	    el.style.height = '350px';
+		el.style.overflowY = 'hidden';
+		console.log('long post; need to link', el);
+	  } else {
+		console.log('short post; need to hide link', el);
+	    el.getElementsByClassName('post-article-link')[0].style.display = 'none';
+	  }
+	});
+    FibRatios();
   }
 
   render() {

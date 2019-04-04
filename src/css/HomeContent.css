@@ -11,8 +11,8 @@
 
 /* Apply this to only the home page. */
 .post-content article > div.content {
-  height:300px;
-  overflow-y: hidden;
+/*  height:300px;
+  overflow-y: hidden;*/
 }
 
 .post-content {
