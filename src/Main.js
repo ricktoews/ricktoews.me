@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import Phi from './arithmo/Phi';
+import FibonacciRatios from './arithmo/FibonacciRatios';
 import Decimal from './arithmo/Decimal';
 import Pythag from './arithmo/Pythag';
 import Arithmo from './arithmo/Arithmo';
@@ -61,6 +62,7 @@ class Main extends Component {
               <Route path='/arithmo/phi' render={(props) => <Phi callback={callback}/>}/>
               <Route path='/arithmo/decimal' render={(props) => <Decimal callback={callback}/>}/>
               <Route path='/arithmo/pythagorean' render={(props) => <Pythag callback={callback}/>}/>
+              <Route path='/arithmo/fibratios' render={(props) => <FibonacciRatios callback={callback}/>}/>
               <Route path='/arithmo' render={(props) => <Arithmo callback={callback}/>} content={this.posts.arithmophile}/>
               <Route path='/logophilia' render={(props) => <Logophilia callback={callback} content={this.posts.logophile}/>}/>
               <Route path='/books' render={(props) => <Bookshelf callback={callback} content={this.posts.bookshelf}/>}/>
@@ -79,6 +81,7 @@ class Main extends Component {
             <Route path='/arithmo/phi' render={(props) => <Phi callback={callback}/>}/>
             <Route path='/arithmo/decimal' render={(props) => <Decimal callback={callback}/>}/>
             <Route path='/arithmo/pythagorean' render={(props) => <Pythag callback={callback}/>}/>
+            <Route path='/arithmo/fibratios' render={(props) => <FibonacciRatios callback={callback}/>}/>
             <Route exact path='/arithmo' render={(props) => <Arithmo callback={callback}/>}/>
             <Route path='/logophilia' render={(props) => <Logophilia callback={callback}/>}/>
             <Route path='/books' render={(props) => <Bookshelf callback={callback}/>}/>
