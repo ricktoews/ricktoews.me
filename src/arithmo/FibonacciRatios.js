@@ -48,6 +48,7 @@ class FibonacciRatios extends Component {
                   <tbody>
                     <tr>
                       <td colSpan="5">Sum of</td>
+                      <td colSpan="1">Ratio</td>
                     </tr>
                     <tr>
                       <td>a</td>
@@ -69,6 +70,7 @@ class FibonacciRatios extends Component {
                       <td>1b</td>
                       <td>=</td>
                       <td>1a+1b</td>
+                      <td></td>
                     </tr>
                     <tr>
                       <td>1b</td>
@@ -76,28 +78,21 @@ class FibonacciRatios extends Component {
                       <td>1a+1b</td>
                       <td>=</td>
                       <td>1a+2b</td>
+                      <td>1a+2b / 1a+1b</td>
                     </tr>
-                    <tr>
-                      <td>1a+1b</td>
+                    { fibRows.map(n => {
+                        let [a3, b3] = this.fib(n+2);
+                        let [a2, b2] = this.fib(n+1);
+                        let [a1, b1] = this.fib(n);
+                        return (<tr key={n}>
+                      <td>{a2}a+{b2}b</td>
                       <td>+</td>
-                      <td>1a+2b</td>
+                      <td>{a3}a+{b3}b</td>
                       <td>=</td>
-                      <td>2a+3b</td>
-                    </tr>
-                    <tr>
-                      <td>1a+2b</td>
-                      <td>+</td>
-                      <td>2a+3b</td>
-                      <td>=</td>
-                      <td>3a+5b</td>
-                    </tr>
-                    <tr>
-                      <td>2a+3b</td>
-                      <td>+</td>
-                      <td>3a+5b</td>
-                      <td>=</td>
-                      <td>5a+8b</td>
-                    </tr>
+                      <td>{a2+a3}a+{b2+b3}b</td>
+                      <td>{a2+a3}a+{b2+b3}b / {a1+a2}a+{b1+b2}b</td>
+                        </tr>)}
+                    )}
                   </tbody>
                 </table>
                 <br clear="both"/>
