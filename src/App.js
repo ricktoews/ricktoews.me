@@ -2,6 +2,7 @@ import React from 'react';
 import Main from './Main';
 
 const App = (props) => {
+// First lab test.
 console.log('App, props', props.content);
 	return (
 	<div>
