@@ -3,6 +3,7 @@ import Main from './Main';
 
 const App = (props) => {
 // First lab test.
+// Third commit for experiment branch
 console.log('App, props', props.content);
 	return (
 	<div>
