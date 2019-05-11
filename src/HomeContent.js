@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MediaQuery from 'react-responsive';
 import { Link } from 'react-router-dom';
 import SideCalendar from './SideCalendar';
 import './css/HomeContent.css';
@@ -37,7 +38,9 @@ class Post extends Component {
     var html = { __html: post.content };
 
     return <div className="post">
-             <div className="post-side"><SideCalendar postDate={postDateObj}></SideCalendar></div>
+             <MediaQuery query="(max-width:4096px) and (min-width:481px)">
+               <div className="post-side"><SideCalendar postDate={postDateObj}></SideCalendar></div>
+             </MediaQuery>
              <div className="post-content">
                <div dangerouslySetInnerHTML={html}></div>
                <div className="post-article-link"><Link to={post.path}>Link to Article</Link></div>

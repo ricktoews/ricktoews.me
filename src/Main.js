@@ -25,7 +25,6 @@ const styles = theme => ({
     borderRadius: '3px',
     background: 'rgba(255,255,255,.8)',
     margin: 'auto',
-    padding: '20px',
   },
 });
 
