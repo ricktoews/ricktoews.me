@@ -71,10 +71,10 @@ console.log('HomeContent content', props.content);
   }
 
   render() {
-    
+    let content = this.state.content || [];
     return (
       <div className="home-container">
-		{ this.state.content.map((post, key) => <Post key={key} post={post}/>)}
+		{ content.map((post, key) => <Post key={key} post={post}/>)}
       </div>
     );
   }

@@ -33,6 +33,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.content = props.content;
+console.log('Main content', props.content);
     this.posts = this.organizeContent();
   }
 
@@ -77,17 +78,17 @@ class Main extends Component {
         <MediaQuery query="(max-width:480px)">
           { id !== 'home' ? <Masthead id={id}/> : <span /> }
           <Switch>
-            <Route exact path='/' render={(props) => <Home callback={callback}/>}/>
-            <Route path='/arithmo/phi' render={(props) => <Phi callback={callback}/>}/>
-            <Route path='/arithmo/decimal' render={(props) => <Decimal callback={callback}/>}/>
-            <Route path='/arithmo/pythagorean' render={(props) => <Pythag callback={callback}/>}/>
-            <Route path='/arithmo/fibratios' render={(props) => <FibonacciRatios callback={callback}/>}/>
-            <Route exact path='/arithmo' render={(props) => <Arithmo callback={callback}/>}/>
-            <Route path='/logophilia' render={(props) => <Logophilia callback={callback}/>}/>
-            <Route path='/books' render={(props) => <Bookshelf callback={callback}/>}/>
-            <Route path='/travel' render={(props) => <Travel callback={callback}/>}/>
-            <Route path='/professional' render={(props) => <Professional callback={callback}/>}/>
-            <Route path='/learning' render={(props) => <Autodidact callback={callback}/>}/>
+            <Route exact path='/' render={(props) => <Home callback={callback} content={this.content}/>}/>
+            <Route path='/arithmo/phi' render={(props) => <Phi callback={callback} content={this.content}/>}/>
+            <Route path='/arithmo/decimal' render={(props) => <Decimal callback={callback} content={this.content}/>}/>
+            <Route path='/arithmo/pythagorean' render={(props) => <Pythag callback={callback} content={this.content}/>}/>
+            <Route path='/arithmo/fibratios' render={(props) => <FibonacciRatios callback={callback} content={this.content}/>}/>
+            <Route exact path='/arithmo' render={(props) => <Arithmo callback={callback} content={this.content}/>}/>
+            <Route path='/logophilia' render={(props) => <Logophilia callback={callback} content={this.content}/>}/>
+            <Route path='/books' render={(props) => <Bookshelf callback={callback} content={this.content}/>}/>
+            <Route path='/travel' render={(props) => <Travel callback={callback} content={this.content}/>}/>
+            <Route path='/professional' render={(props) => <Professional callback={callback} content={this.content}/>}/>
+            <Route path='/learning' render={(props) => <Autodidact callback={callback} content={this.content}/>}/>
           </Switch>
         </MediaQuery>
       </div>

@@ -14,14 +14,22 @@ class Masthead extends Component {
 }
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+	this.state = { content: props.content };
+console.log('MobileHome content', props.content);
+  }
+
 
   render() {
+    let content = this.state.content || [];
+
     return (
       <div>
         <MobileNav />
         <Masthead />
 
-        <HomeContent />
+        <HomeContent content={content}/>
       </div>
     );
   }
