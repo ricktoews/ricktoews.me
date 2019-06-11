@@ -20,7 +20,7 @@
   flex-basis:100%;
 }
 
-.post-article-link {
+.post-article-link, .home-article-link {
   display: inline-block;
   right: 0;
   font-size:.8em;
@@ -31,11 +31,11 @@
   float: right;
 }
 
-.post-article-link {
+.post-article-link, .home-article-link {
   text-decoration:none;
 }
 
-.post-article-link:hover {
+.post-article-link:hover, .home-article-link:hover {
   text-decoration:underline;
 }
 

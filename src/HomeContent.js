@@ -35,7 +35,7 @@ class Post extends Component {
   render() {
     var postDateObj = this.makePostDateObj(this.props.post.date);
     var post = this.props.post;
-    var html = { __html: post.article };
+    var html = { __html: post.homeArticle };
 
     return <div className="post">
              <MediaQuery query="(max-width:4096px) and (min-width:481px)">

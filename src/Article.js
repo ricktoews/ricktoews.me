@@ -27,14 +27,14 @@ class Article extends Component {
 	}
 
 	render() {
-        var post = { __html: this.post.content };
+        var post = { __html: this.post.fullArticle };
 		var defaultPost = (
-            <div>
+            <div className="article-wrapper">
             </div>
 		);
 
         if (this.post) {
-            return <div dangerouslySetInnerHTML={post}></div>
+            return <div className="article-wrapper" dangerouslySetInnerHTML={post}></div>
         } else {
             return defaultPost;
         }
