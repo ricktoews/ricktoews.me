@@ -8,11 +8,9 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.content = props.content;
-console.log('Home content', this.content);
     }
 
     componentDidMount() {
-        console.log('Home component did mount.', this.props);
         this.props.callback('home');
 	}
 

@@ -6,13 +6,23 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 function fetchContent() {
-  var url = 'https://rest.toewsweb.net/index.php/content';
+  var url = 'http://rest.toewsweb.net/index.php/content';
   return fetch(url)
     .then(res => {
       return res.json();
     })
     .then(res => {
-      res.data = res.data.map(d => { d.path = '/article/' + d.title; return d; });
+      res.data = res.data.map(d => { 
+        let tempEl = document.createElement('div');
+        tempEl.innerHTML = d.content;
+        let article = tempEl.firstChild;
+        let linkEl = document.createElement('a');
+        linkEl.href = '/article/' + d.title;
+        linkEl.innerHTML = 'Link to article';
+        article.appendChild(linkEl);
+        d.article = article.outerHTML;
+        d.path = '/article/' + d.title; return d; 
+      });
       return res.data;
     })
 }

@@ -32,7 +32,6 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.content = props.content;
-console.log('Main content', props.content);
     this.posts = this.organizeContent();
   }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import MediaQuery from 'react-responsive';
 import { Link } from 'react-router-dom';
 import SideCalendar from './SideCalendar';
@@ -6,7 +7,6 @@ import './css/HomeContent.css';
 import './css/Header.css';
 import './css/Logophile.css';
 import './css/Professional.css';
-import FibRatios from './helpers/fib-ratios';
 
 
 class Post extends Component {
@@ -35,7 +35,7 @@ class Post extends Component {
   render() {
     var postDateObj = this.makePostDateObj(this.props.post.date);
     var post = this.props.post;
-    var html = { __html: post.content };
+    var html = { __html: post.article };
 
     return <div className="post">
              <MediaQuery query="(max-width:4096px) and (min-width:481px)">
@@ -43,7 +43,6 @@ class Post extends Component {
              </MediaQuery>
              <div className="post-content">
                <div dangerouslySetInnerHTML={html}></div>
-               <div className="post-article-link"><Link to={post.path}>Link to Article</Link></div>
              </div>
            </div>
   }
@@ -54,12 +53,11 @@ class HomeContent extends Component {
   constructor(props) {
     super(props);
 	this.state = { content: props.content };
-console.log('HomeContent content', props.content);
   }
 
   componentDidMount() {
+/*
     var els = Array.from(document.getElementsByClassName('post-content'));
-	console.log('els', els);
 	els.forEach(el => {
 	  if (el.offsetHeight > 350) {
 	    el.style.height = '350px';
@@ -70,7 +68,7 @@ console.log('HomeContent content', props.content);
 	    el.getElementsByClassName('post-article-link')[0].style.display = 'none';
 	  }
 	});
-    FibRatios();
+*/
   }
 
   render() {
