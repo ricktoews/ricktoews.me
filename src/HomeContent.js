@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import MediaQuery from 'react-responsive';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import SideCalendar from './SideCalendar';
 import './css/HomeContent.css';
 import './css/Header.css';
@@ -52,7 +52,14 @@ class Post extends Component {
 class HomeContent extends Component {
   constructor(props) {
     super(props);
+    this.props = props;
 	this.state = { content: props.content };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    let link = e.target.dataset.link;
+    this.props.history.push(link);
   }
 
   componentDidMount() {
@@ -69,6 +76,9 @@ class HomeContent extends Component {
 	  }
 	});
 */
+    let els = Array.from(document.getElementsByClassName('post-article-link'));
+    els.map(el => el.addEventListener('click', this.handleClick));
+console.log('should have added click handler to all article links.');
   }
 
   render() {
@@ -81,4 +91,4 @@ class HomeContent extends Component {
   }
 }
 
-export default HomeContent;
+export default withRouter(HomeContent);

@@ -6,14 +6,13 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 function makeLinks(post) {
-  let linkEl = document.createElement('a');
+  let linkEl = document.createElement('button');
   linkEl.className = 'post-article-link';
-  linkEl.href = '/article/' + post.title;
+  linkEl.dataset.link = '/article/' + post.title;
   linkEl.innerHTML = 'Link to article';
 
-  let homeLinkEl = document.createElement('a');
+  let homeLinkEl = document.createElement('button');
   homeLinkEl.className = 'home-article-link';
-  homeLinkEl.href = '/';
   homeLinkEl.innerHTML = 'Home';
 
   return {

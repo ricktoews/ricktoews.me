@@ -12,6 +12,7 @@ const styles = {
 class Article extends Component {
     constructor(props) {
         super(props);
+        this.props = props;
         var request = detectPost(props.location, props.content);
         this.post = { content: '' };
         if (request.length > 0) {
@@ -19,11 +20,18 @@ class Article extends Component {
         } else {
             console.log('Article; unrecognized path');
         }
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+      console.log('Got here', this.props);
+      this.props.history.push('/');
     }
 
     componentDidMount() {
-        console.log('Article component did mount.', this.props);
         this.props.callback('professional');
+        let homeLinkEl = document.querySelector('.home-article-link');
+        homeLinkEl.addEventListener('click', this.handleClick);
 	}
 
 	render() {
