@@ -17,6 +17,7 @@ function fetchContent() {
         tempEl.innerHTML = d.content;
         let article = tempEl.firstChild;
         let linkEl = document.createElement('a');
+        linkEl.className = 'post-article-link';
         linkEl.href = '/article/' + d.title;
         linkEl.innerHTML = 'Link to article';
         article.appendChild(linkEl);

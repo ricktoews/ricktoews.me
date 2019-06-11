@@ -21,15 +21,21 @@
 }
 
 .post-article-link {
+  display: inline-block;
+  right: 0;
   font-size:.8em;
-  text-align:right;
+  background: #07e;
+  border-radius: 10px;
+  color: white;
+  padding: 1px 4px;
+  float: right;
 }
 
-.post-article-link a {
+.post-article-link {
   text-decoration:none;
 }
 
-.post-article-link a:hover {
+.post-article-link:hover {
   text-decoration:underline;
 }
 
