@@ -59,24 +59,23 @@ class HomeContent extends Component {
 
   handleClick(e) {
     let link = e.target.dataset.link;
+console.log('handleClick', link);
     this.props.history.push(link);
   }
 
   componentDidMount() {
-/*
-    var els = Array.from(document.getElementsByClassName('post-content'));
-	els.forEach(el => {
+    let postEls = Array.from(document.getElementsByClassName('post-content'));
+	postEls.forEach(el => {
 	  if (el.offsetHeight > 350) {
 	    el.style.height = '350px';
 		el.style.overflowY = 'hidden';
 		console.log('long post; need to link', el);
 	  } else {
 		console.log('short post; need to hide link', el);
-	    el.getElementsByClassName('post-article-link')[0].style.display = 'none';
 	  }
 	});
-*/
-    let els = Array.from(document.getElementsByClassName('post-article-link'));
+
+    let els = Array.from(document.getElementsByClassName('title'));
     els.map(el => el.addEventListener('click', this.handleClick));
 console.log('should have added click handler to all article links.');
   }

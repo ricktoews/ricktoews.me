@@ -38,7 +38,8 @@ function fetchContent() {
 
         let homeArticle = homeArticleEl.firstChild;
         let fullArticle = fullArticleEl.firstChild;
-        homeArticle.appendChild(linkToArticle);
+        let titleEl = homeArticle.querySelector('.title');
+        if (titleEl) titleEl.dataset.link = '/article/' + d.title;
         fullArticle.appendChild(linkToHome);
 
         d.homeArticle = homeArticle.outerHTML;

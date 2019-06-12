@@ -75,6 +75,16 @@ article.professional > header {
   background-color: #819cd3;
 }
 
+/* Thoughts header */
+article.thoughts > header .title::before {
+  content: '';
+}
+
+article.thoughts > header {
+  color:white;
+  background-color: #6d20d8;
+}
+
 /* Travel header */
 article.travel > header .title::before {
   content: 'Travel - ';
