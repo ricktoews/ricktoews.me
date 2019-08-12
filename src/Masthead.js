@@ -75,7 +75,7 @@ class Masthead extends Component {
         <div className={ classes.topTrim } style={{backgroundColor: primary.dark}}></div>
         <div className={ classes.titleBar } style={{color: primary.contrastText, backgroundColor: primary.light}}>
           <MobileNav primaryColor={ primary }/>
-          <span style={{display: "inline-block", width:"40px"}}></span>/rɪkteɪvz/.me
+          <span style={{display: "inline-block", width:"40px"}}></span>/ricktoews/.me
         </div>
     </div>
       </MediaQuery>
