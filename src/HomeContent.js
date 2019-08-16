@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import HomePost from './HomePost';
 import './css/HomeContent.css';

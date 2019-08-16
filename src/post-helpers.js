@@ -18,7 +18,6 @@ export const makePostDateObj = (date) => {
 export const extractContent = (post) => {
   var domEl = document.createElement('div');
   domEl.innerHTML = post.homeArticle;
-        console.log('domEl', domEl);
   var header = domEl.getElementsByTagName('header')[0];
   var titleEl = domEl.getElementsByClassName('title')[0];
   var title, articleLink, category, content;

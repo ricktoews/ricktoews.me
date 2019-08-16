@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import FibRatios from '../helpers/fib-ratios';
 
 const styles = theme => ({
@@ -32,7 +31,6 @@ class FibonacciRatios extends Component {
 
 
 	render() {
-		const { classes } = this.props;
 		const fibRows = [...Array(30).keys()];
 
 		return (

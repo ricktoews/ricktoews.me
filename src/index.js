@@ -4,9 +4,7 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 import allReducers from './reducers';
-import { homeArticles } from './actions';
 import { Provider } from 'react-redux';
-import { useDispatch } from 'react-redux';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -39,7 +37,7 @@ function fetchContent() {
         homeArticleEl.innerHTML = d.content;
         fullArticleEl.innerHTML = d.content;
 
-        let { linkToArticle, linkToHome } = makeLinks(d);
+        let { linkToHome } = makeLinks(d);
 
         let homeArticle = homeArticleEl.firstChild;
         let fullArticle = fullArticleEl.firstChild;
