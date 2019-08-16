@@ -2,6 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
+import { createStore } from 'redux';
+import allReducers from './reducers';
+import { homeArticles } from './actions';
+import { Provider } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -50,8 +55,9 @@ function fetchContent() {
     })
 }
 
-fetchContent().then(data => {
-console.log('Fetched content; now rendering.');
-  ReactDOM.render(<BrowserRouter><App content={data} /></BrowserRouter>, document.getElementById('root'));
+fetchContent().then(function(data) {
+  const store = createStore(allReducers, { homeArticles: data });
+        console.log('store', store.getState());
+  ReactDOM.render(<Provider store={store}><BrowserRouter><App content={data} /></BrowserRouter></Provider>, document.getElementById('root'));
 });
 registerServiceWorker();

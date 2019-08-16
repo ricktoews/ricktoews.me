@@ -1,0 +1,32 @@
+Tech stuff I do.
+
+I write JavaScript code.
+
+Currently, my preferred framework is React.
+
+Familiar with CSS.
+
+I write PHP code.
+
+I write Python code.
+
+I've worked in the past with MySQL. Currently, I work with PostGreSQL. For both, my tool has been the command line api.
+
+I currently work some with MongoDB, using the Robomongo interface.
+
+Linux command line.
+
+For source management, I use git.
+
+
+
+In software engineering, change is the way of things. Once upon a time, it was a common practice to preserve the value of "this" (e.g., var that = this) for use in situations in which "this" was overwritten in the immediate context. When arrow functions were introduced, that practice became unnecessary.
+
+It used to be that if you wanted to swap the relative values of variables, you would have to store one in a temporary variable:
+var tmp = a;
+var b = a + b;
+var a = b;
+When desctructing assignment was introduced, it became possible to do this instead:
+[a, b] = [b, b + a];
+
+
