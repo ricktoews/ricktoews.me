@@ -32,6 +32,16 @@ function CornerInput(props) {
     console.log('handleHover', triple.a, triple.b, triple.c, areaInfo);
   }
 
+  const moveRegion = (region) => {
+console.log('will move region squares', region, document.getElementsByClassName(region));
+    let alt = document.getElementById('a-b-c-alt');
+    let els = Array.from(document.getElementsByClassName(region));
+    els.forEach(el => {
+console.log('el', el, alt);
+      alt.appendChild(el);
+    });
+  }
+
   const handleChange = event => {
     corner = event.target.value;
     abcs = getABC(event.target.value);
@@ -83,13 +93,15 @@ function CornerInput(props) {
            { [...Array(triple.c)].map((e2, i2) => {
              let regionLabel = getRegionLabel(i, i2);
 
-             return (<PythagSquare details={details} region={regionLabel} key={i2}></PythagSquare> )
+             return (<PythagSquare details={details} move={moveRegion} region={regionLabel} key={i2}></PythagSquare> )
            } ) }
           </div>)
         })}
       </div>
 
       <br style={{clear:"both"}}/>
+      <div id="a-b-c-alt">
+      </div>
     </article>
     </div>
 
