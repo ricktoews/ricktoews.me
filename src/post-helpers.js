@@ -15,27 +15,36 @@ export const makePostDateObj = (date) => {
   };
 }
 
+function createTextFadeEl() {
+  let el = document.createElement('div');
+  el.className = 'fade-text';
+  return el;
+}
+
 export const extractContent = (post) => {
-  var domEl = document.createElement('div');
-  domEl.innerHTML = post.homeArticle;
-  var header = domEl.getElementsByTagName('header')[0];
-  var titleEl = domEl.getElementsByClassName('title')[0];
+  // these are the data items to be extracted.
   var title, articleLink, category, content;
 
+  // create temporary element for use in parsing, and put article's HTML in it.
+  var domEl = document.createElement('div');
+  // apparently, insertAdjacentHTML isn't supported from createDocumentFragment. Investigate.
+  domEl.insertAdjacentHTML('afterBegin', post.homeArticle);
+  var titleEl = domEl.querySelector('.title');
   if (titleEl) {
-    let articleEl = domEl.getElementsByTagName('article')[0];
+    let articleEl = domEl.querySelector('article');
     category = articleEl.className;
     articleLink = titleEl.dataset.link;
     title = titleEl.innerHTML;
+
+  // Remove header from article.
+    var headerEl = articleEl.querySelector('header');
+    articleEl.removeChild(headerEl);
     if (category !== 'logophile') {
-      let contentEl = domEl.getElementsByClassName('content')[0];
-      content = contentEl.innerHTML;
-    } else {
-      header.remove();
-      content = articleEl.innerHTML;
+      articleEl.appendChild(createTextFadeEl());
     }
+    content = articleEl.innerHTML;
   } else {
-    console.log('weird homeArticle', header);
+    console.log('weird homeArticle', headerEl);
   }
   return {
     title,

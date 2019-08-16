@@ -1,12 +1,15 @@
-.grid-wrapper {
-	position:relative;
-	height:100vh;
+.content-wrapper {
+  max-height: 250px;
+  position: relative;
+  overflow: hidden;
 }
-.grid-layout {
-	position:absolute;
-	right:0;
-	width: calc(100% - 650px);
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-	grid-template-rows: 320px 320px 320px;
+article .fade-text { 
+  position: absolute; 
+  bottom: 0; 
+  left: 0;
+  width: 100%; 
+  text-align: center; 
+  margin: 0; padding: 30px 0; 
+	
+  background-image: linear-gradient(to bottom, transparent, white);
 }

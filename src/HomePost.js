@@ -26,7 +26,7 @@ function HomePost(props) {
            <div className="title" data-link={articleLink}>{title}</div>
            <div className="date"></div>
          </header>
-         <div className="content" dangerouslySetInnerHTML={contentHtml}></div>
+         <div className="content-wrapper" dangerouslySetInnerHTML={contentHtml}></div>
        </article>
      </div>
    </div>

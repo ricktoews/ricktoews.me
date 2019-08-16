@@ -23,7 +23,7 @@ const styles = theme => ({
     minHeight: '100vh',
     width: 'calc(60% - 40px)',
     borderRadius: '3px',
-    background: 'rgba(255,255,255,.8)',
+    background: 'rgba(255,255,255)',
     margin: 'auto',
   },
 });
