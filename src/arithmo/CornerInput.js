@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import CheckCircle from '@material-ui/icons/CheckCircle';
+import PythagSandbox from './PythagSandbox';
 import Button from '@material-ui/core/Button';
 import TripleBtn from './TripleBtn';
-import PythagSquare from './PythagSquare';
 import { getABC, calcACoords, calcBCoords } from './pythag-helpers';
 import './arithmo.css';
 
@@ -19,29 +19,6 @@ function CornerInput(props) {
   let [triple, setTriple] = useState({a:4, b:3, c:5});
   const { classes } = props;
 
-  const details = (cls) => {
-    var areaInfo;
-
-    if (cls === 'b-corner-area') {
-      areaInfo = `B corner: ${triple.c - triple.a} squared: ${Math.pow(triple.c - triple.a, 2)}`;
-    } else if (cls === 'b-area') {
-      areaInfo = `B sides: 2 x ${triple.c - triple.a} x ${triple.a}: ${2*(triple.c-triple.a)*triple.a}`;
-    } else {
-      areaInfo = `A squared: ${Math.pow(triple.a, 2)}`;
-    }
-    console.log('handleHover', triple.a, triple.b, triple.c, areaInfo);
-  }
-
-  const moveRegion = (region) => {
-console.log('will move region squares', region, document.getElementsByClassName(region));
-    let alt = document.getElementById('a-b-c-alt');
-    let els = Array.from(document.getElementsByClassName(region));
-    els.forEach(el => {
-console.log('el', el, alt);
-      alt.appendChild(el);
-    });
-  }
-
   const handleChange = event => {
     corner = event.target.value;
     abcs = getABC(event.target.value);
@@ -56,20 +33,6 @@ console.log('el', el, alt);
   const chooseTriple = triple => {
     setTriple(triple);
   }
-
-  const getRegionLabel = (row, col) => {
-    let region = '';
-    let bThick = triple.c - triple.a;
-    if (row < bThick && col < bThick) { 
-      region = 'b-corner-area'; 
-    } else if (row < bThick || col < bThick) { 
-      region = 'b-area'; 
-    } else { 
-      region = 'a-area'; 
-    }
-    return region;
-  }
-
 
   return (
     <div>
@@ -87,21 +50,8 @@ console.log('el', el, alt);
         return <TripleBtn key={i} chooseTriple={chooseTriple} abc={abc}></TripleBtn>
       }) }
 
-      <div className="a-b-c">
-        { [...Array(triple.c)].map((e, i) => {
-          return (<div className="row" key={i}>
-           { [...Array(triple.c)].map((e2, i2) => {
-             let regionLabel = getRegionLabel(i, i2);
+      <PythagSandbox triple={triple}></PythagSandbox>
 
-             return (<PythagSquare details={details} move={moveRegion} region={regionLabel} key={i2}></PythagSquare> )
-           } ) }
-          </div>)
-        })}
-      </div>
-
-      <br style={{clear:"both"}}/>
-      <div id="a-b-c-alt">
-      </div>
     </article>
     </div>
 

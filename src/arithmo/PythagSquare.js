@@ -1,17 +1,27 @@
 import React from 'react';
 
 function PythagSquare(props) {
-  const { region, details, move } = props;
+  const { square, details, move } = props;
+
+  let style = {}; 
 
   const handleHover = e => {
-    details(region);
+    details(square.region);
   }
 
   const handleClick = e => {
-    move(region);
+    move(square.region);
   }
 
-  return (<div onMouseOver={handleHover} onClick={handleClick} className={'square ' + region}></div> )
+  style = {
+    top: square.coords.top,
+    left: square.coords.left
+  }
+  console.log(square.region, style);
+
+  return (
+    <div style={style} onMouseOver={handleHover} onClick={handleClick} className={'square ' + square.region}></div> 
+  );
 }
 
 export default PythagSquare;
