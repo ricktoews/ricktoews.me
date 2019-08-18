@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PythagSquare from './PythagSquare';
 
 const SQ = 11;
 
+// colors used for constructing grid
+let altColors = false;
+
 function constructSquareGrid(triple, side = 11) {
   const { a, b, c } = triple;
   const bThickness = c - a;
-  let squareGrid = [];
+  const squareGrid = [];
   for (let row = 0; row < c; row++) {
     let isBRow = row < bThickness;
     for (let col = 0; col < c; col++) {
       let isBCol = col < bThickness;
       let region = '';
       if (isBRow && isBCol) {
-        region = 'b-corner-region';
+        region = altColors ? 'a-region' : 'b-region';
       } else if (isBRow || isBCol) {
-        region = 'b-region';
+        region = altColors ? 'a-region' : 'b-region';
       } else {
-        region = 'a-region';
+        region = altColors ? 'b-region' : 'a-region';
       }
       let top = (row * side) + 'px';
       let left = (col * side) + 'px';
@@ -30,9 +33,15 @@ function constructSquareGrid(triple, side = 11) {
 }
 
 function PythagSandbox(props) {
-  const { triple } = props;
-  const squareGrid = constructSquareGrid(triple);
-  console.log('grid', squareGrid);
+  let { triple } = props;
+  altColors = false;
+  const initSquareGrid = constructSquareGrid(triple);
+  const [ squareGrid, setSquareGrid ] = useState(initSquareGrid);
+  // If a new triple is selected, this should rerender the component.
+  if (initSquareGrid.length !== squareGrid.length) {
+    console.log('should reset squareGrid');
+    setSquareGrid(initSquareGrid);
+  }
 
   const details = (cls) => {
     var areaInfo;
@@ -48,13 +57,11 @@ function PythagSandbox(props) {
   }
 
   const moveRegion = (region) => {
-console.log('will move region squares', region, triple);
-    let alt = document.getElementById('a-b-c-alt');
-    let side = SQ*triple.c;
-    alt.style.backgroundColor = '#ccc';
-    alt.style.height = side + 'px';
-    alt.style.width = side + 'px';
-    let els = Array.from(document.getElementsByClassName(region));
+    let { a, b } = triple;
+    triple.b = a;
+    triple.a = b;
+    altColors = !altColors;
+    setSquareGrid(constructSquareGrid(triple));
   }
 
   const aRegion = squareGrid.filter(sq => sq.region === 'a-region');

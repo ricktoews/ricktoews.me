@@ -47,12 +47,13 @@
   background-color: #ccc;
 }
 
-.b-corner-area, .b-corner-region {
+
+.b-corner-region {
   background-color: #84f9c2;
 }
-.b-area, .b-region {
+.b-region {
   background-color: #dbffee;
 }
-.a-area, .a-region {
+.a-region {
   background-color: #ffe2ed;
 }
