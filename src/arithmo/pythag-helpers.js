@@ -1,13 +1,25 @@
+/*
+ * Think of a, b, and c in context of a square of side c.
+ * In the lower right corner is a smaller square of side a.
+ * Wrapped around this smaller square is a shape of area
+ * 2(c-a) + (c-a)^2. What this function looks for is cases
+ * in which this area is also a square. These cases are
+ * compiled into an array and returned.
+ *
+ * The parameter corner is an integer whose value is a
+ * side of the upper left square. This is equal to c - a.
+ */
 export const getABC = (corner) => {
   var abcVals = [];
   for (let i = 3; i <= 100; i++) {
     let bSquared = Math.pow(corner, 2) + 2 * corner * i;
     let sqrt = Math.floor(Math.pow(bSquared, .5));
+    // is 2(c-a) + (c-a)^2 also a square?
     if (Math.pow(sqrt, 2) === bSquared) {
       abcVals.push({ a: i, b: sqrt, c: Math.pow(i*i + sqrt*sqrt, .5)});
     }
   }
-  console.log('getABC', corner, abcVals);
+  abcVals = abcVals.slice(0, 4);
   return abcVals;
 }
 
@@ -31,18 +43,15 @@ export const calcBCoords = (i, a, b) => {
 
 
 export const wrap = (i, a, b, c) => {
-//console.log('Wrap:', a, b, c);
-    var numSquares = b*b-1;
-    if (b && i <= numSquares) {
-      var style = calcWrapCoords(numSquares - i, a, b, 12, 200, c-a);
-      var el = document.getElementById('sq' + i);
-      el.style.top = style.top;
-      el.style.left = style.left;
-      i++;
-      //var t = setTimeout(() => { wrap(i, a, b, c); }, 100);
-    }
-    
+  var numSquares = b*b-1;
+  if (b && i <= numSquares) {
+    var style = calcWrapCoords(numSquares - i, a, b, 12, 200, c-a);
+    var el = document.getElementById('sq' + i);
+    el.style.top = style.top;
+    el.style.left = style.left;
+    i++;
   }
+}
 
 const calcWrapCoords = (i, a, b, sqW, leftOffset, thickness) => {
     let growVertically = a * thickness + thickness*thickness;

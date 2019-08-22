@@ -33,15 +33,10 @@ function constructSquareGrid(triple, side = 11) {
 }
 
 function PythagSandbox(props) {
-  let { triple } = props;
-  altColors = false;
+  const { triple } = props;
   const initSquareGrid = constructSquareGrid(triple);
-  const [ squareGrid, setSquareGrid ] = useState(initSquareGrid);
-  // If a new triple is selected, this should rerender the component.
-  if (initSquareGrid.length !== squareGrid.length) {
-    console.log('should reset squareGrid');
-    setSquareGrid(initSquareGrid);
-  }
+  const squareGrid = initSquareGrid;
+  const [ rerender, setRerender ] = useState(false);
 
   const details = (cls) => {
     var areaInfo;
@@ -53,7 +48,6 @@ function PythagSandbox(props) {
     } else {
       areaInfo = `A squared: ${Math.pow(triple.a, 2)}`;
     }
-    console.log('handleHover', triple.a, triple.b, triple.c, areaInfo);
   }
 
   const moveRegion = (region) => {
@@ -61,7 +55,8 @@ function PythagSandbox(props) {
     triple.b = a;
     triple.a = b;
     altColors = !altColors;
-    setSquareGrid(constructSquareGrid(triple));
+    // Trigger re-render.
+    setRerender(!rerender);
   }
 
   const aRegion = squareGrid.filter(sq => sq.region === 'a-region');
