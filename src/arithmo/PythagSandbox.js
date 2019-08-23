@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PythagSquare from './PythagSquare';
 
 const SQ = 11;
@@ -38,6 +38,11 @@ function PythagSandbox(props) {
   const squareGrid = initSquareGrid;
   const [ rerender, setRerender ] = useState(false);
 
+  useEffect(() => {
+    let el = document.querySelector('.sandbox > div:nth-of-type(1)');
+
+  });
+
   const details = (cls) => {
     var areaInfo;
 
@@ -62,10 +67,16 @@ function PythagSandbox(props) {
   const aRegion = squareGrid.filter(sq => sq.region === 'a-region');
   const bRegion = squareGrid.filter(sq => sq.region === 'b-region');
   const bCornerRegion = squareGrid.filter(sq => sq.region === 'b-corner-region');
+  const aArea = aRegion.length;
+  const bArea = bRegion.length;
+  const aSide = Math.sqrt(aArea);
+  const bSide = Math.sqrt(bArea);
+  const side = Math.sqrt(squareGrid.length);
+  const style = { height: (side * SQ) + 'px', width: (side * SQ) + 'px' };
 
   return (
     <div className="sandbox">
-      <div className="a-b-c">
+      <div className="a-b-c" style={style}>
         { bRegion.map((square, ndx) => {
             return <PythagSquare key={ndx} square={square} details={details} move={moveRegion}></PythagSquare>
           })
@@ -82,8 +93,20 @@ function PythagSandbox(props) {
 
       </div>
 
-      <br style={{clear:"both"}}/>
-      <div id="a-b-c-alt">
+      <div className="legend-wrapper">
+        <div className="legend">
+          <div>
+            <div className="square a-region"></div>
+          </div>
+          <div>{aSide}x{aSide}: area {aArea} square units</div>
+        </div>
+
+        <div className="legend">
+          <div>
+            <div className="square b-region"></div>
+          </div>
+          <div>{bSide}x{bSide}: area {bArea} square units</div>
+        </div>
       </div>
     </div>
   );
