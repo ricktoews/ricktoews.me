@@ -46,9 +46,13 @@ function CornerInput(props) {
       <Button onClick={handleClick}><CheckCircle /></Button>
       <br style={{clear:"both"}}/>
 
+      <div className="triple-button-wrapper">
+
       { abcs && abcs.map((abc, i) => {
         return <TripleBtn key={i} chooseTriple={chooseTriple} abc={abc}></TripleBtn>
       }) }
+
+      </div>
 
       <PythagSandbox triple={triple}></PythagSandbox>
 

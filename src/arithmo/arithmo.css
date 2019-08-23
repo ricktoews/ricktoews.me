@@ -1,3 +1,21 @@
+.triple-button-wrapper {
+  margin: 10px 0;
+  display: flex;
+}
+
+.triple-button-wrapper button {
+  margin-right: 20px;
+  border-radius: 20px;
+  border: 1px solid #999;
+  color: #999;
+  font-size:0.70rem;
+}
+.triple-button-wrapper button:hover {
+  color: #333;
+  cursor: pointer;
+}
+
+
 .a-b-c {
   position: relative;
 }
