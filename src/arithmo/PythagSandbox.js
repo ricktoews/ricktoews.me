@@ -34,8 +34,7 @@ function constructSquareGrid(triple, side = 11) {
 
 function PythagSandbox(props) {
   const { triple } = props;
-  const initSquareGrid = constructSquareGrid(triple);
-  const squareGrid = initSquareGrid;
+  const squareGrid = constructSquareGrid(triple);
   const [ rerender, setRerender ] = useState(false);
 
   useEffect(() => {
@@ -45,14 +44,62 @@ function PythagSandbox(props) {
 
   const details = (cls) => {
     var areaInfo;
+    var wrapAround = altColors ? 'a-region' : 'b-region';
 
-    if (cls === 'b-corner-area') {
-      areaInfo = `B corner: ${triple.c - triple.a} squared: ${Math.pow(triple.c - triple.a, 2)}`;
-    } else if (cls === 'b-area') {
-      areaInfo = `B sides: 2 x ${triple.c - triple.a} x ${triple.a}: ${2*(triple.c-triple.a)*triple.a}`;
+    if (cls === wrapAround) {
+      let bThick = triple.c - triple.a;
+      areaInfo = `${bThick}^2 + ${bThick}x${triple.a} + ${bThick}x${triple.a}`;
     } else {
-      areaInfo = `A squared: ${Math.pow(triple.a, 2)}`;
+      areaInfo = `${triple.a}^2`;
     }
+
+    return areaInfo;
+  }
+
+  const legend = (shape, regions) => {
+    const { aRegion, bRegion } = regions;
+    const aArea = aRegion.length;
+    const bArea = bRegion.length;
+    const aLegend = details('a-region');
+    const bLegend = details('b-region');
+    let regionClass, regionArea, regionLegend;
+    switch (shape) {
+      case 'wrap':
+        if (altColors) {
+          // a-region
+          regionClass = 'a-region';
+          regionArea = aArea;
+          regionLegend = aLegend;
+        } else {
+          // b-region
+          regionClass = 'b-region';
+          regionArea = bArea;
+          regionLegend = bLegend;
+        }
+        break;
+      case 'square':
+        if (altColors) {
+          // b-region
+          regionClass = 'b-region';
+          regionArea = bArea;
+          regionLegend = bLegend;
+        } else {
+          // a-region
+          regionClass = 'a-region';
+          regionArea = aArea;
+          regionLegend = aLegend;
+        }
+    }
+
+    var code = (
+        <div className="legend">
+          <div>
+            <div className={'square ' + regionClass}></div>
+          </div>
+          <div>{regionArea} square units: {regionLegend}</div>
+        </div>
+    );
+    return code;
   }
 
   const moveRegion = (region) => {
@@ -66,22 +113,16 @@ function PythagSandbox(props) {
 
   const aRegion = squareGrid.filter(sq => sq.region === 'a-region');
   const bRegion = squareGrid.filter(sq => sq.region === 'b-region');
-  const bCornerRegion = squareGrid.filter(sq => sq.region === 'b-corner-region');
-  const aArea = aRegion.length;
-  const bArea = bRegion.length;
-  const aSide = Math.sqrt(aArea);
-  const bSide = Math.sqrt(bArea);
   const side = Math.sqrt(squareGrid.length);
   const style = { height: (side * SQ) + 'px', width: (side * SQ) + 'px' };
+  const wrapLegend = legend('wrap', { aRegion, bRegion });
+  const squareLegend = legend('square', { aRegion, bRegion });
+
 
   return (
     <div className="sandbox">
       <div className="a-b-c" style={style}>
         { bRegion.map((square, ndx) => {
-            return <PythagSquare key={ndx} square={square} details={details} move={moveRegion}></PythagSquare>
-          })
-        }
-        { bCornerRegion.map((square, ndx) => {
             return <PythagSquare key={ndx} square={square} details={details} move={moveRegion}></PythagSquare>
           })
         }
@@ -94,19 +135,8 @@ function PythagSandbox(props) {
       </div>
 
       <div className="legend-wrapper">
-        <div className="legend">
-          <div>
-            <div className="square a-region"></div>
-          </div>
-          <div>{aSide}x{aSide}: area {aArea} square units</div>
-        </div>
-
-        <div className="legend">
-          <div>
-            <div className="square b-region"></div>
-          </div>
-          <div>{bSide}x{bSide}: area {bArea} square units</div>
-        </div>
+        {wrapLegend}
+        {squareLegend}
       </div>
     </div>
   );
