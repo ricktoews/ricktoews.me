@@ -15,7 +15,8 @@ function PythagSquare(props) {
 
   style = {
     top: square.coords.top,
-    left: square.coords.left
+    left: square.coords.left,
+    transition: '2s'
   }
 
   return (

@@ -48,9 +48,13 @@ function PythagSandbox(props) {
 
     if (cls === wrapAround) {
       let bThick = triple.c - triple.a;
-      areaInfo = `${bThick}^2 + ${bThick}x${triple.a} + ${bThick}x${triple.a}`;
+      areaInfo = <span className="wrap">
+        <span id="left-side">{bThick}x{triple.a}</span> +&nbsp; 
+        <span id="corner-square">{bThick}x{bThick}</span> +&nbsp; 
+        <span id="top-side">{bThick}x{triple.a}</span> ({triple.b}x{triple.b})
+      </span>
     } else {
-      areaInfo = `${triple.a}^2`;
+      areaInfo = <span className="small-square">{triple.a}x{triple.a}</span>
     }
 
     return areaInfo;
@@ -121,6 +125,10 @@ function PythagSandbox(props) {
 
   return (
     <div className="sandbox">
+      <div className="legend-wrapper">
+        {wrapLegend}
+        {squareLegend}
+      </div>
       <div className="a-b-c" style={style}>
         { bRegion.map((square, ndx) => {
             return <PythagSquare key={ndx} square={square} details={details} move={moveRegion}></PythagSquare>
@@ -134,10 +142,6 @@ function PythagSandbox(props) {
 
       </div>
 
-      <div className="legend-wrapper">
-        {wrapLegend}
-        {squareLegend}
-      </div>
     </div>
   );
 }
