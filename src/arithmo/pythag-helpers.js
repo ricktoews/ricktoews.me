@@ -19,7 +19,7 @@ export const getABC = (corner) => {
       abcVals.push({ a: i, b: sqrt, c: Math.pow(i*i + sqrt*sqrt, .5)});
     }
   }
-  abcVals = abcVals.slice(0, 4);
+  abcVals = abcVals.slice(0, 9);
   return abcVals;
 }
 
