@@ -13,64 +13,87 @@ function MakePost(props) {
   let title, content;
 
   const savePost = post => {
-    console.log('save post', post);
     let options = {
       method: 'POST',
       body: JSON.stringify(post)
     }
-    fetch(savePostUrl, options)
+    return fetch(savePostUrl, options)
       .then(res => res.json())
       .then(res => {
-        console.log('after setPost', res);
+        let ndx = posts.findIndex(p => p.id === res.data.id);
+        if (ndx > -1) { posts.splice(ndx, 1); }
+        posts.push(res.data);
         setPost(res.data);
       });
   }
 
   const initSavePost = post => {
     if (saveTimeout) {
-            console.log('clearing timemout');
       clearTimeout(saveTimeout);
     }
-    saveTimeout = setTimeout(() => { savePost(post); }, 2000);
+    saveTimeout = setTimeout(() => { 
+      savePost(post)
+    }, 5000);
   }
 
 
-  const changePost = e => {
-    let id = e.target.value;
-    let _post = posts.find(p => p.id === id);
-    setPost(_post);
-  }
+  // clonePost in order to create a separate copy of the post to pass to the hook. This is so the page will be rerendered.
+  const clonePost = post => JSON.parse(JSON.stringify(post));
 
   const newItem = e => {
     e.preventDefault();
     setPost(blankItem);
   }
 
+  const deleteItem = e => {
+    e.preventDefault();
+    if (window.confirm('Are you sure?')) {
+      console.log('Will delete post ID', post.id);
+      let ndx = posts.findIndex(p => p.id === post.id);
+      posts.splice(ndx, 1);
+      // Need API call for delete.
+    }
+  }
+
+  /*
+    Handlers for changing form field.
+    changePost selects the post with which to populate the form. The posts were previously loaded and are in a local array.
+    The other handlers (Title, Content, Category) call initSavePost, which sets up an autosave function.
+  */
+  const changePost = e => {
+    let id = e.target.value;
+    let _post = posts.find(p => p.id === id);
+    setPost(_post);
+  }
+
   const changeTitle = e => {
     post.title = e.target.value;
-    setPost(JSON.parse(JSON.stringify(post)));
+    setPost(clonePost());
     initSavePost(post);
   }
 
   const changeContent = e => {
     post.content = e.target.value;
-    setPost(JSON.parse(JSON.stringify(post)));
+    setPost(clonePost());
+    initSavePost(post);
     initSavePost(post);
   }
 
   const changeCategory = e => {
     post.category = e.target.value;
-    setPost(JSON.parse(JSON.stringify(post)));
+    setPost(clonePost());
     initSavePost(post);
   }
 
-  const { posts, loading, error } = useFetchPosts();
+  var { posts, loading, error } = useFetchPosts();
+
+  const formTitle = post.id ? 'Edit Post' : 'Create Post';
 
   if (!posts) return null;
   else {
     return (
     <div className="post-entry">
-      <h1>Create Post</h1>
+      <h1>{formTitle}</h1>
       <form>
         <div>
         <select id="post-id" value={post.id} onChange={changePost}>
@@ -80,6 +103,7 @@ function MakePost(props) {
         })}
         </select>
         <button onClick={newItem}>New</button>
+        <button onClick={deleteItem}>Delete</button>
         </div>
         <fieldset>
           <div><label htmlFor="definition">Category</label></div>
