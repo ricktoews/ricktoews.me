@@ -3,7 +3,7 @@ import { useFetchPosts } from './posts-hook';
 
 function MakePost(props) {
   const [ postType, setPostType ] = useState('');
-  const [ post, setPost ] = useState({})
+  const [ post, setPost ] = useState({ id: 0, title: '', category: '', content: ''})
   let title, content;
 
   const handleSelectPost = e => {
@@ -11,6 +11,16 @@ function MakePost(props) {
     let id = el.value;
     let _post = posts.find(p => p.id === id);
     setPost(_post);
+  }
+
+  const changeTitle = e => {
+    post.title = e.target.value;
+    setPost(JSON.parse(JSON.stringify(post)));
+  }
+
+  const changeContent = e => {
+    post.content = e.target.value;
+    setPost(JSON.parse(JSON.stringify(post)));
   }
 
   const handleChange = e => {
@@ -39,6 +49,18 @@ function MakePost(props) {
           <option value="professional">Professional</option>
         </select>
 
+        <div style={{ display: postType !== 'logophile' ? 'block' : 'none' }} className="generic">
+          <div>
+          <label htmlFor="title">Title</label>
+          <input type="text" id="title" value={post.title} onChange={changeTitle}/>
+          </div>
+
+          <div>
+          <label htmlFor="content">Content</label>
+          <textarea id="content" value={post.content} onChange={changeContent}></textarea>
+          </div>
+        </div>
+
         <div style={{ display: postType === 'logophile' ? 'block' : 'none' }} className="logophile-fields">
           <div>
           <label htmlFor="word">Word</label>
@@ -61,17 +83,6 @@ function MakePost(props) {
           </div>
         </div>
 
-        <div style={{ display: postType !== 'logophile' ? 'block' : 'none' }} className="generic">
-          <div>
-          <label htmlFor="title">Title</label>
-          <input type="text" id="title" value={post.title} />
-          </div>
-
-          <div>
-          <label htmlFor="content">Content</label>
-          <textarea id="content">{post.content}</textarea>
-          </div>
-        </div>
       </form>
 
     </div>
