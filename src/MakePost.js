@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useFetchPosts } from './posts-hook';
 
 function MakePost(props) {
+  const blankItem = { id: 0, title: '', category: '', content: '' };
   const [ postType, setPostType ] = useState('');
-  const [ post, setPost ] = useState({ id: 0, title: '', category: '', content: ''})
+  const [ post, setPost ] = useState(blankItem)
+  const [ selected, setSelected ] = useState(0)
   let title, content;
 
   const handleSelectPost = e => {
@@ -11,6 +13,13 @@ function MakePost(props) {
     let id = el.value;
     let _post = posts.find(p => p.id === id);
     setPost(_post);
+    setSelected(id);
+  }
+
+  const newItem = e => {
+    e.preventDefault();
+    setPost(blankItem);
+    setSelected(0);
   }
 
   const changeTitle = e => {
@@ -23,9 +32,9 @@ function MakePost(props) {
     setPost(JSON.parse(JSON.stringify(post)));
   }
 
-  const handleChange = e => {
-    let el = e.target;
-    setPostType(el.value);
+  const changeCategory = e => {
+    post.category = e.target.value;
+    setPost(JSON.parse(JSON.stringify(post)));
   }
 
   const { posts, loading, error } = useFetchPosts();
@@ -36,18 +45,23 @@ function MakePost(props) {
     <div>
       <h1>Create Post</h1>
       <form>
-        <select id="select-post" onChange={handleSelectPost}>
+        <div>
+        <select id="select-post" value={selected} onChange={handleSelectPost}>
           <option value="">Select post</option>
         {posts.map(p => {
           return <option key={p.id} value={p.id}>{p.title}</option>
         })}
         </select>
-        <select onChange={handleChange} id="post-type">
+        <button onClick={newItem}>New</button>
+        </div>
+        <div>
+        <select value={post.category} onChange={changeCategory} id="post-type">
           <option value="">Select type</option>
           <option value="logophile">Logophile</option>
           <option value="arithmophile">Arithmophile</option>
           <option value="professional">Professional</option>
         </select>
+        </div>
 
         <div style={{ display: postType !== 'logophile' ? 'block' : 'none' }} className="generic">
           <div>
