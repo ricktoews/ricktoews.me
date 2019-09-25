@@ -14,7 +14,7 @@ import Bookshelf from './Bookshelf';
 import Travel from './Travel';
 import Professional from './Professional';
 import Article from './Article';
-import MakePost from './MakePost';
+import MakePost from './manage-posts/MakePost';
 import Autodidact from './Autodidact';
 import Masthead from './Masthead';
 

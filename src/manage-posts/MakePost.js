@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useFetchPosts } from './posts-hook';
+import { initApi, savePost, delPost } from './posts-api';
 import './MakePost.css';
 
-const savePostUrl = 'http://rest.toewsweb.net/home-content.php/setPost';
-const delPostUrl = 'http://rest.toewsweb.net/home-content.php/delPost';
 var saveTimeout;
 
 function MakePost(props) {
@@ -11,45 +10,16 @@ function MakePost(props) {
   const [ postType, setPostType ] = useState('');
   const [ post, setPost ] = useState(blankItem)
 
+  initApi(savePost, blankItem);
+
   let title, content;
-
-  const savePost = post => {
-    let options = {
-      method: 'POST',
-      body: JSON.stringify(post)
-    }
-    return fetch(savePostUrl, options)
-      .then(res => res.json())
-      .then(res => {
-        let ndx = posts.findIndex(p => p.id === res.data.id);
-        if (ndx > -1) { posts.splice(ndx, 1); }
-        posts.push(res.data);
-        setPost(res.data);
-      });
-  }
-
-  const delPost = id => {
-    let reqPayload = { id };
-    let options = {
-      method: 'POST',
-      body: JSON.stringify(reqPayload)
-    };
-    return fetch(delPostUrl, options)
-      .then(res => res.json())
-      .then(res => {
-        let ndx = posts.findIndex(p => p.id === id);
-        if (ndx > -1) { posts.splice(ndx, 1); }
-        setPost(blankItem);
-      });
-  }
-
 
   const initSavePost = post => {
     if (saveTimeout) {
       clearTimeout(saveTimeout);
     }
     saveTimeout = setTimeout(() => { 
-      savePost(post)
+      savePost(posts, post)
     }, 5000);
   }
 
@@ -77,7 +47,7 @@ function MakePost(props) {
     if (window.confirm('Are you sure?')) {
       console.log('Will delete post ID', post.id);
       // Need API call for delete.
-      delPost(post.id);
+      delPost(posts, post.id);
     }
   }
 
