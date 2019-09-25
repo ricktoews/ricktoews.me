@@ -1,8 +1,24 @@
+.post-entry {
+  position: relative;
+  width:90%;
+  margin: auto;
+  font: .75rem arial;
+}
+
+fieldset {
+  margin-top: 10px;
+  border: 1px solid #ccc;
+}
+
+select {
+  font: .75rem arial;
+}
+
 input {
   width: 50%;
 }
 
 textarea {
   width: 100%;
-  height: 75px;
+  height: 200px;
 }
