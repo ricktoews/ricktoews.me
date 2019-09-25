@@ -3,6 +3,7 @@ import { useFetchPosts } from './posts-hook';
 import './MakePost.css';
 
 const savePostUrl = 'http://rest.toewsweb.net/home-content.php/setPost';
+const delPostUrl = 'http://rest.toewsweb.net/home-content.php/delPost';
 var saveTimeout;
 
 function MakePost(props) {
@@ -27,6 +28,22 @@ function MakePost(props) {
       });
   }
 
+  const delPost = id => {
+    let reqPayload = { id };
+    let options = {
+      method: 'POST',
+      body: JSON.stringify(reqPayload)
+    };
+    return fetch(delPostUrl, options)
+      .then(res => res.json())
+      .then(res => {
+        let ndx = posts.findIndex(p => p.id === id);
+        if (ndx > -1) { posts.splice(ndx, 1); }
+        setPost(blankItem);
+      });
+  }
+
+
   const initSavePost = post => {
     if (saveTimeout) {
       clearTimeout(saveTimeout);
@@ -38,7 +55,17 @@ function MakePost(props) {
 
 
   // clonePost in order to create a separate copy of the post to pass to the hook. This is so the page will be rerendered.
-  const clonePost = post => JSON.parse(JSON.stringify(post));
+  const clonePost = post => {
+    if (post) {
+      try {
+        return JSON.parse(JSON.stringify(post));
+      } catch (e) {
+        console.log('Problem cloning post', post, e);
+      }
+    } else {
+      return blankItem;
+    }
+  }
 
   const newItem = e => {
     e.preventDefault();
@@ -49,9 +76,8 @@ function MakePost(props) {
     e.preventDefault();
     if (window.confirm('Are you sure?')) {
       console.log('Will delete post ID', post.id);
-      let ndx = posts.findIndex(p => p.id === post.id);
-      posts.splice(ndx, 1);
       // Need API call for delete.
+      delPost(post.id);
     }
   }
 
@@ -68,20 +94,20 @@ function MakePost(props) {
 
   const changeTitle = e => {
     post.title = e.target.value;
-    setPost(clonePost());
+    setPost(clonePost(post));
     initSavePost(post);
   }
 
   const changeContent = e => {
     post.content = e.target.value;
-    setPost(clonePost());
+    setPost(clonePost(post));
     initSavePost(post);
     initSavePost(post);
   }
 
   const changeCategory = e => {
     post.category = e.target.value;
-    setPost(clonePost());
+    setPost(clonePost(post));
     initSavePost(post);
   }
 
