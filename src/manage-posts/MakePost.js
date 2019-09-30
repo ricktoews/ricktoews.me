@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFetchPosts } from './posts-hook';
 import { initApi, savePost, delPost } from './posts-api';
 import './MakePost.css';
@@ -6,13 +6,9 @@ import './MakePost.css';
 var saveTimeout;
 
 function MakePost(props) {
-  const blankItem = { id: 0, title: '', category: '', content: '' };
-  const [ postType, setPostType ] = useState('');
+  const blankItem = { id: 0, title: '', category: '', content: {} };
   const [ post, setPost ] = useState(blankItem)
-
-  initApi(savePost, blankItem);
-
-  let title, content;
+  initApi(setPost, blankItem);
 
   const initSavePost = post => {
     if (saveTimeout) {
@@ -20,7 +16,7 @@ function MakePost(props) {
     }
     saveTimeout = setTimeout(() => { 
       savePost(posts, post)
-    }, 5000);
+    }, 2000);
   }
 
 
@@ -51,6 +47,24 @@ function MakePost(props) {
     }
   }
 
+  const saveItem = e => {
+    e.preventDefault();
+          console.log('saveItem', post);
+    savePost(posts, post);
+  }
+
+  const saveContent = e => {
+    e.preventDefault();
+    var { id, value } = e.currentTarget;
+    if (id === 'title' || id === 'category') {
+      post[id] = value;
+    } else {
+      post.content[id] = value;
+    }
+    console.log('saveContent post', post);
+    setPost(JSON.parse(JSON.stringify(post)));
+  }
+
   /*
     Handlers for changing form field.
     changePost selects the post with which to populate the form. The posts were previously loaded and are in a local array.
@@ -59,34 +73,30 @@ function MakePost(props) {
   const changePost = e => {
     let id = e.target.value;
     let _post = posts.find(p => p.id === id);
+          console.log('changePost', JSON.parse(JSON.stringify(_post.content)));
     setPost(_post);
   }
 
-  const changeTitle = e => {
-    post.title = e.target.value;
-    setPost(clonePost(post));
-    initSavePost(post);
-  }
-
-  const changeContent = e => {
-    post.content = e.target.value;
-    setPost(clonePost(post));
-    initSavePost(post);
-    initSavePost(post);
-  }
-
-  const changeCategory = e => {
-    post.category = e.target.value;
-    setPost(clonePost(post));
-    initSavePost(post);
-  }
-
-  var { posts, loading, error } = useFetchPosts();
+  var { posts } = useFetchPosts();
+  var title, category, content;
+  var definition, etymology, citations;
+  var text;
 
   const formTitle = post.id ? 'Edit Post' : 'Create Post';
 
-  if (!posts) return null;
+  if (!posts) { console.log('posts is empty; rendering null'); return null; }
   else {
+    category = post.category;
+    title = post.title;
+    content = post.content;
+    if (category === 'logophile') {
+      definition = content.definition || '';
+      etymology = content.etymology || '';
+      citations = content.citations || '';
+      console.log('definition', definition);
+    } else {
+      text = content.text || '';
+    }
     return (
     <div className="post-entry">
       <h1>{formTitle}</h1>
@@ -100,11 +110,12 @@ function MakePost(props) {
         </select>
         <button onClick={newItem}>New</button>
         <button onClick={deleteItem}>Delete</button>
+        <button onClick={saveItem}>Save</button>
         </div>
         <fieldset>
           <div><label htmlFor="definition">Category</label></div>
           <div>
-            <select value={post.category} onChange={changeCategory} id="post-type">
+            <select value={category} onChange={saveContent} id="category">
               <option value="">Select type</option>
               <option value="logophile">Logophile</option>
               <option value="arithmophile">Arithmophile</option>
@@ -113,36 +124,38 @@ function MakePost(props) {
           </div>
         </fieldset>
 
-        <fieldset style={{ display: postType !== 'logophile' ? 'block' : 'none' }} className="generic">
-          <div><label htmlFor="title">Title</label></div>
-          <div><input type="text" id="title" value={post.title} onChange={changeTitle}/></div>
-        </fieldset>
+        <div style={{ display: category !== 'logophile' ? 'block' : 'none' }} className="generic">
+          <fieldset>
+            <div><label htmlFor="title">Title</label></div>
+            <div><input type="text" id="title" value={title} onChange={saveContent}/></div>
+          </fieldset>
 
-        <fieldset>
-          <div><label htmlFor="content">Content</label></div>
-          <div><textarea id="content" value={post.content} onChange={changeContent}></textarea></div>
-        </fieldset>
+          <fieldset>
+            <div><label htmlFor="text">Text</label></div>
+            <div><textarea id="text" value={text} onChange={saveContent}></textarea></div>
+          </fieldset>
+        </div>
 
-        <div style={{ display: postType === 'logophile' ? 'block' : 'none' }} className="logophile-fields">
-          <div>
-          <label htmlFor="word">Word</label>
-          <input type="text" id="word" />
-          </div>
+        <div style={{ display: category === 'logophile' ? 'block' : 'none' }} className="logophile-fields">
+          <fieldset>
+          <label htmlFor="title">Word</label>
+          <input type="text" id="title" value={title} onChange={saveContent} />
+          </fieldset>
 
-          <div>
+          <fieldset>
           <label htmlFor="definition">Definition</label>
-          <textarea id="definition"></textarea>
-          </div>
+          <textarea id="definition" value={definition} onChange={saveContent}></textarea>
+          </fieldset>
 
-          <div>
+          <fieldset>
           <label htmlFor="etymology">Etymology</label>
-          <textarea id="etymology"></textarea>
-          </div>
+          <textarea id="etymology" value={etymology} onChange={saveContent}></textarea>
+          </fieldset>
 
-          <div>
-          <label htmlFor="usage">Usage</label>
-          <textarea id="usage"></textarea>
-          </div>
+          <fieldset>
+          <label htmlFor="citations">Citations</label>
+          <textarea id="citations" values={citations} onChange={saveContent}></textarea>
+          </fieldset>
         </div>
 
       </form>
