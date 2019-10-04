@@ -8,6 +8,19 @@ import { Provider } from 'react-redux';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
+function generateTitle(post) {
+  // create temporary element for use in parsing, and put article's HTML in it.
+  var domEl = document.createElement('div');
+  // apparently, insertAdjacentHTML isn't supported from createDocumentFragment. Investigate.
+  domEl.insertAdjacentHTML('afterBegin', post.content);
+  var titleEl = domEl.querySelector('.title');
+  var titleText = titleEl.childNodes ? titleEl.childNodes[0].nodeValue : '';
+  titleText = titleText.replace(/\W+/g, ' ')
+                       .trim()
+                       .replace(/\s/g, '-').toLowerCase();
+  return titleText;
+}
+
 function makeLinks(post) {
   let linkEl = document.createElement('button');
   linkEl.className = 'post-article-link';
@@ -32,11 +45,11 @@ function fetchContent() {
     })
     .then(res => {
       res.data = res.data.map(d => { 
+        d.title = generateTitle(d);
         let homeArticleEl = document.createElement('div');
         let fullArticleEl = document.createElement('div');
         homeArticleEl.innerHTML = d.content;
         fullArticleEl.innerHTML = d.content;
-
         let { linkToHome } = makeLinks(d);
 
         let homeArticle = homeArticleEl.firstChild;
@@ -55,7 +68,6 @@ function fetchContent() {
 
 fetchContent().then(function(data) {
   const store = createStore(allReducers, { homeArticles: data });
-        console.log('store', store.getState());
-  ReactDOM.render(<Provider store={store}><BrowserRouter><App content={data} /></BrowserRouter></Provider>, document.getElementById('root'));
+  ReactDOM.render(<Provider store={store}><BrowserRouter><App content={data}/></BrowserRouter></Provider>, document.getElementById('root'));
 });
 registerServiceWorker();
