@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import './Home.css';
-import HomeContent from './HomeContent';
+import HomeContent from './desktop/HomeContent';
 import MobileHome from './mobile/Home.js';
 
 class Home extends Component {

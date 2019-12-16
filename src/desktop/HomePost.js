@@ -2,7 +2,7 @@ import React from 'react';
 import MediaQuery from 'react-responsive';
 import { withRouter } from 'react-router-dom';
 import SideCalendar from './SideCalendar';
-import { makePostDateObj, extractContent } from './post-helpers';
+import { makePostDateObj, extractContent } from '../post-helpers';
 
 function HomePost(props) {
 

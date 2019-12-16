@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MobileNav from './MobileNav';
-import HomeContent from '../HomeContent';
+import HomeContent from './HomeContent';
 import './Home.css';
 
 class Masthead extends Component {
