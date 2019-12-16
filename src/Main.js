@@ -89,6 +89,7 @@ class Main extends Component {
             <Route path='/travel' render={(props) => <Travel callback={callback} content={this.content}/>}/>
             <Route path='/professional' render={(props) => <Professional callback={callback} content={this.content}/>}/>
             <Route path='/learning' render={(props) => <Autodidact callback={callback} content={this.content}/>}/>
+            <Route path='/article' render={(props) => <Article callback={callback} content={this.posts}/>}/>
             <Route path='/makepost' component={MakePost}/>
           </Switch>
         </MediaQuery>

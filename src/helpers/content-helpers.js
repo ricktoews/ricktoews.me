@@ -16,6 +16,22 @@ export function detectPost(loc, content) {
     return post;
 }
 
+const definitionStyle = `
+  font-style: italic; padding-bottom: 5px; margin-bottom: 5px; border-bottom: 1px dotted black
+`;
+
+const etymologyStyle = `
+  font-size: .75rem; padding-bottom: 10px;
+`;
+
+const citationsStyle = `
+  font-size: .75rem;
+`;
+
+const contentStyle = `
+  font-size: .75rem;
+`;
+
 const articleHTML = {
   logophile: 
     `<article class="logophile">
@@ -24,9 +40,9 @@ const articleHTML = {
          <div class="date">__date__</div>
        </header>
        <div class="entry">__word__</div>
-       <div class="etymology">__etymology__</div>
-       <div class="definition">__definition__</div>
-       <div class="citations">__citations__</div>
+       <div style="${definitionStyle}" class="definition">__definition__</div>
+       <div style="${etymologyStyle}" class="etymology">__etymology__</div>
+       <div style="${citationsStyle}" class="citations">__citations__</div>
      </article>`,
 
   default: 
@@ -35,7 +51,7 @@ const articleHTML = {
          <div class="title" data-link="__linkTitle__">__title__</div>
          <div class="date">__date__</div>
        </header>
-       <div class="content">
+       <div style="${contentStyle}" class="content">
          __text__
        </div>
      </article>`,
@@ -43,11 +59,22 @@ const articleHTML = {
 
 const fillInRe = /__(\w+)__/;
 
+function getMatch(post, m) {
+  var item = m[1]
+  var value = post.content[item] || post[item] || '';
+  if (item === 'citations') {
+    let lines = value.split('\n');
+    value = '<ul style="list-style-type: none; margin: 0; padding: 0"><li style="margin-bottom: 5px">' + lines.join('</li><li style="margin-bottom: 5px">') + '</li></ul>';
+    console.log('citations', value.split('\n'));
+  }
+  return value;
+}
+
 function generateHtml(post) {
   var template = articleHTML[post.category] || articleHTML['default'];
   var match;
   while (match = fillInRe.exec(template)) {
-    let value = post.content[match[1]] || post[match[1]] || '';
+    let value = getMatch(post, match);
     template = template.replace(fillInRe, value);
   }
   return template;

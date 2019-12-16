@@ -13,6 +13,7 @@ class Article extends Component {
     constructor(props) {
         super(props);
         this.props = props;
+console.log('Article props', props);
         var request = detectPost(props.location, props.content);
         this.post = { content: '' };
         if (request.length > 0) {
