@@ -16,15 +16,14 @@ function HomePost(props) {
   }
 
   const postStyle = {
-    margin: '10px',
-    border: '1px solid gray',
-    borderRadius: '5px'
+    display: 'flex',
   }
 
   const postHeader = {
     padding: '10px',
     backgroundColor: '#e8e8e8',
-    borderBottom: '1px solid #666'
+    borderTop: '1px solid #ccc',
+    borderBottom: '1px solid #ccc',
   }
 
   const contentWrapper = {
@@ -32,20 +31,20 @@ function HomePost(props) {
   }
 
   return (
-    <div style={postStyle} className="post">
-     <MediaQuery query="(max-width:4096px) and (min-width:481px)">
-       <div className="post-side"><SideCalendar postDate={postDateObj}></SideCalendar></div>
-     </MediaQuery>
-     <div className="post-content">
-       <article className={category}>
-         <header style={postHeader} onClick={handleClick}>
-           <div className="title" data-link={articleLink}>{title}</div>
-           <div className="date"></div>
-         </header>
-         <div style={contentWrapper} className="content-wrapper" dangerouslySetInnerHTML={contentHtml}></div>
-       </article>
-     </div>
-   </div>
+    <div>
+      <header style={postHeader} onClick={handleClick}>
+        <div className="title" data-link={articleLink}>{title}</div>
+        <div className="date"></div>
+      </header>
+      <div style={postStyle}>
+        <div><SideCalendar postDate={postDateObj}></SideCalendar></div>
+        <div className="post-content">
+          <article className={category}>
+            <div style={contentWrapper} className="content-wrapper" dangerouslySetInnerHTML={contentHtml}></div>
+          </article>
+        </div>
+      </div>
+    </div>
   );
 }
 

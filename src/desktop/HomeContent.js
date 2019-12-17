@@ -1,11 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import HomePost from './HomePost';
-//import './css/HomeContent.css';
-//import './css/Header.css';
-//import './css/Logophile.css';
-//import './css/Professional.css';
-
 
 function HomeContent(props) {
   const content = useSelector(state => state.homeArticles);
