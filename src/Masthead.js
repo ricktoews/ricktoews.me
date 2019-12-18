@@ -18,14 +18,14 @@ const styles = (theme) => {
     topTrimMobile: {
       height: 6,
     },
-	shadowBarMobile: {
-		position: 'absolute',
-		top: '8px',
-		left: '1px',
-		width: 'calc(100% - 2px)',
-		height: '34px',
-		boxShadow: '0 1px 5px 0px #666',
-	},
+    shadowBarMobile: {
+      position: 'absolute',
+      top: '8px',
+      left: '1px',
+      width: 'calc(100% - 2px)',
+      height: '34px',
+      boxShadow: '0 1px 5px 0px #666',
+    },
     titleBar: {
       ...theme.mixins.gutters(),
       height: 64,
@@ -69,28 +69,28 @@ class Masthead extends Component {
     const cardTheme = homeCardTheme({ primaryColor });
     const primary = cardTheme.palette.primary;
     return (
-      <MuiThemeProvider theme={cardTheme}>
-      <MediaQuery query="(max-width: 4096px) and (min-width: 481px)">
-    <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
-        <div className={ classes.topTrim } style={{backgroundColor: primary.dark}}></div>
-        <div className={ classes.titleBar } style={{color: primary.contrastText, backgroundColor: primary.light}}>
-          <MobileNav primaryColor={ primary }/>
-          <span style={{display: "inline-block", width:"40px"}}></span>/ricktoews/.me
-        </div>
-    </div>
-      </MediaQuery>
+      <div>
+        <MediaQuery query="(max-width: 4096px) and (min-width: 481px)">
+          <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
+            <div className={ classes.topTrim } style={{backgroundColor: 'rgba(41, 81, 138, 1)' }}></div>
+            <div className={ classes.titleBar } style={{color: 'rgba(255, 255, 255, 1)', backgroundColor: 'rgba(3, 136, 252, 1)'}}>
+              <MobileNav primaryColor={ primary }/>
+              <span style={{display: "inline-block", width:"40px"}}></span>ricktoews.me
+            </div>
+          </div>
+        </MediaQuery>
 
-      <MediaQuery query="(max-width: 480px)">
-        <div className={ classes.topTrimMobile } style={{backgroundColor: primary.dark}}></div>
-        <div className={ classes.shadowBarMobile }></div>
-        <div className={ classes.titleBarMobile } style={{color: primary.contrastText, backgroundColor: primary.light}}>
-        <MobileNav primaryColor={ primary }/>
-          <span style={{ display: "inline-block", width: "40px" }}></span>
-			  <CardIcon id={id} color="secondary" />
-          { title }
-        </div>
-      </MediaQuery>
-      </MuiThemeProvider>
+        <MediaQuery query="(max-width: 480px)">
+          <div className={ classes.topTrimMobile } style={{backgroundColor: primary.dark}}></div>
+          <div className={ classes.shadowBarMobile }></div>
+          <div className={ classes.titleBarMobile } style={{color: primary.contrastText, backgroundColor: primary.light}}>
+            <MobileNav primaryColor={ primary }/>
+              <span style={{ display: "inline-block", width: "40px" }}></span>
+              <CardIcon id={id} color="secondary" />
+              { title }
+          </div>
+        </MediaQuery>
+      </div>
     );
   }
 }
