@@ -65,7 +65,7 @@ function getMatch(post, m) {
   if (item === 'citations') {
     let lines = value.split('\n');
     value = '<ul style="list-style-type: none; margin: 0; padding: 0"><li style="margin-bottom: 5px">' + lines.join('</li><li style="margin-bottom: 5px">') + '</li></ul>';
-    console.log('citations', value.split('\n'));
+    //console.log('citations', value.split('\n'));
   }
   return value;
 }

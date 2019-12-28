@@ -22,9 +22,11 @@ class NavItem extends Component {
 
     return (
       <ListItem button onClick={this.handleClick}>
+{/*
         <ListItemIcon>
           <CardIcon id={ id } />
         </ListItemIcon>
+*/}
         <ListItemText primary={ this.card.title } />
       </ListItem>
     )

@@ -7,7 +7,6 @@ class NavOptions extends Component {
     return (
       <div>
         <NavItem id="home" />
-        <NavItem id="arithmophile" />
       </div>
     );
   }

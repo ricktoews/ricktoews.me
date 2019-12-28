@@ -49,7 +49,7 @@ function MakePost(props) {
 
   const saveItem = e => {
     e.preventDefault();
-          console.log('saveItem', post);
+    console.log('saveItem', post);
     savePost(posts, post);
   }
 
@@ -62,6 +62,7 @@ function MakePost(props) {
       post.content[id] = value;
     }
     console.log('saveContent post', post);
+    initSavePost(post);
     setPost(JSON.parse(JSON.stringify(post)));
   }
 
@@ -73,7 +74,7 @@ function MakePost(props) {
   const changePost = e => {
     let id = e.target.value;
     let _post = posts.find(p => p.id === id);
-          console.log('changePost', JSON.parse(JSON.stringify(_post.content)));
+    console.log('changePost', JSON.parse(JSON.stringify(_post.content)));
     setPost(_post);
   }
 
@@ -97,6 +98,7 @@ function MakePost(props) {
     } else {
       text = content.text || '';
     }
+
     return (
     <div className="post-entry">
       <h1>{formTitle}</h1>
@@ -120,6 +122,7 @@ function MakePost(props) {
               <option value="logophile">Logophile</option>
               <option value="arithmophile">Arithmophile</option>
               <option value="professional">Professional</option>
+              <option value="thoughts">Thoughts</option>
             </select>
           </div>
         </fieldset>
