@@ -2,3 +2,52 @@
   height: 150px;
   overflow-y: hidden;
 }
+
+header {
+  position: relative;
+  padding: 10px;
+  borderBottom: 1px solid #666;
+}
+
+header > .category-tag {
+  position: absolute;
+  display: flex;
+  top: 0;
+  right: 0;
+  border-radius: 0 5px;
+}
+
+header > .category-tag > span {
+  display: block;
+  color: white;
+  font-size:.5em;
+  padding: 2px;
+}
+
+.thoughts header {
+  background-color: rgba(32, 99, 155, .5);
+}
+.thoughts header > .category-tag {
+  background-color: rgba(32, 99, 155, 1);
+}
+
+.logophile header {
+  background-color: rgba(60, 174, 163, .5);
+}
+.logophile header > .category-tag {
+  background-color: rgba(60, 174, 163, 1);
+}
+
+.professional header {
+  background-color: rgba(237, 85, 59, .8);
+}
+.professional header > .category-tag {
+  background-color: rgba(237, 85, 59, 1);
+}
+
+.arithmophile header {
+  background-color: rgba(246, 213, 92, .5);
+}
+.arithmophile header > .category-tag {
+  background-color: rgba(246, 213, 92, 1);
+}

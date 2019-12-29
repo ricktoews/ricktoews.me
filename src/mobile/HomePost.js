@@ -20,12 +20,6 @@ function HomePost(props) {
     borderRadius: '5px'
   }
 
-  const postHeader = {
-    padding: '10px',
-    backgroundColor: '#e8e8e8',
-    borderBottom: '1px solid #666'
-  }
-
   const contentWrapper = {
     padding: '10px'
   }
@@ -34,7 +28,8 @@ function HomePost(props) {
     <div style={postStyle} className="post">
      <div className="post-content">
        <article className={category}>
-         <header style={postHeader} onClick={handleClick}>
+         <header onClick={handleClick}>
+           <div className="category-tag"><span>{category}</span></div>
            <div className="title" data-link={articleLink}>{title}</div>
            <div className="date"></div>
          </header>
