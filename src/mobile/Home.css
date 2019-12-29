@@ -3,13 +3,17 @@
   overflow-y: hidden;
 }
 
-header {
+.article-wrapper header {
   position: relative;
-  padding: 10px;
-  borderBottom: 1px solid #666;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  font-size: .8em;
+  font-weight: bold;
+  border-bottom: 1px solid #666;
 }
 
-header > .category-tag {
+.home-container header > .category-tag {
   position: absolute;
   display: flex;
   top: 0;
@@ -17,37 +21,56 @@ header > .category-tag {
   border-radius: 0 5px;
 }
 
-header > .category-tag > span {
+.home-container header > .category-tag > span {
   display: block;
   color: white;
   font-size:.5em;
   padding: 2px;
 }
 
-.thoughts header {
-  background-color: rgba(32, 99, 155, .5);
-}
-.thoughts header > .category-tag {
-  background-color: rgba(32, 99, 155, 1);
+.home-container header {
+  position: relative;
+  padding: 5px;
+  font-size: .8em;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(153, 153, 153, 1);
 }
 
-.logophile header {
+.home-container .thoughts header {
+  background-color: rgba(32, 99, 155, .5);
+}
+.home-container .thoughts header > .category-tag {
+  background-color: rgba(32, 99, 155, 1);
+}
+.article-wrapper .thoughts header {
+  background-color: rgba(32, 99, 155, .5);
+}
+
+.home-container .logophile header {
   background-color: rgba(60, 174, 163, .5);
 }
-.logophile header > .category-tag {
+.home-container .logophile header > .category-tag {
   background-color: rgba(60, 174, 163, 1);
 }
 
-.professional header {
+.home-container .professional header {
   background-color: rgba(237, 85, 59, .8);
 }
-.professional header > .category-tag {
+.home-container .professional header > .category-tag {
   background-color: rgba(237, 85, 59, 1);
 }
+.article-wrapper .professional header {
+  background-color: rgba(237, 85, 59, .8);
+}
 
-.arithmophile header {
+.home-container .arithmophile header {
   background-color: rgba(246, 213, 92, .5);
 }
-.arithmophile header > .category-tag {
+.home-container .arithmophile header > .category-tag {
   background-color: rgba(246, 213, 92, 1);
+}
+
+.article-wrapper header {
+  background-color: rgba(240, 240, 240, 1);
+  border-bottom: 1px solid rgba(32, 32, 32, .5);
 }

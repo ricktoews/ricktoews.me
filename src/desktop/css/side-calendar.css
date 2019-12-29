@@ -52,16 +52,18 @@
 
 /* date position */
 .date {
+/*
   position:absolute;
   top: 5px;
   left: 1px;
   width:18px;
   z-index: 10;
+*/
 }
 
 /* date text */
 .date {
-  text-align: center;
+//  text-align: center;
 }
 
 /* date highlighter */

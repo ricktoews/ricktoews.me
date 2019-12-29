@@ -13,7 +13,6 @@ class Article extends Component {
     constructor(props) {
         super(props);
         this.props = props;
-console.log('Article props', props);
         var request = detectPost(props.location, props.content);
         this.post = { content: '' };
         if (request.length > 0) {
@@ -31,23 +30,23 @@ console.log('Article props', props);
 
     componentDidMount() {
         this.props.callback('professional');
-        let homeLinkEl = document.querySelector('.home-article-link');
-        homeLinkEl.addEventListener('click', this.handleClick);
-	}
+//        let homeLinkEl = document.querySelector('.home-article-link');
+//        homeLinkEl.addEventListener('click', this.handleClick);
+    }
 
-	render() {
+    render() {
         var post = { __html: this.post.fullArticle };
-		var defaultPost = (
-            <div className="article-wrapper">
-            </div>
-		);
+        var defaultPost = (
+          <div className="article-wrapper">
+          </div>
+        );
 
         if (this.post) {
-            return <div className="article-wrapper" dangerouslySetInnerHTML={post}></div>
+        return <div className="article-wrapper" dangerouslySetInnerHTML={post}></div>
         } else {
-            return defaultPost;
+        return defaultPost;
         }
-	}
+    }
 }
 
 export default withRouter(withStyles(styles)(Article));

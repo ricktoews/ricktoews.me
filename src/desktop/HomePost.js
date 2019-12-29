@@ -18,20 +18,22 @@ function HomePost(props) {
     display: 'flex',
   }
 
-  const postHeader = {
-    padding: '10px',
-    backgroundColor: '#e8e8e8',
-    borderTop: '1px solid #ccc',
-    borderBottom: '1px solid #ccc',
-  }
-
   const contentWrapper = {
     padding: '10px 0 10px 20px'
   }
 
+  const headerStyle = {
+    padding: '10px',
+    backgroundColor: '#e8e8e8',
+    borderTop: '1px solid #ccc',
+    borderBottom: '1px solid #ccca',
+    display: 'flex',
+    justifyContent: 'space-between',
+  }
+
   return (
     <div>
-      <header style={postHeader} onClick={handleClick}>
+      <header style={headerStyle} onClick={handleClick}>
         <div className="title" data-link={articleLink}>{title}</div>
         <div className="date"></div>
       </header>

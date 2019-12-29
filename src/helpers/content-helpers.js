@@ -29,6 +29,8 @@ const citationsStyle = `
 `;
 
 const contentStyle = `
+  margin: 10px;
+  line-height: 1.5em;
   font-size: .75rem;
 `;
 
@@ -39,10 +41,12 @@ const articleHTML = {
          <div class="title" data-link="__linkTitle__">__title__</div>
          <div class="date">__date__</div>
        </header>
-       <div class="entry">__word__</div>
-       <div style="${definitionStyle}" class="definition">__definition__</div>
-       <div style="${etymologyStyle}" class="etymology">__etymology__</div>
-       <div style="${citationsStyle}" class="citations">__citations__</div>
+       <div style="${contentStyle}">
+         <div class="entry">__word__</div>
+         <div style="${definitionStyle}" class="definition">__definition__</div>
+         <div style="${etymologyStyle}" class="etymology">__etymology__</div>
+         <div style="${citationsStyle}" class="citations">__citations__</div>
+       </div>
      </article>`,
 
   default: 
@@ -134,7 +138,7 @@ export function getAll() {
         let fullArticle = fullArticleEl.firstChild;
         let titleEl = homeArticle.querySelector('.title');
         if (titleEl) titleEl.dataset.link = '/article/' + d.title;
-        fullArticle.appendChild(linkToHome);
+//        fullArticle.appendChild(linkToHome);
 
         d.homeArticle = homeArticle.outerHTML;
         d.fullArticle = fullArticle.outerHTML;

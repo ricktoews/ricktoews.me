@@ -86,7 +86,6 @@ class Masthead extends Component {
           <div className={ classes.titleBarMobile } style={{color: primary.contrastText, backgroundColor: primary.light}}>
             <MobileNav primaryColor={ primary }/>
               <span style={{ display: "inline-block", width: "40px" }}></span>
-              <CardIcon id={id} color="secondary" />
               { title }
           </div>
         </MediaQuery>
