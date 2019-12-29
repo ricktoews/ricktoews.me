@@ -5,7 +5,7 @@ import { makePostDateObj, extractContent } from '../post-helpers';
 
 function HomePost(props) {
 
-  var postDateObj = makePostDateObj(props.post.date);
+  var postDateObj = makePostDateObj(props.post);
   var { category, articleLink, title, content } = extractContent(props.post);
   var contentHtml = { __html: content };
 
