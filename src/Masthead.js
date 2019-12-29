@@ -24,7 +24,7 @@ const styles = (theme) => {
       left: '1px',
       width: 'calc(100% - 2px)',
       height: '34px',
-      boxShadow: '0 1px 5px 0px #666',
+      boxShadow: '0 1px 5px 0px #000',
     },
     titleBar: {
       ...theme.mixins.gutters(),
@@ -69,11 +69,11 @@ class Masthead extends Component {
     const cardTheme = homeCardTheme({ primaryColor });
     const primary = cardTheme.palette.primary;
     return (
-      <div>
+      <div style={{ position: 'relative', zIndex:1 }}>
         <MediaQuery query="(max-width: 4096px) and (min-width: 481px)">
           <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
-            <div className={ classes.topTrim } style={{backgroundColor: 'rgba(41, 81, 138, 1)' }}></div>
-            <div className={ classes.titleBar } style={{color: 'rgba(255, 255, 255, 1)', backgroundColor: 'rgba(3, 136, 252, 1)'}}>
+            <div className={ classes.topTrim } style={{backgroundColor: cardTheme.palette.primary.dark }}></div>
+            <div className={ classes.titleBar } style={{color: cardTheme.palette.primary.contrastText, backgroundColor: cardTheme.palette.primary.light }}>
               <MobileNav primaryColor={ primary }/>
               <span style={{display: "inline-block", width:"40px"}}></span>ricktoews.me
             </div>

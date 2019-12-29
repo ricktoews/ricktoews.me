@@ -29,7 +29,7 @@ class Article extends Component {
     }
 
     componentDidMount() {
-        this.props.callback('professional');
+        this.props.callback(this.post.category);
 //        let homeLinkEl = document.querySelector('.home-article-link');
 //        homeLinkEl.addEventListener('click', this.handleClick);
     }

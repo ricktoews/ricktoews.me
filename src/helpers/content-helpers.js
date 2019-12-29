@@ -1,3 +1,5 @@
+import { cards, homeCardTheme } from '../cards';
+
 const BASE = '//rest.toewsweb.net/';
 const API = {
   'getAll': BASE + 'home-content.php/getall'
@@ -37,7 +39,7 @@ const contentStyle = `
 const articleHTML = {
   logophile: 
     `<article class="logophile">
-       <header>
+       <header style="__headerStyle__">
          <div class="title" data-link="__linkTitle__">__title__</div>
          <div class="date">__date__</div>
        </header>
@@ -51,7 +53,7 @@ const articleHTML = {
 
   default: 
     `<article class="__category__">
-       <header>
+       <header style="__headerStyle__">
          <div class="title" data-link="__linkTitle__">__title__</div>
          <div class="date">__date__</div>
        </header>
@@ -72,6 +74,16 @@ function getMatch(post, m) {
     //console.log('citations', value.split('\n'));
   }
   return value;
+}
+
+function addTheme(post) {
+  var category = post.category;
+  var card = cards[category] || {};
+  var primaryColor = card.primaryColor || '#000';
+  const cardTheme = homeCardTheme({ primaryColor });
+  const colors = cardTheme.palette.primary;
+  const headerStyle = `background-color: ${colors.main}; color: ${colors.contrastText}`;
+  return headerStyle;
 }
 
 function generateHtml(post) {
@@ -124,6 +136,7 @@ export function getAll() {
     .then(res => {
       res.data = res.data.map(d => { 
         d.linkTitle = generateTitle(d);
+        d.headerStyle = addTheme(d);
         if (d.content && d.content.text) d.text = makeText(d);
         let homeArticleContent = generateHtml(d);
         let fullArticleContent = generateHtml(d);

@@ -3,10 +3,14 @@ import MediaQuery from 'react-responsive';
 import { withRouter } from 'react-router-dom';
 import SideCalendar from './SideCalendar';
 import { makePostDateObj, extractContent } from '../post-helpers';
+import { cards, homeCardTheme } from '../cards';
 
 function HomePost(props) {
   var postDateObj = makePostDateObj(props.post);
   var { category, articleLink, title, content } = extractContent(props.post);
+  var primaryColor = cards[category] && cards[category].primaryColor || '#000';
+  var theme = homeCardTheme({ primaryColor });
+  var color = theme.palette.primary;
   var contentHtml = { __html: content };
 
   function handleClick(e) {
@@ -24,7 +28,8 @@ function HomePost(props) {
 
   const headerStyle = {
     padding: '10px',
-    backgroundColor: '#e8e8e8',
+    backgroundColor: color.light,
+    color: color.contrastText,
     borderTop: '1px solid #ccc',
     borderBottom: '1px solid #ccca',
     display: 'flex',

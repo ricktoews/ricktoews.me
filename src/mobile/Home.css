@@ -36,6 +36,7 @@
   border-bottom: 1px solid rgba(153, 153, 153, 1);
 }
 
+/*
 .home-container .thoughts header {
   background-color: rgba(32, 99, 155, .5);
 }
@@ -45,6 +46,7 @@
 .article-wrapper .thoughts header {
   background-color: rgba(32, 99, 155, .5);
 }
+*/
 
 .home-container .logophile header {
   background-color: rgba(60, 174, 163, .5);

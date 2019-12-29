@@ -38,9 +38,8 @@ class Main extends Component {
 
   render() {
     const { classes } = this.props;
-	const callback = (id) => { console.log('Main callback function', id); this.setState({ id: id }); };
-
-	const id = this.state && this.state.id ? this.state.id : 'home';
+    const callback = (id) => { this.setState({ id: id }); };
+    const id = this.state && this.state.id ? this.state.id : 'home';
 
     return (
       <div id="router">
