@@ -5,8 +5,7 @@ import SideCalendar from './SideCalendar';
 import { makePostDateObj, extractContent } from '../post-helpers';
 
 function HomePost(props) {
-
-  var postDateObj = makePostDateObj(props.post.date);
+  var postDateObj = makePostDateObj(props.post);
   var { category, articleLink, title, content } = extractContent(props.post);
   var contentHtml = { __html: content };
 
@@ -27,7 +26,7 @@ function HomePost(props) {
   }
 
   const contentWrapper = {
-    padding: '10px'
+    padding: '10px 0 10px 20px'
   }
 
   return (

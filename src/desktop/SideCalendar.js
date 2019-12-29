@@ -17,6 +17,7 @@ class SideCalendar extends Component {
     this.blanks = postDateObj.blanks;
     this.year = postDateObj.year;
     this.month = monthName[postDateObj.month-1];
+    this.category = postDateObj.category;
   }
 
   generateHeader() {
@@ -36,7 +37,7 @@ class SideCalendar extends Component {
   }
 
   drawDate(date) {
-    var dateClass = date.selected ? 'date-selected' : 'date-unselected';
+    var dateClass = date.selected ? `date-selected date-selected-${date.category}` : 'date-unselected';
     return <div key={date.ndx} className="date-cell">
              <div className="date">{date.dt}</div>
              <div className={dateClass}></div>
@@ -51,7 +52,7 @@ class SideCalendar extends Component {
     dates.forEach((d, ndx) => {
       var selected = d === this.postDate;
       if (ndx > 0 && ndx % 7 === 0) rowNdx++;
-      rows[rowNdx].push((d === -1 ? { ndx: ndx, dt: '' } : { ndx: ndx, dt: d, selected: selected } ));
+      rows[rowNdx].push((d === -1 ? { ndx: ndx, dt: '' } : { ndx: ndx, dt: d, selected: selected, category: this.category } ));
     });
     return rows;
   }
