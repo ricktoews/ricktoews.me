@@ -39,6 +39,12 @@
   width:18px;
 }
 
+.month-grid {
+  position: relative;
+  top: 6px;
+  left: -6px;
+}
+
 .month-row {
   clear: both;
   display: flex;
@@ -48,16 +54,18 @@
   position: relative;
   width: 18px;
   height: 18px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* date position */
 .date {
+  position:relative;
+  z-index: 10;
 /*
-  position:absolute;
   top: 5px;
   left: 1px;
   width:18px;
-  z-index: 10;
 */
 }
 
@@ -69,8 +77,8 @@
 /* date highlighter */
 .date-selected {
   position:absolute;
-  top: 2px;
-  left: 2px;
+  top: -3px;
+  left: 6px;
   width:16px;
   height:16px;
 }

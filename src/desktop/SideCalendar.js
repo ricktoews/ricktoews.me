@@ -59,7 +59,7 @@ class SideCalendar extends Component {
 
   monthRows(dates) {
     var rows = this.buildMonthRowArray(dates);
-    return <div>
+    return <div className="month-grid">
              {rows.map((row, key) => {
                return <div key={key} className="month-row">
                       {row.map(date => { return this.drawDate(date); })}
@@ -75,9 +75,7 @@ class SideCalendar extends Component {
     var dates = [];
     for (let i = 0; i < blanks; i++) dates.push(-1);
     for (let i = 1; i <= monthDays; i++) dates.push(i);
-    var html = <div className="month-grid">
-                 {this.monthRows(dates)}
-               </div>
+    var html = this.monthRows(dates);
     return html;
 
   }
