@@ -6,6 +6,7 @@ import './MakePost.css';
 var saveTimeout;
 
 function MakePost(props) {
+console.log('MakePost props', props);
   const blankItem = { id: 0, title: '', category: '', content: {} };
   const [ post, setPost ] = useState(blankItem)
   initApi(setPost, blankItem);

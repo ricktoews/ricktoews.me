@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
 
 import NavOptions from './NavOptions';
 
@@ -25,6 +27,11 @@ class MobileNav extends Component {
     right: false,
   };
 
+  homeClick = e => {
+    const { history } = this.props;
+    history.push('/');
+  };
+
   toggleDrawer = (open) => () => {
     this.setState({
       right: open,
@@ -43,7 +50,8 @@ class MobileNav extends Component {
 
     return (
       <div className={ classes.menuButton }>
-        <IconButton onClick={this.toggleDrawer(true)}>
+      <HomeIcon onClick={this.homeClick} style={{ cursor: 'pointer', color: iconColor }}/>
+{/*        <IconButton onClick={this.toggleDrawer(true)}>
           <MenuIcon style={{ color: iconColor }}/>
         </IconButton>
         <Drawer anchor="left" open={this.state.right} onClose={this.toggleDrawer(false)}>
@@ -56,6 +64,7 @@ class MobileNav extends Component {
             {sideList}
           </div>
         </Drawer>
+*/}
       </div>
     );
   }
@@ -65,5 +74,5 @@ MobileNav.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MobileNav);
+export default withRouter(withStyles(styles)(MobileNav));
 

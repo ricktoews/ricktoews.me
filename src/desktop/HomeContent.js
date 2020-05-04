@@ -1,13 +1,14 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useContext } from 'react';
+import { Context } from '../Store';
 import HomePost from './HomePost';
 
-function HomeContent(props) {
-  const content = useSelector(state => state.homeArticles);
+function HomeContent({ content }) {
+  const [ state, dispatch ] = useContext(Context);
 
+  var filter = state.filter || '';
   return (
     <div className="home-container">
-      { content.map((post, key) => <HomePost key={key} post={post}/>)}
+      { content.filter(item => !filter || item.category === filter).map((post, key) => <HomePost key={key} post={post}/>)}
     </div>
   );
 }

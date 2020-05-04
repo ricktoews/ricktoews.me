@@ -32,7 +32,7 @@ const citationsStyle = `
 
 const contentStyle = `
   margin: 10px;
-  line-height: 1.5em;
+  line-height: 2.0em;
   font-size: .75rem;
 `;
 

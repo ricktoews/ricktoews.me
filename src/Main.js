@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import Home from './Home';
 import Article from './Article';
 import MakePost from './manage-posts/MakePost';
@@ -40,7 +40,6 @@ class Main extends Component {
     const { classes } = this.props;
     const callback = (id) => { this.setState({ id: id }); };
     const id = this.state && this.state.id ? this.state.id : 'home';
-
     return (
       <div id="router">
         <MediaQuery query="(max-width:4096px) and (min-width:481px)">
@@ -49,7 +48,7 @@ class Main extends Component {
             <Switch>
               <Route exact path='/' render={(props) => <Home callback={callback} content={this.content}/>}/>
               <Route path='/article' render={(props) => <Article callback={callback} content={this.posts}/>}/>
-              <Route path='/makepost' component={MakePost}/>
+              <Route path='/makepost' render={(props) => <MakePost />} />
             </Switch>
           </div>
         </MediaQuery>
@@ -71,5 +70,5 @@ Main.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Main);
+export default withRouter(withStyles(styles)(Main));
 
