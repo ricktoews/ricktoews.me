@@ -135,6 +135,11 @@ console.log('MakePost props', props);
           </fieldset>
 
           <fieldset>
+            <div><label htmlFor="title">Snapshot</label></div>
+            <div><input type="file" accept="image/*" id="snapshot" capture="camera"/></div>
+          </fieldset>
+
+          <fieldset>
             <div><label htmlFor="text">Text</label></div>
             <div><textarea id="text" value={text} onChange={saveContent}></textarea></div>
           </fieldset>

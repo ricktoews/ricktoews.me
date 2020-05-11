@@ -50,9 +50,10 @@ class MobileNav extends Component {
 
     return (
       <div className={ classes.menuButton }>
-      <HomeIcon onClick={this.homeClick} style={{ cursor: 'pointer', color: iconColor }}/>
-{/*        <IconButton onClick={this.toggleDrawer(true)}>
-          <MenuIcon style={{ color: iconColor }}/>
+      <HomeIcon onClick={this.homeClick} style={{ fontSize: 40, cursor: 'pointer', color: iconColor }}/>
+{/*
+        <IconButton onClick={this.toggleDrawer(true)}>
+        <MenuIcon style={{ color: iconColor }}/>
         </IconButton>
         <Drawer anchor="left" open={this.state.right} onClose={this.toggleDrawer(false)}>
           <div

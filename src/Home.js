@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import './Home.css';
-import HomeContent from './desktop/HomeContent';
+import DesktopHome from './desktop/HomeContent';
 import MobileHome from './mobile/Home.js';
 
 class Home extends Component {
@@ -15,11 +15,11 @@ class Home extends Component {
 	}
 
 	render() {
-		return (
+          return (
             <div>
 
             <MediaQuery query="(min-width:481px) and (max-width:4096px)">
-              <HomeContent content={this.content}/>
+              <DesktopHome content={this.content}/>
             </MediaQuery>
 
             <MediaQuery query="(max-width: 480px)">

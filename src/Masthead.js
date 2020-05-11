@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import { withRouter } from 'react-router-dom';
-import { MuiThemeProvider, withStyles } from '@material-ui/core/styles';
-import MobileNav from './mobile/MobileNav';
+import { withStyles } from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
-import Filter from './Filter';
 import CardIcon from './CardIcon';
 import { cards, homeCardTheme } from './cards';
 
 const styles = (theme) => {
-console.log('gutters', theme.mixins.gutters());
   return ({
     root: {
       position: 'relative',
@@ -62,7 +59,8 @@ class Masthead extends Component {
 
   homeClick = e => {
     const { history } = this.props;
-    history.push('/');
+console.log('homeClick, should be passing id: home');
+    history.push({ pathname: '/', state: { id: 'home' } });
   };
 
   handleClick() {
@@ -76,6 +74,7 @@ class Masthead extends Component {
     const primaryColor = cards[id].primaryColor;
     const cardTheme = homeCardTheme({ primaryColor });
     const primary = cardTheme.palette.primary;
+console.log('Masthead id', id);
     return (
       <div style={{ position: 'relative', zIndex:1 }}>
         {/* Desktop */}
@@ -83,9 +82,8 @@ class Masthead extends Component {
           <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
             <div className={ classes.topTrim } style={{backgroundColor: cardTheme.palette.primary.dark }}></div>
             <div className={ classes.titleBar } style={{color: cardTheme.palette.primary.contrastText, backgroundColor: cardTheme.palette.primary.light }}>
-              <HomeIcon onClick={this.homeClick} style={{ cursor: 'pointer', color: primary.dark }}/>
+              <HomeIcon onClick={this.homeClick} style={{ fontSize: 40, cursor: 'pointer', color: primary.dark }}/>
               ricktoews.me
-              <Filter color="primary"/>
             </div>
           </div>
         </MediaQuery>
@@ -95,9 +93,8 @@ class Masthead extends Component {
           <div className={ classes.topTrimMobile } style={{backgroundColor: primary.dark}}></div>
           <div className={ classes.shadowBarMobile }></div>
           <div className={ classes.titleBarMobile } style={{color: primary.contrastText, backgroundColor: primary.light}}>
-            <HomeIcon onClick={this.homeClick} style={{ cursor: 'pointer', color: primary.dark }}/>
-            { title }
-            <Filter color="primary"/>
+            <HomeIcon onClick={this.homeClick} style={{ fontSize: 40, cursor: 'pointer', color: primary.dark }}/>
+            { 'ricktoews.me' }
           </div>
         </MediaQuery>
       </div>

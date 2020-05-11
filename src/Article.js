@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { detectPost } from './helpers/content-helpers.js';
+import Masthead from './Masthead';
 import './App.css';
 
 const styles = {
@@ -30,11 +31,11 @@ class Article extends Component {
 
     componentDidMount() {
         this.props.callback(this.post.category);
-//        let homeLinkEl = document.querySelector('.home-article-link');
-//        homeLinkEl.addEventListener('click', this.handleClick);
     }
 
     render() {
+        var id = this.props.id || 'home';
+console.log('Render Article, props', this.props);
         var post = { __html: this.post.fullArticle };
         var defaultPost = (
           <div className="article-wrapper">
@@ -42,9 +43,9 @@ class Article extends Component {
         );
 
         if (this.post) {
-        return <div className="article-wrapper" dangerouslySetInnerHTML={post}></div>
+        return <div><Masthead id={id}/><div className="article-wrapper" dangerouslySetInnerHTML={post}></div></div>
         } else {
-        return defaultPost;
+        return <div><Masthead id={id}/>{ defaultPost }</div>;
         }
     }
 }

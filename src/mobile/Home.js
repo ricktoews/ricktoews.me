@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
 import MobileNav from './MobileNav';
 import HomeContent from './HomeContent';
+import Filter from '../Filter';
 import './Home.css';
-
-class Masthead extends Component {
-  render() {
-    return (
-      <div style={{ marginBottom: "5px", borderBottom: "1px solid #999", background: "#ccc", paddingTop: "5px", paddingLeft: "60px", fontSize: "2.25em", color: "#fff", clear: "both", height: "50px" }}>
-      ricktoews.me
-      </div>
-    );
-  }
-}
 
 class Home extends Component {
   constructor(props) {
@@ -25,9 +16,6 @@ class Home extends Component {
 
     return (
       <div>
-        <MobileNav />
-        <Masthead />
-
         <HomeContent content={content}/>
       </div>
     );
