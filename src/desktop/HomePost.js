@@ -1,11 +1,13 @@
 import React from 'react';
 import MediaQuery from 'react-responsive';
+import { withStyles, createMuiTheme } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import SideCalendar from './SideCalendar';
 import { makePostDateObj, extractContent } from '../post-helpers';
 import { cards, homeCardTheme } from '../cards';
 
 function HomePost(props) {
+  const { classes } = props;
   var postDateObj = makePostDateObj(props.post);
   var { category, articleLink, title, content } = extractContent(props.post);
   var primaryColor = cards[category] && cards[category].primaryColor || '#000';

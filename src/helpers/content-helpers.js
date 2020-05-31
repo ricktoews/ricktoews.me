@@ -22,6 +22,10 @@ const definitionStyle = `
   font-style: italic; padding-bottom: 5px; margin-bottom: 5px; border-bottom: 1px dotted black
 `;
 
+const sourceStyle = `
+  font-size: .75rem; padding-bottom: 10px;
+`;
+
 const etymologyStyle = `
   font-size: .75rem; padding-bottom: 10px;
 `;
@@ -44,8 +48,11 @@ const articleHTML = {
          <div class="date">__date__</div>
        </header>
        <div style="${contentStyle}">
-         <div class="entry">__word__</div>
-         <div style="${definitionStyle}" class="definition">__definition__</div>
+         <div style="${definitionStyle}">
+           <span class="entry" style="text-transform: capitalize"><b>__title__</b></span>.
+           <span class="definition">__definition__</span>
+         </div>
+         <div style="${sourceStyle}" class="source">__source__</div>
          <div style="${etymologyStyle}" class="etymology">__etymology__</div>
          <div style="${citationsStyle}" class="citations">__citations__</div>
        </div>
