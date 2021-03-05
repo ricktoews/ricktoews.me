@@ -7,13 +7,15 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 const styles = theme => ({
   filterIconWrapper: {
     position: 'absolute',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
     top: 0,
     right: 10,
   },
   filterIcon: {
     fontSize: 35,
     cursor: 'pointer',
-    color: theme.palette.primary.dark
   },
   filterList: {
     position: 'absolute',
@@ -67,7 +69,7 @@ console.log('Filter props', props.theme);
 
   return (
     <div className={ classes.filterIconWrapper }>
-      <FilterListIcon onClick={toggle} className={ classes.filterIcon } style={{ color: primary.dark }} />
+      <FilterListIcon color="secondary" onClick={toggle} className={ classes.filterIcon } />
       <ul className={ classes.filterList } style={{ display: (filterState.show ? 'none' : 'none') }}>
         { filterItems.map((item, key) => <li key={key} data-item={item} onClick={selectFilter}>{item}</li>) }
       </ul>

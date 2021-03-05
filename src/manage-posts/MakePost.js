@@ -140,11 +140,10 @@ console.log('MakePost state', state);
 
   const handleClose = e => {
     let id = e.currentTarget.value;
-console.log('handleClose', id);
+    setAnchorEl(null);
     if (id) {
       let _post = posts.find(p => p.id == id);
       setState(_post);
-      setAnchorEl(null);
     }
   };
 
@@ -154,31 +153,18 @@ console.log('handleClose', id);
       <h1>{formTitle}</h1>
       <form>
         <div>
-{/*
-        <select id="post-id" value={state.id} onChange={handleSelectPost}>
-          <option value="">Select post</option>
-        {posts.map(p => {
-          return <option key={p.id} value={p.id}>{p.title}</option>
-        })}
-        </select>
-        <Button className={classes.root} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Post</Button>
-*/}
-        <Button color="primary" variant="contained" className={classes.button} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>Select Post</Button>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-      >
-        {posts.map((p, key) => {
-          return <MenuItem key={key} value={p.id} onClick={handleClose}>{p.title}</MenuItem>
-        })}
+
+        <Button color="primary" variant="contained" className={classes.button} onClick={handleClick}>Select Post</Button>
+        <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+          {posts.map((p, key) => {
+            return <MenuItem key={key} value={p.id} onClick={handleClose}>{p.title}</MenuItem>
+          })}
         </Menu>
 
         <Button color="primary" variant="contained" className={classes.button} onClick={newItem}>New</Button>
         <Button color="primary" variant="contained" className={classes.button} onClick={deleteItem}>Delete</Button>
         <Button color="primary" variant="contained" className={classes.button} onClick={saveItem}>Save</Button>
+
         </div>
         <fieldset>
           <div><label htmlFor="definition">Category</label></div>

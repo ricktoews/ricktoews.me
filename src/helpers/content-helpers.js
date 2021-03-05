@@ -1,6 +1,6 @@
 import { cards, homeCardTheme } from '../cards';
 
-const BASE = '//rest.toewsweb.net/';
+const BASE = 'https://rest.toewsweb.net/';
 const API = {
   'getAll': BASE + 'home-content.php/getall'
 };

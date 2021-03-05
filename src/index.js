@@ -13,7 +13,8 @@ const mainTheme = createMuiTheme({
     useNextVariants: true
   },        
   palette: {
-    primary: { main: '#0099ff' }
+    primary: { main: '#0099ff' },
+    secondary: { main: '#ff9900' }
   }
 });
 
