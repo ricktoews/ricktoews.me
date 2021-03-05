@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { detectPost } from './helpers/content-helpers.js';
+import Masthead from './Masthead';
 import './App.css';
 
 const styles = {
@@ -29,24 +30,24 @@ class Article extends Component {
     }
 
     componentDidMount() {
-        this.props.callback('professional');
-        let homeLinkEl = document.querySelector('.home-article-link');
-        homeLinkEl.addEventListener('click', this.handleClick);
-	}
+        this.props.callback(this.post.category);
+    }
 
-	render() {
+    render() {
+        var id = this.props.id || 'home';
+console.log('Render Article, props', this.props);
         var post = { __html: this.post.fullArticle };
-		var defaultPost = (
-            <div className="article-wrapper">
-            </div>
-		);
+        var defaultPost = (
+          <div className="article-wrapper">
+          </div>
+        );
 
         if (this.post) {
-            return <div className="article-wrapper" dangerouslySetInnerHTML={post}></div>
+        return <div><Masthead id={id}/><div className="article-wrapper" dangerouslySetInnerHTML={post}></div></div>
         } else {
-            return defaultPost;
+        return <div><Masthead id={id}/>{ defaultPost }</div>;
         }
-	}
+    }
 }
 
 export default withRouter(withStyles(styles)(Article));

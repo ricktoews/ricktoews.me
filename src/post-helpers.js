@@ -1,4 +1,5 @@
-export const makePostDateObj = (date) => {
+export const makePostDateObj = (post) => {
+  var { date, category } = post;
   // Cool! This is allowed.
   var [yr, mo, dt] = date.split('-');
   var dateObj = new Date(yr, mo, 0);
@@ -11,6 +12,7 @@ export const makePostDateObj = (date) => {
     month: mo,
     date: parseInt(dt, 10),
     days: daysInMonth,
+    category: category,
     blanks: blanks
   };
 }

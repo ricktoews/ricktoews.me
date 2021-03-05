@@ -1,4 +1,6 @@
-const BASE = '//rest.toewsweb.net/';
+import { cards, homeCardTheme } from '../cards';
+
+const BASE = 'https://rest.toewsweb.net/';
 const API = {
   'getAll': BASE + 'home-content.php/getall'
 };
@@ -16,26 +18,53 @@ export function detectPost(loc, content) {
     return post;
 }
 
+const definitionStyle = `
+  font-style: italic; padding-bottom: 5px; margin-bottom: 5px; border-bottom: 1px dotted black
+`;
+
+const sourceStyle = `
+  font-size: .75rem; padding-bottom: 10px;
+`;
+
+const etymologyStyle = `
+  font-size: .75rem; padding-bottom: 10px;
+`;
+
+const citationsStyle = `
+  font-size: .75rem;
+`;
+
+const contentStyle = `
+  margin: 10px;
+  line-height: 2.0em;
+  font-size: .75rem;
+`;
+
 const articleHTML = {
   logophile: 
     `<article class="logophile">
-       <header>
+       <header style="__headerStyle__">
          <div class="title" data-link="__linkTitle__">__title__</div>
          <div class="date">__date__</div>
        </header>
-       <div class="entry">__word__</div>
-       <div class="etymology">__etymology__</div>
-       <div class="definition">__definition__</div>
-       <div class="citations">__citations__</div>
+       <div style="${contentStyle}">
+         <div style="${definitionStyle}">
+           <span class="entry" style="text-transform: capitalize"><b>__title__</b></span>.
+           <span class="definition">__definition__</span>
+         </div>
+         <div style="${sourceStyle}" class="source">__source__</div>
+         <div style="${etymologyStyle}" class="etymology">__etymology__</div>
+         <div style="${citationsStyle}" class="citations">__citations__</div>
+       </div>
      </article>`,
 
   default: 
     `<article class="__category__">
-       <header>
+       <header style="__headerStyle__">
          <div class="title" data-link="__linkTitle__">__title__</div>
          <div class="date">__date__</div>
        </header>
-       <div class="content">
+       <div style="${contentStyle}" class="content">
          __text__
        </div>
      </article>`,
@@ -43,11 +72,32 @@ const articleHTML = {
 
 const fillInRe = /__(\w+)__/;
 
+function getMatch(post, m) {
+  var item = m[1]
+  var value = post.content[item] || post[item] || '';
+  if (item === 'citations') {
+    let lines = value.split('\n');
+    value = '<ul style="list-style-type: none; margin: 0; padding: 0"><li style="margin-bottom: 5px">' + lines.join('</li><li style="margin-bottom: 5px">') + '</li></ul>';
+    //console.log('citations', value.split('\n'));
+  }
+  return value;
+}
+
+function addTheme(post) {
+  var category = post.category;
+  var card = cards[category] || {};
+  var primaryColor = card.primaryColor || '#000';
+  const cardTheme = homeCardTheme({ primaryColor });
+  const colors = cardTheme.palette.primary;
+  const headerStyle = `background-color: ${colors.main}; color: ${colors.contrastText}`;
+  return headerStyle;
+}
+
 function generateHtml(post) {
   var template = articleHTML[post.category] || articleHTML['default'];
   var match;
   while (match = fillInRe.exec(template)) {
-    let value = post.content[match[1]] || post[match[1]] || '';
+    let value = getMatch(post, match);
     template = template.replace(fillInRe, value);
   }
   return template;
@@ -93,6 +143,7 @@ export function getAll() {
     .then(res => {
       res.data = res.data.map(d => { 
         d.linkTitle = generateTitle(d);
+        d.headerStyle = addTheme(d);
         if (d.content && d.content.text) d.text = makeText(d);
         let homeArticleContent = generateHtml(d);
         let fullArticleContent = generateHtml(d);
@@ -107,7 +158,7 @@ export function getAll() {
         let fullArticle = fullArticleEl.firstChild;
         let titleEl = homeArticle.querySelector('.title');
         if (titleEl) titleEl.dataset.link = '/article/' + d.title;
-        fullArticle.appendChild(linkToHome);
+//        fullArticle.appendChild(linkToHome);
 
         d.homeArticle = homeArticle.outerHTML;
         d.fullArticle = fullArticle.outerHTML;

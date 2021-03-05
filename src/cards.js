@@ -9,7 +9,7 @@ const cards = {
     },
 	home: {
 		title: 'Home',
-		primaryColor: '000000',
+		primaryColor: '808080',
 		iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
 		link: '/',
 	},
@@ -20,14 +20,14 @@ const cards = {
 		link: '/',
 	},
 	thoughts: {
-		title: 'A Thought',
+		title: 'Thoughts',
 		primaryColor: '455f8e',
 		iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
 		link: '/',
 	},
 	logophile: {
 		title: 'Logophile',
-		primaryColor: '455f8e',
+		primaryColor: '3caea3',
 		iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
 		link: '/',
 	},
@@ -98,16 +98,21 @@ const cards = {
 
 
 const homeCardTheme = specs => {
-	return createMuiTheme({
-		palette: {
-			primary: {
-				main: '#' + specs.primaryColor,
-			},
-			secondary: {
-				main: '#' + (specs.secondaryColor || 'ccc'),
-			},
-		},
-	});
+    var theme = createMuiTheme({
+        typography: {
+            useNextVariants: true
+        },        
+        palette: {
+            primary: {
+                main: '#' + specs.primaryColor,
+            },
+            secondary: {
+                main: '#' + (specs.secondaryColor || 'ccc'),
+            },
+        },
+    });
+
+    return theme;
 }
 
 export { cards, homeCardTheme };

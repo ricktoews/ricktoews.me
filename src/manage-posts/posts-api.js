@@ -15,7 +15,7 @@ const savePost = (posts, post) => {
     method: 'POST',
     body: JSON.stringify(post)
   }
-  if (options.body) {
+  if (options.body && post.title) {
   return fetch(savePostUrl, options)
     .then(res => res.json())
     .then(res => {
