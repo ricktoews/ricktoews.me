@@ -1,4 +1,5 @@
-import { cards, homeCardTheme } from '../cards';
+//import { categories, homeCardTheme } from '../categories';
+import { theme, createCategoryTheme } from '../theme';
 
 const BASE = 'https://rest.toewsweb.net/';
 const API = {
@@ -84,13 +85,13 @@ function getMatch(post, m) {
 }
 
 function addTheme(post) {
-  var category = post.category;
-  var card = cards[category] || {};
-  var primaryColor = card.primaryColor || '#000';
-  const cardTheme = homeCardTheme({ primaryColor });
-  const colors = cardTheme.palette.primary;
-  const headerStyle = `background-color: ${colors.main}; color: ${colors.contrastText}`;
-  return headerStyle;
+	var category = post.category;
+	var card = theme.categories[category] || {};
+	var primaryColor = card.primaryColor || '#000';
+	var cardTheme = createCategoryTheme({ primaryColor });
+	var colors = cardTheme.palette.primary;
+	var headerStyle = `background-color: ${colors.main}; color: ${colors.contrastText}`;
+	return headerStyle;
 }
 
 function generateHtml(post) {
@@ -136,12 +137,25 @@ function makeLinks(post) {
 }
 
 
-export function getAll() {
-  var url = API.getAll;
-  return fetch(url)
-    .then(res => res.json())
-    .then(res => {
-      res.data = res.data.map(d => { 
+export async function getAll() {
+	var url = API.getAll;
+	var preJson = await fetch(url);
+	var res = await preJson.json();
+	var data = res.data;
+	data.map(item => {
+		item.linkTitle = generateTitle(item);
+		item.headerStyle = addTheme(item);
+		if (item.content && item.content.text) item.text = makeText(item);
+
+        let homeArticleContent = generateHtml(item);
+        let homeArticleEl = document.createElement('div');
+        homeArticleEl.innerHTML = homeArticleContent;
+        let homeArticle = homeArticleEl.firstChild;
+        let titleEl = homeArticle.querySelector('.title');
+        item.homeArticle = homeArticle.outerHTML;
+	});
+
+		  /*
         d.linkTitle = generateTitle(d);
         d.headerStyle = addTheme(d);
         if (d.content && d.content.text) d.text = makeText(d);
@@ -163,8 +177,7 @@ export function getAll() {
         d.homeArticle = homeArticle.outerHTML;
         d.fullArticle = fullArticle.outerHTML;
         d.path = '/article/' + d.title; return d; 
-      });
-      return res.data;
-    })
+		*/
+	return data;
 }
 
