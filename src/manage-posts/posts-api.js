@@ -1,5 +1,5 @@
-const savePostUrl = 'http://rest.toewsweb.net/home-content.php/setPost';
-const delPostUrl = 'http://rest.toewsweb.net/home-content.php/delPost';
+const savePostUrl = 'https://rest.toewsweb.net/home-content.php/setPost';
+const delPostUrl = 'https://rest.toewsweb.net/home-content.php/delPost';
 
 var setPost;
 var blankItem;

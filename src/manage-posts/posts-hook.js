@@ -30,7 +30,7 @@ export const useFetchPosts = () => {
   const [ posts, setPosts ] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios('http://rest.toewsweb.net/home-content.php/getall');
+      const result = await axios('https://rest.toewsweb.net/home-content.php/getall');
       var payload = result.data;
       console.log('fetchData; Result from axios', payload.data);
       setPosts(payload.data);
