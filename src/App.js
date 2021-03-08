@@ -7,16 +7,17 @@ import { Switch, Route } from 'react-router-dom';
 
 import Masthead from './Masthead';
 import Home from './components/Home';
+import GeoGame from './components/GeoGame';
 import MakePost from './manage-posts/MakePost';
 
-function withNav(MyComponent, title) {
+function withNav(MyComponent, title, showFilter = false) {
 
 	return function(...props) {
 		const [ categoryFilter, setCategoryFilter ] = useState();
 
 		return (
 		<>
-			<Masthead title={title} setCategoryFilter={setCategoryFilter} />
+			<Masthead title={title} setCategoryFilter={setCategoryFilter} showFilter={showFilter} />
 			<main>
 				<MyComponent categoryFilter={categoryFilter} {...props} />
 			</main>
@@ -38,7 +39,8 @@ function App(props) {
 	<ThemeProvider theme={theme}>
 		<GlobalStyles />
 		<Switch>
-			<Route exact path="/" component={withNav(HomeContent, 'RickToews.me')} />
+			<Route exact path="/" component={withNav(HomeContent, 'RickToews.me', true)} />
+			<Route path='/geogame' component={withNav(GeoGame, 'Geography Game')} />
 			<Route path='/makepost' render={(props) => <MakePost />} />
 		</Switch>
 	</ThemeProvider>

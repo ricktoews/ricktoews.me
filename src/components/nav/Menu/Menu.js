@@ -8,6 +8,9 @@ const Menu = ({ open }) => {
       <a href="/">
         Home
       </a>
+      <a href="/geogame">
+        Geography Game
+      </a>
     </StyledMenu>
   )
 }

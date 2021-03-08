@@ -21,7 +21,7 @@ const SiteHeader = styled.header`
 	top: 0;
 	left: 0;
 	width: 100vw;
-	height: 80px;
+	height: 70px;
 	background: white;
 
 `;
@@ -108,7 +108,7 @@ const CategoryFilter = props => {
 }
 
 function Masthead(props) {
-	const { title, setCategoryFilter, children } = props;
+	const { title, setCategoryFilter, showFilter, children } = props;
 	const [open, setOpen] = useState(false);
 
 	const node = useRef(); 
@@ -134,7 +134,7 @@ function Masthead(props) {
 			</SiteHeaderBackground>
 
 			{/* Category filter for home page items */}
-			<CategoryFilter setCategoryFilter={setCategoryFilter} />
+			{ showFilter && <CategoryFilter setCategoryFilter={setCategoryFilter} /> }
 		</SiteHeader>
 	);
 }
