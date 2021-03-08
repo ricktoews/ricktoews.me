@@ -1,105 +1,142 @@
-import React, { Component } from 'react';
-import MediaQuery from 'react-responsive';
-import { withRouter } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
-import HomeIcon from '@material-ui/icons/Home';
-import CardIcon from './CardIcon';
-import { cards, homeCardTheme } from './cards';
+import React, { useRef, useState } from 'react';
+import { useOnClickOutside } from './hooks';
+import { Burger, Menu } from './components/nav';
+import styled from 'styled-components';
+import selfie from './ricktoews.me.jpg';
+import SVGFunnel from './funnel.svg';
+import SVGFunnelFill from './funnel-fill.svg';
+import { theme } from './theme';
 
-const styles = (theme) => {
-  return ({
-    root: {
-      position: 'relative',
-      backgroundColor: "#ffffff",
-    },
-    topTrim: {
-      height: 12,
-    },
-    topTrimMobile: {
-      height: 6,
-    },
-    shadowBarMobile: {
-      position: 'absolute',
-      top: '8px',
-      left: '1px',
-      width: 'calc(100% - 2px)',
-      height: '34px',
-      boxShadow: '0 1px 5px 0px #000',
-    },
-    titleBar: {
-      ...theme.mixins.gutters(),
-      height: 64,
-      display: "flex",
-      position: "relative",
-      alignItems: "center",
-      justifyContent: "space-between",
-      fontSize: "18pt",
-      marginBottom: "20px",
-    },
-    titleBarMobile: {
-      ...theme.mixins.gutters(),
-      height: 36,
-      display: "flex",
-      position: "relative",
-      alignItems: "center",
-      fontSize: "14pt",
-    },
-    button: {
-      margin: theme.spacing.unit,
-    },
-  });
-};
+const TopBand = styled.div`
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 6px;
+	background-color: #666;
+`;
 
-class Masthead extends Component {
+const SiteHeader = styled.header`
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 70px;
+	background: white;
 
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
+`;
 
-  homeClick = e => {
-    const { history } = this.props;
-console.log('homeClick, should be passing id: home');
-    history.push({ pathname: '/', state: { id: 'home' } });
-  };
+const SiteHeaderBackground = styled.header`
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 50px;
 
-  handleClick() {
-    const { history } = this.props;
-    history.push('/');
-  }
+	background: ${({ theme }) => theme.mastheadBg};
+`;
 
-  render() {
-    const { id, classes } = this.props;
-    const title = cards[id].title;
-    const primaryColor = cards[id].primaryColor;
-    const cardTheme = homeCardTheme({ primaryColor });
-    const primary = cardTheme.palette.primary;
-console.log('Masthead id', id);
-    return (
-      <div style={{ position: 'relative', zIndex:1 }}>
-        {/* Desktop */}
-        <MediaQuery query="(max-width: 4096px) and (min-width: 481px)">
-          <div style={{ position: "sticky", top: 0, zIndex: 100 }}>
-            <div className={ classes.topTrim } style={{backgroundColor: cardTheme.palette.primary.dark }}></div>
-            <div className={ classes.titleBar } style={{color: cardTheme.palette.primary.contrastText, backgroundColor: cardTheme.palette.primary.light }}>
-              <HomeIcon onClick={this.homeClick} style={{ fontSize: 40, cursor: 'pointer', color: primary.dark }}/>
-              ricktoews.me
-            </div>
-          </div>
-        </MediaQuery>
+const SiteHeaderOverlay = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
 
-        {/* Mobile device */}
-        <MediaQuery query="(max-width: 480px)">
-          <div className={ classes.topTrimMobile } style={{backgroundColor: primary.dark}}></div>
-          <div className={ classes.shadowBarMobile }></div>
-          <div className={ classes.titleBarMobile } style={{color: primary.contrastText, backgroundColor: primary.light}}>
-            <HomeIcon onClick={this.homeClick} style={{ fontSize: 40, cursor: 'pointer', color: primary.dark }}/>
-            { 'ricktoews.me' }
-          </div>
-        </MediaQuery>
-      </div>
-    );
-  }
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
+
+	color: ${({ theme }) => theme.mastheadColor};
+	font-size: 20px;
+`;
+
+const Funnel = styled.div`
+	display: inline-block;
+`;
+
+const Filter = styled.div`
+	position: relative;
+	display: flex;
+	justify-content: center;
+	font-size: 10px;
+
+	ul {
+		padding: 0;
+	}
+
+	li {
+		display: inline;
+		list-style-type: none;
+		margin: 0;
+		padding: 10px;
+		cursor: pointer;
+	}
+
+	li: hover {
+		color: black;
+	}
+`;
+
+const Selfie = styled.div`
+	width: 46px;
+	height: 46px;
+	margin-right: 10px;
+
+	img {
+		width: 100%;
+		border-radius: 50%;
+		border: 1px solid white;
+	}
+`;
+
+
+const CategoryFilter = props => {
+	const exclude = ['home', 'perambulations', 'bookshelf', 'autodidact', 'quote', 'travel'];
+
+	return (
+				<Filter>
+					<ul>
+						<li onClick={() => { props.setCategoryFilter('') } }>Clear</li>
+						<li><Funnel><img src={SVGFunnel} /></Funnel></li>
+						{ Object.keys(theme.categories).filter(cat => exclude.indexOf(cat) === -1).map((category, key) => (
+							<li key={key} onClick={() => { props.setCategoryFilter(category) } }>{category}</li>
+						))}
+					</ul>
+				</Filter>
+	);
 }
 
-export default withRouter(withStyles(styles)(Masthead));
+function Masthead(props) {
+	const { title, setCategoryFilter, showFilter, children } = props;
+	const [open, setOpen] = useState(false);
+
+	const node = useRef(); 
+	useOnClickOutside(node, () => setOpen(false));
+
+	return (
+		<SiteHeader>
+			{/* Colored background for site header. */}
+			<SiteHeaderBackground>
+				<TopBand />
+
+				{/* Site header content: Menu button, Title, Photo */}
+				<SiteHeaderOverlay>
+					<div ref={node}>
+						<Burger open={open} setOpen={setOpen}/>
+						<Menu open={open} setOpen={setOpen}/>
+					</div>
+					{children}
+					<div className="title">{title}</div>
+					<Selfie><img src={selfie} /></Selfie>
+				</SiteHeaderOverlay>
+
+			</SiteHeaderBackground>
+
+			{/* Category filter for home page items */}
+			{ showFilter && <CategoryFilter setCategoryFilter={setCategoryFilter} /> }
+		</SiteHeader>
+	);
+}
+
+export default Masthead;

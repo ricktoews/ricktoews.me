@@ -22,7 +22,7 @@ const savePost = (posts, post) => {
       let ndx = posts.findIndex(p => p.id === res.data.id);
       if (ndx > -1) { posts.splice(ndx, 1); }
       posts.push(res.data);
-      setPost(res.data);
+//      setPost(res.data);
     });
   }
 }

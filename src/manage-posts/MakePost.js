@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFetchPosts } from './posts-hook';
 import { initApi, savePost, delPost } from './posts-api';
-import { extractOEDWord, extractOEDDefinitions, extractOEDEtymology } from './oed';
+import { extractOEDWord, extractOEDDefinitions, extractOEDEtymology, extractOEDCitations } from './oed';
 import './MakePost.css';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -10,145 +10,147 @@ import MenuItem from '@material-ui/core/MenuItem';
 import blue from '@material-ui/core/colors/blue';
 
 const useStyles = makeStyles((theme) => {
-    return ({
-    button: {
-      margin: theme.spacing(1)
-    }
-    });
+	return ({
+		button: {
+			margin: theme.spacing(1)
+		}
+	});
 });
 
 
 var saveTimeout;
 
 function MakePost(props) {
-  const classes = useStyles(props);
-  const blankItem = { id: 0, date: '', title: '', category: '', content: {} };
-  const [ state, setState ] = useState(blankItem)
-console.log('MakePost state', state);
+	const classes = useStyles(props);
+	const blankItem = { id: 0, oedCode: '', date: '', title: '', category: '', content: { definition: '', etymology: '', citations: '' } };
+	const [ state, setState ] = useState(blankItem)
+	const [anchorEl, setAnchorEl] = useState(null);
 
-  initApi(setState, blankItem);
-  const initSavePost = post => {
-    if (saveTimeout) {
-      clearTimeout(saveTimeout);
-    }
-    saveTimeout = setTimeout(() => { 
-      savePost(posts, post)
-    }, 2000);
-  }
+	initApi(setState, blankItem);
+	const initSavePost = post => {
+		if (saveTimeout) {
+			clearTimeout(saveTimeout);
+		}
+		saveTimeout = setTimeout(() => { 
+			savePost(posts, post)
+		}, 2000);
+	}
 
 
-  const newItem = e => {
-    e.preventDefault();
-    setState(blankItem);
-  }
+	const newItem = e => {
+		e.preventDefault();
+		setState(blankItem);
+	}
 
-  const deleteItem = e => {
-    e.preventDefault();
-    if (window.confirm('Are you sure?')) {
-      console.log('Will delete post ID', state.id);
-      // Need API call for delete.
-      delPost(posts, state.id);
-    }
-  }
+	const deleteItem = e => {
+		e.preventDefault();
+		if (window.confirm('Are you sure?')) {
+			console.log('Will delete post ID', state.id);
+			// Need API call for delete.
+			delPost(posts, state.id);
+		}
+	}
 
-  const saveItem = e => {
-    e.preventDefault();
-    console.log('saveItem', state);
-    savePost(posts, state);
-  }
+	const saveItem = async e => {
+		e.preventDefault();
+		console.log('saveItem', state);
+		await savePost(posts, state);
+		setState(blankItem);
+	}
 
-  const handleChange = e => {
-    e.preventDefault();
-    var { id, value } = e.currentTarget;
-    if (id === 'title' || id === 'category' || id === 'date') {
-      state[id] = value;
-    } else {
-      state.content[id] = value;
-    }
-    console.log('handleChange post', state);
-    initSavePost(state);
-    setState(JSON.parse(JSON.stringify(state)));
-  }
+	const handleChange = e => {
+		e.preventDefault();
+		var { id, value } = e.currentTarget;
+		if (id === 'title' || id === 'category' || id === 'date') {
+			state[id] = value;
+		} else {
+			state.content[id] = value;
+		}
+		console.log('handleChange post', state);
+		initSavePost(state);
+		setState(JSON.parse(JSON.stringify(state)));
+	}
 
   /*
     Handlers for changing form field.
     handleSelectPost selects the post with which to populate the form. The posts were previously loaded and are in a local array.
     The other handlers (Title, Content, Category) call initSavePost, which sets up an autosave function.
   */
-  const handleSelectPost = e => {
-    let id = e.target.value;
-    let _post = posts.find(p => p.id === id);
-    console.log('handleSelectPost', JSON.parse(JSON.stringify(_post.content)));
-    setState(_post);
-  }
+	const handleSelectPost = e => {
+		let id = e.target.value;
+		let _post = posts.find(p => p.id === id);
+		console.log('handleSelectPost', JSON.parse(JSON.stringify(_post.content)));
+		setState(_post);
+	}
 
-  const extractOEDEntry = e => {
-    let code = e.target.value;
-    let domparser = new DOMParser();
-    let doc = domparser.parseFromString(code, 'text/html');
-    let mainContent = doc.querySelector('#mainContent');
+	const extractOEDEntry = e => {
+		let code = e.target.value;
+		let domparser = new DOMParser();
+		let doc = domparser.parseFromString(code, 'text/html');
+   		let mainContent = doc.querySelector('#mainContent');
 
-    let oed_word = extractOEDWord(mainContent);
-    let oed_etymology = extractOEDEtymology(mainContent);
-    let oed_definitions = extractOEDDefinitions(mainContent);
+		let oed_word = extractOEDWord(mainContent);
+   		let oed_etymology = extractOEDEtymology(mainContent);
+		let oed_definitions = extractOEDDefinitions(mainContent);
+		let oed_citations = extractOEDCitations(mainContent);
 
-    var oed = {
-      word: oed_word.word,
-      definitions: oed_definitions,
-      etymology: oed_etymology,
-    };
-    let oed_definition = oed_definitions.map(def => def.innerHTML).join("<hr/>");
-    var oed_post = {
-      category: 'logophile',
-      title: oed_word.word,
-      date: new Date(),
-      content: {
-        definition: oed_definition,
-        etymology: oed_etymology,
-        source: 'Extracted from online OED'
-      }
-    };
-    setState(oed_post);
-  }
+		var oed = {
+			word: oed_word.word,
+			definitions: oed_definitions,
+			etymology: oed_etymology,
+			citations: oed_citations,
+		};
+		let oed_definition = oed_definitions.map(def => def.innerHTML).join("<hr/>");
+		var oed_post = {
+			category: 'logophile',
+			title: oed_word.word,
+			date: new Date(),
+			content: {
+				definition: oed_definition,
+				etymology: oed_etymology,
+				citations: oed_citations,
+   				source: 'Extracted from online OED',
+			}
+		};
+		setState(oed_post);
+	}
 
-  var { posts } = useFetchPosts();
-  var title, category, content;
-  var definition, source, etymology, citations;
-  var text;
+	var { posts } = useFetchPosts();
+	var title, category, content;
+	var definition, source, etymology, citations;
+	var text;
 
-  const formTitle = 'Manage Post'
+	const formTitle = 'Manage Post'
 
-  if (!posts) { console.log('posts is empty; rendering null'); return null; }
-  else {
-    category = state.category;
-    title = state.title;
-    content = state.content;
-    if (category === 'logophile') {
-      definition = content.definition || '';
-      source = content.source || '';
-      etymology = content.etymology || '';
-      citations = content.citations || '';
-    } else {
-      text = content.text || '';
-    }
+	if (!posts) { console.log('posts is empty; rendering null'); return null; }
+	else {
+		category = state.category;
+		title = state.title;
+		content = state.content;
+		if (category === 'logophile') {
+			definition = content.definition || '';
+			source = content.source || '';
+			etymology = content.etymology || '';
+			citations = content.citations || '';
+		} else {
+			text = content.text || '';
+		}
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+		const handleClick = (event) => {
+			setAnchorEl(event.currentTarget);
+		};
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = e => {
-    let id = e.currentTarget.value;
-    setAnchorEl(null);
-    if (id) {
-      let _post = posts.find(p => p.id == id);
-      setState(_post);
-    }
-  };
+		const handleClose = e => {
+			let id = e.currentTarget.value;
+			setAnchorEl(null);
+			if (id) {
+				let _post = posts.find(p => p.id == id);
+				setState(_post);
+			}
+		};
 
 
-    return (
+		return (
     <div className="post-entry">
       <h1>{formTitle}</h1>
       <form>
@@ -209,7 +211,7 @@ console.log('MakePost state', state);
 */}
 
           <label htmlFor="title">OED Code</label>
-          <textarea id="oed-code" onChange={extractOEDEntry}></textarea>
+          <textarea id="oed-code" value={state.oedCode} onChange={extractOEDEntry}></textarea>
 
           </fieldset>
 
@@ -237,19 +239,19 @@ console.log('MakePost state', state);
           <label htmlFor="etymology">Etymology</label>
           <textarea id="etymology" value={state.content.etymology} onChange={handleChange}></textarea>
           </fieldset>
-{/*
+
           <fieldset>
           <label htmlFor="citations">Citations</label>
-          <textarea id="citations" values={citations} onChange={handleChange}></textarea>
+          <textarea id="citations" value={state.content.citations} onChange={handleChange}></textarea>
           </fieldset>
-*/}
+
         </div>
 
       </form>
 
     </div>
     );
-  }
+	}
 }
 
 export default MakePost;
