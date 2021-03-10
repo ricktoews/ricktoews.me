@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import geo_flags from './geo_flags.json';
+import geo_borders from './geo_borders.json';
+
+// Filter out countries that don't have borders.
+const flagsWithBorders = geo_flags.filter(flag => {
+	var countryRecord = geo_borders.find(item => item.country === flag.countryName);
+	return countryRecord && countryRecord.borders.length > 0;
+});;
+
 const geoUrl = 'https://arithmo.toewsweb.net:3000/geopath/';
 const geoCrossingsUrl = 'https://arithmo.toewsweb.net:3000/geocrossings/';
-const geoFlagsUrl = 'https://arithmo.toewsweb.net:3000/geoflags';
 
 const PathItem = styled.div`
 	display: flex;
@@ -22,21 +30,19 @@ function GeoGame(props) {
 	const [ destination, setDestination ] = useState();
 	const [ crossings, setCrossings ] = useState();
 	const [ path, setPath ] = useState([]);
-	const [ flagList, setFlagList ] = useState([]);
 	const [ randomCountry, setRandomCountry ] = useState();
 	const [ challengePath, setChallengePath ] = useState();
 	const [ bordering, setBordering ] = useState([]);
 	const [ correctBordering, setCorrectBordering ] = useState([]);
+	const flagList = flagsWithBorders;
 
+	// First load: pick a country with borders.
 	useEffect(async () => {
-		var res = await fetch(geoFlagsUrl);
-		res = await res.json();
-		var data = res.data || res;
-		setFlagList(data);
 		pickOne();
 	}, []);
 
-	/* Pick a path from those identified. */
+
+	// When path changes: Pick a path from those identified.
 	useEffect(async () => {
 		if (path.length > 0) {
 			var pathNdx = Math.floor(Math.random() * path.length);
@@ -71,7 +77,7 @@ function GeoGame(props) {
 
 	}, [path]);
 
-	/* Origin or Crossings count has changed, so get list of border crossings with the specified number of crossings. */
+	// Origin or Crossings count has changed, so get list of border crossings with the specified number of crossings.
 	useEffect(async () => {
 		if (origin && crossings) {
 			var url = geoCrossingsUrl + `${origin}/${crossings}`;
@@ -108,6 +114,7 @@ function GeoGame(props) {
 	const pickOne = () => {
 		var rndNdx = Math.floor(Math.random() * flagList.length);
 		var randCountry = flagList[rndNdx] || {};
+		console.log('Pick One', rndNdx, randCountry);
 		setRandomCountry(randCountry);
 		setOrigin(randCountry.countryName);
 		setCrossings(2);
@@ -198,50 +205,18 @@ function GeoGame(props) {
 		console.log('clicked', correctBordering);
 	}
 
-	const handleSetOrigin = e => {
-		e.preventDefault();
-		setOrigin(e.target.value);
-	}
-
-	const handleSetDestination = e => {
-		e.preventDefault();
-		setDestination(e.target.value);
-	}
-
-	const handleSetCrossings = e => {
-		e.preventDefault();
-		setCrossings(e.target.value);
-	}
 
 	return (
 		<div className="container">
 			<button className="btn btn-info" onClick={pickOne}>Random Country</button>
-		{/*
-			<div>
-				<input type="text" name="origin" onBlur={handleSetOrigin} />
-			</div>
-			<div>
-				<input type="text" name="destination" onBlur={handleSetDestination} />
-			</div>
-			<div>
-				<input type="text" name="crossings" onBlur={handleSetCrossings} />
-			</div>
-		*/}
 
 			{ randomCountry && challengePath && (
-				<Challenge origin={challengePath[0]} destination={challengePath[challengePath.length - 1]} />
+				<>
+				<Challenge origin={origin} destination={challengePath[challengePath.length - 1]} />
+				<FlagSelectionGrid />
+				</>
 			) }
 
-
-		{/*
-			{ path.length > 0 && (
-				<div>
-			<h3>Border Crossings</h3>
-			{ path.map && path.map((p, key) => <Crossings key={key} path={p} />) }
-				</div>
-			) }
-		*/}
-			<FlagSelectionGrid />
 
 
 		</div>
