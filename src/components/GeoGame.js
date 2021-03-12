@@ -34,13 +34,13 @@ function GeoGame(props) {
 	const [ challengePath, setChallengePath ] = useState();
 	const [ bordering, setBordering ] = useState([]);
 	const [ correctBordering, setCorrectBordering ] = useState([]);
+	const [ refreshFlags, setRefreshFlags ] = useState(false);
 	const flagList = flagsWithBorders;
 
 	// First load: pick a country with borders.
 	useEffect(async () => {
 		pickOne();
 	}, []);
-
 
 	// When path changes: Pick a path from those identified.
 	useEffect(async () => {
@@ -69,16 +69,18 @@ function GeoGame(props) {
 			var correctCountries = validPaths.map(path => path.slice(1, path.length - 1)).flat();
 //			console.log('bordering countries', correctBordering);
 			var bordering = [...origBordering, ...destBordering, ...correctCountries];
-			console.log('multiple choice countries', bordering);
+
 			setChallengePath(path[pathNdx]);
 			setBordering(bordering);
 			setCorrectBordering(correctCountries);
+			setRefreshFlags(true);
 		}
 
 	}, [path]);
 
 	// Origin or Crossings count has changed, so get list of border crossings with the specified number of crossings.
 	useEffect(async () => {
+		setRefreshFlags(false);
 		if (origin && crossings) {
 			var url = geoCrossingsUrl + `${origin}/${crossings}`;
 
@@ -145,8 +147,12 @@ function GeoGame(props) {
 
 	const Challenge = props => {
 		const { origin, destination } = props;
-		const originFlag = flagList.find(item => item.countryName === origin).flagUrl;
-		const destinationFlag = flagList.find(item => item.countryName === destination).flagUrl;
+		var originFlagObj = flagList.find(item => item.countryName === origin);
+		var destinationFlagObj = flagList.find(item => item.countryName === destination);
+		const originFlag = originFlagObj ? originFlagObj.flagUrl : '';
+		if (!originFlag) console.log('No flag URL found for origin', origin);
+		const destinationFlag = destinationFlagObj ? destinationFlagObj.flagUrl : '';
+		if (!destinationFlag) console.log('No flag URL found for destination', destination);
 
 		return (
 			<>
@@ -178,6 +184,7 @@ function GeoGame(props) {
 
 	const FlagSelectionGrid = props => {
 		var borderingCountries = JSON.stringify(bordering);
+
 		if (flagList) {
 			var multipleChoiceFlags = flagList.filter(flag => {
 				let isBordering = borderingCountries.indexOf(flag.countryName) !== -1;
@@ -201,6 +208,7 @@ function GeoGame(props) {
 		var selectedCountry = el.dataset.country;
 		if (correctBordering.indexOf(selectedCountry) !== -1) {
 			console.log('Correct!', selectedCountry, correctBordering);
+			pickOne();
 		}
 		console.log('clicked', correctBordering);
 	}
@@ -210,7 +218,7 @@ function GeoGame(props) {
 		<div className="container">
 			<button className="btn btn-info" onClick={pickOne}>Random Country</button>
 
-			{ randomCountry && challengePath && (
+			{ refreshFlags && randomCountry && challengePath && (
 				<>
 				<Challenge origin={origin} destination={challengePath[challengePath.length - 1]} />
 				<FlagSelectionGrid />
