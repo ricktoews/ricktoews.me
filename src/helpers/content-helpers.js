@@ -112,10 +112,11 @@ function generateTitle(post) {
 }
 
 function makeText(post) {
-  var text = (post.content && post.content.text) ? post.content.text : null;
+  var text = post.content?.text ? post.content.text : null;
   if (text) {
-    let pEls = text.split(/\n+/);
-    text = '<p>' + pEls.join('</p>\n<p>') + '</p>';
+    let pEls = text.split(/\n\n+/);
+    text = '<p>' + pEls.join('</p><p>') + '</p>';
+    text = text.replaceAll(/\n/g, '<br/>');
   }
   return text;
 }
@@ -145,7 +146,7 @@ export async function getAll() {
 	data.map(item => {
 		item.linkTitle = generateTitle(item);
 		item.headerStyle = addTheme(item);
-		if (item.content && item.content.text) item.text = makeText(item);
+		if (item.content && item.content.text) item.content.text = makeText(item);
 
         let homeArticleContent = generateHtml(item);
         let homeArticleEl = document.createElement('div');
