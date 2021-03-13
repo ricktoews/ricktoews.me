@@ -67,7 +67,7 @@ function MakePost(props) {
 			state.content[id] = value;
 		}
 		console.log('handleChange post', state);
-		initSavePost(state);
+//		initSavePost(state);
 		setState(JSON.parse(JSON.stringify(state)));
 	}
 
@@ -176,6 +176,7 @@ function MakePost(props) {
               <option value="logophile">Logophile</option>
               <option value="arithmophile">Arithmophile</option>
               <option value="professional">Professional</option>
+              <option value="trivia">Trivia</option>
               <option value="thoughts">Thoughts</option>
             </select>
           </div>
