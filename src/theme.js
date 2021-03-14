@@ -38,9 +38,9 @@ export const theme = {
 			iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
 			link: '/',
 		},
-		perambulations: {
-			title: 'Local Wanderings',
-			primaryColor: 'aaccff',
+		trivia: {
+			title: 'Trivia',
+			primaryColor: '625d76',
 			iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
 			link: '/',
 		},
@@ -75,7 +75,7 @@ export const theme = {
 			link: '/learning',
 		},
 		quote: {
-			title: 'Eye-catching Quote',
+			title: 'Memorable Quote',
 			primaryColor: 'e91e63',
 			iconPath: 'M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z',
 			link: '/logophilia',
