@@ -8,8 +8,7 @@ import { theme, createCategoryTheme } from '../theme';
 
 const HomeItemTitle = styled.div`
 	position: relative;
-	padding: 5px;
-	font-size: 1.5em;
+	font-size: 1.25em;
 	font-weight: bold;
 `;
 
@@ -39,8 +38,6 @@ function HomePost(props) {
 		paddingLeft: '10px',
 		backgroundColor: color.light,
 		color: color.contrastText,
-		borderTop: '1px solid #ccc',
-		borderBottom: '1px solid #ccca',
 		display: 'flex',
 		justifyContent: 'space-between',
 	}
