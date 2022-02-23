@@ -34,7 +34,6 @@ function withNav(MyComponent, title, showFilter = false) {
 };
 
 function App(props) {
-	console.log('Testing deploy (5).');
 	const HomeContent = ({ categoryFilter }) => {
 		console.log('HomeContent filter', categoryFilter);
 		return (
