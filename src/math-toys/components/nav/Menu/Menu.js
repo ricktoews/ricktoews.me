@@ -26,9 +26,6 @@ const Menu = ({ open }) => {
       <a href="/wordle">
         Wordle
       </a>
-      <a href="/geogame">
-        Geography Game
-      </a>
     </StyledMenu>
   )
 }
