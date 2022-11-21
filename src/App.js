@@ -1,61 +1,30 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState } from 'react';
-import { ThemeProvider } from 'styled-components';
-import { GlobalStyles } from './global';
-import { theme } from './theme';
-import { Switch, Route } from 'react-router-dom';
-
-import Masthead from './Masthead';
-import Home from './components/Home';
-import Pythag from './math-toys/components/pythag/Pythag-mobile';
-import PythagC from './math-toys/components/pythag/Pythag-C';
-import Denom from './math-toys/components/denom/Denom-mobile';
-import Calendar from './math-toys/components/calendar/Calendar';
-import CalendarPractice from './math-toys/components/calendar/CalendarPractice';
-import Mastermind from './math-toys/components/mastermind/AppSolves';
-import WordleAppSolves from './math-toys/components/wordle/AppSolves';
-import GeoGame from './components/GeoGame';
-import MakePost from './manage-posts/MakePost';
-
-function withNav(MyComponent, title, showFilter = false) {
-
-	return function(...props) {
-		const [ categoryFilter, setCategoryFilter ] = useState();
-
-		return (
-		<>
-			<Masthead title={title} setCategoryFilter={setCategoryFilter} showFilter={showFilter} />
-			<main>
-				<MyComponent categoryFilter={categoryFilter} {...props} />
-			</main>
-		</>
-		);
-	}
-};
+import React from "react";
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import Navbar from "./Navbar";
+import Home from "./Home";
+import About from "./About";
+import Articles from "./Articles";
+import "./assets/css/App.css";
 
 function App(props) {
-	const HomeContent = ({ categoryFilter }) => {
-		console.log('HomeContent filter', categoryFilter);
-		return (
-			<Home content={props.content} categoryFilter={categoryFilter} />
-		);
-	}
+  const { content } = props;
+  const categories = Array.from(
+    new Set(content.map((item) => item.category))
+  ).sort();
 
-	return (
-	<ThemeProvider theme={theme}>
-		<GlobalStyles />
-		<Switch>
-			<Route exact path="/" component={withNav(HomeContent, 'RickToews.me', true)} />
-			<Route path='/denom' component={withNav(Denom, 'Denominators')} />
-			<Route path='/pythag' component={withNav(Pythag, 'Pythagorean Toy')} />
-			<Route path='/calendar' component={withNav(Calendar, 'Calendar')} />
-			<Route path='/mastermind' component={withNav(Mastermind, 'Mastermind')} />
-			<Route path='/wordle' component={withNav(WordleAppSolves, 'Wordle')} />
-			<Route path='/geogame' component={withNav(GeoGame, 'Geography Game')} />
-			<Route path='/makepost' render={(props) => <MakePost />} />
-		</Switch>
-	</ThemeProvider>
-	);
+  return (
+    <div className="App">
+      <Navbar categories={categories} />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route
+          path="/category/:category"
+          element={<Articles content={content} />}
+        />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

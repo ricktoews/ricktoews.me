@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+.root {
+}
+
+body {
+  font-family: Lato;
+}
+
+.App {
+  width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.app-picture-label-container {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 3px;
+  border: 1px solid white;
+  background-color: rgba(128, 128, 128, .5);
+}
+.app-picture-label-container .location {
+  color: white;
+  font-size: 16px;
+}
+.app-picture-label-container .description {
+  color: white;
+  font-size: 30px;
+}
+
+.app-upper-background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: black;
+}
+.app-upper-background-picture-container {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 70%);
+  background-color: white;
+}
+.app-upper-background-picture {
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: calc(100% - 2px);
+  background-image: url(../images/portugal-aquarium.jpg);
+  background-size: cover;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 70%);
+}
+
+.app-lower-background-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: black;
+}
+.app-lower-background-picture-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0 30%, 100% 0, 100% 100%, 0% 100%);
+  background-color: white;
+}
+.app-lower-background-picture {
+  position: relative;
+  top: 2px;
+  width: 100%;
+  height: calc(100% - 2px);
+  background-image: url(../images/portugal-aquarium-lower.jpg);
+  background-size: cover;
+  clip-path: polygon(0 30%, 100% 0, 100% 100%, 0% 100%);
+}
+
+
+
+.home-container {
+/* Because we need a wrapper tag in Home.js */
+}
+
+.home-content {
+  position: absolute;
+  bottom: calc(50% - 8%);
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 50%;
+  height: 16%;
+  margin: 0;
+  color: white;
+}
+.home-content .title {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+.home-content .tag-line {
+  font-size: 13px;
+}
+
+
+.app-container {
+  position: relative;
+  padding: 20px;
+  padding-top: 75px;
+}
+
+.inner-banner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: rgb(45, 202, 176);
+}
+.header-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+h1 {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 24px;
+  color: white;
+}
+.inner-banner-background {
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 30px solid transparent;
+  border-top: 30px solid transparent;
+  border-left: 100vw solid black;
+}
+
+.mosaic-container {
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  width: 80px;
+  border: 1px solid black;
+}
+.mosaic-container div {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin: 1px;
+  background-color:rgb(249, 177, 105)
+}
+
+.nav-mechanism {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 0;
+}
+.nav-mechanism .nav-button {
+  position: absolute;
+  z-index: 10;
+
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: black;
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.nav-button .hamburger-container {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.nav-button .hamburger {
+  position: relative;
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  margin: 1px 0;
+}
+
+.nav-element.nav-hide {
+  right: -200px;
+  transition-property: right;
+  transition-duration: 1s;
+  transition-timing-function: ease-out;
+}
+.nav-element.nav-show {
+  right: 0;
+  transition-property:right;
+  transition-duration:1s;
+  transition-timing-function: ease-out;
+}
+
+.nav-element {
+  position: absolute;
+  top: 0;
+  width: 200px;
+  height: 100vh;
+  background-color: black;
+  color: white;
+}
+.nav-element nav {
+  right: 0;
+}
+.nav-element nav ul {
+  list-style: none;
+  margin: 0;
+  margin-top: 80px;
+  padding-left: 0;
+}
+nav ul li {
+  background-color: rgb(128,128,128);
+  margin: 20px 0;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+}
+.nav-element nav a {
+  color: white;
+  text-decoration: none;
+
+}
+
+

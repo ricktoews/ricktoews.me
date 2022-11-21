@@ -1,18 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-import './index.scss';
-import reportWebVitals from './reportWebVitals';
-import { getAll } from './helpers/content-helpers';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-async function start() {
-	var content = await getAll();
-	ReactDOM.render(<BrowserRouter><App content={content} /></BrowserRouter>, document.getElementById('root'));
-}
+const API_URL = `https://rest.toewsweb.net`;
+const initialContentLoad = async () => {
+  const url = `${API_URL}/home-content.php/getall`;
+  let result = await (await fetch(url)).json();
+  result = result.data;
 
-start();
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <App content={result} />
+      </BrowserRouter>
+    </React.StrictMode>
+  );
+};
 
+initialContentLoad();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
