@@ -15,8 +15,6 @@ body {
 .App {
   width: 100vw;
   box-sizing: border-box;
-  overflow-x: hidden;
-  overflow-y: hidden;
 }
 
 .app-picture-label-container {
@@ -147,6 +145,10 @@ h1 {
   font-size: 24px;
   color: white;
 }
+h2 {
+  font-size: 12pt;
+  color: #006666;
+}
 .inner-banner-background {
   top: 0;
   left: 0;
@@ -162,7 +164,6 @@ h1 {
   align-content: flex-start;
   flex-wrap: wrap;
   width: 80px;
-  border: 1px solid black;
 }
 .mosaic-container div {
   width: 10px;
@@ -177,6 +178,9 @@ h1 {
   z-index: 10;
   top: 0;
   right: 0;
+  overflow-x: hidden;
+  width: 200px;
+  height: 100%;
 }
 .nav-mechanism .nav-button {
   position: absolute;

@@ -69,9 +69,9 @@ const Nav = (props) => {
             <li data-link="/">
               <a href="/">Home</a>
             </li>
-            {categories.map((category) => {
+            {categories.map((category, key) => {
               return (
-                <li data-link={`/category/${category}`}>
+                <li key={key} data-link={`/category/${category}`}>
                   <a href="/words">{capitalize(category)}</a>
                 </li>
               );
