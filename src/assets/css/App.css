@@ -56,7 +56,6 @@ body {
   top: 0;
   width: 100%;
   height: calc(100% - 2px);
-  background-image: url(../images/portugal-aquarium.jpg);
   background-size: cover;
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 70%);
 }
@@ -83,12 +82,47 @@ body {
   top: 2px;
   width: 100%;
   height: calc(100% - 2px);
-  background-image: url(../images/portugal-aquarium-lower.jpg);
   background-size: cover;
   clip-path: polygon(0 30%, 100% 0, 100% 100%, 0% 100%);
 }
 
+/* Home page images */
+.app-upper-background-picture-oceanario {
+  background-image: url(../images/portugal-aquarium.jpg);
+  background-position: center;
+}
+.app-lower-background-picture-oceanario {
+  background-image: url(../images/portugal-aquarium-lower.jpg);
+  background-position: center;
+}
 
+.app-upper-background-picture-westminster {
+  background-image: url(../images/westminster.jpg);
+}
+.app-lower-background-picture-westminster {
+  background-image: url(../images/westminster-2.jpg);
+}
+
+.app-upper-background-picture-beaufort-castle {
+  background-image: url(../images/beaufort-castle-2.jpg);
+  background-position: center;
+}
+.app-lower-background-picture-beaufort-castle {
+  background-image: url(../images/beaufort-castle-5.jpg);
+  background-position: center;
+}
+
+.app-upper-background-picture-alaska-cruise {
+  background-image: url(../images/alaska-cruise.jpg);
+}
+.app-lower-background-picture-alaska-cruise {
+  background-image: url(../images/alaska-cruise-2.jpg);
+}
+.places-transition {
+  transition-property: background-image;
+  transition-duration: 3s;
+}
+/* End Home page images */
 
 .home-container {
 /* Because we need a wrapper tag in Home.js */
