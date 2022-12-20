@@ -30,3 +30,4 @@ When desctructing assignment was introduced, it became possible to do this inste
 [a, b] = [b, b + a];
 
 
+Content added on master branch.
