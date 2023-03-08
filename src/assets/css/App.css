@@ -88,35 +88,39 @@ body {
 
 /* Home page images */
 .app-upper-background-picture-oceanario {
-  background-image: url(../images/portugal-aquarium.jpg);
+  background-image: url(../images/reduced-portugal-aquarium.jpg);
   background-position: center;
 }
 .app-lower-background-picture-oceanario {
-  background-image: url(../images/portugal-aquarium-lower.jpg);
+  background-image: url(../images/reduced-portugal-aquarium-lower.jpg);
   background-position: center;
 }
 
 .app-upper-background-picture-westminster {
-  background-image: url(../images/westminster.jpg);
+  background-image: url(../images/reduced-westminster.jpg);
+  background-position: center;
 }
 .app-lower-background-picture-westminster {
-  background-image: url(../images/westminster-2.jpg);
+  background-image: url(../images/reduced-westminster-2.jpg);
+  background-position: center;
 }
 
 .app-upper-background-picture-beaufort-castle {
-  background-image: url(../images/beaufort-castle-2.jpg);
+  background-image: url(../images/reduced-beaufort-castle-2.jpg);
   background-position: center;
 }
 .app-lower-background-picture-beaufort-castle {
-  background-image: url(../images/beaufort-castle-5.jpg);
+  background-image: url(../images/reduced-beaufort-castle-5.jpg);
   background-position: center;
 }
 
 .app-upper-background-picture-alaska-cruise {
-  background-image: url(../images/alaska-cruise.jpg);
+  background-image: url(../images/reduced-alaska-cruise.jpg);
+  background-position: center;
 }
 .app-lower-background-picture-alaska-cruise {
-  background-image: url(../images/alaska-cruise-2.jpg);
+  background-image: url(../images/reduced-alaska-cruise-2.jpg);
+  background-position: center;
 }
 .places-transition {
   transition-property: background-image;
