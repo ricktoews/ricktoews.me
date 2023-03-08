@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { capitalize } from "./utils/utils";
+import FormatArticle from "./FormatArticle";
 
 import "./assets/css/App.css";
 
@@ -71,18 +72,19 @@ const Articles = (props, state) => {
         <div className="inner-banner-background"></div>
       </div>
 
-      {content.map((article) => {
+      {content.map((article, ndx) => {
         let articleContent;
         if (category !== "logophile") {
           articleContent = article.content.text;
         } else {
           articleContent = article.content.definition;
         }
+        console.log('====> article text', articleContent);
         return (
-          <article>
+          <article key={ndx}>
             <h2 className={`content-${category}`}>{article.title}</h2>
 
-            <div>{articleContent}</div>
+            <FormatArticle text={articleContent}/>
           </article>
         );
       })}

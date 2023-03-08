@@ -212,7 +212,7 @@ h2 {
 }
 
 .nav-mechanism {
-  position: absolute;
+  position: fixed;
   z-index: 10;
   top: 0;
   right: 0;
