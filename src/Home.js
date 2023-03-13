@@ -23,6 +23,7 @@ const places = [
     city: 'Alaska, USA'
   }
 ];
+console.log(`Test deploy, since the revert apparently didn't trigger it.`);
 
 const Home = (props, state) => {
   const [ slide, setSlide ] = useState(0);
