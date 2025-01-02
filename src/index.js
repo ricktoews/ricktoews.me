@@ -7,9 +7,16 @@ import reportWebVitals from "./reportWebVitals";
 
 const API_URL = `https://rest.toewsweb.net`;
 const initialContentLoad = async () => {
-  const url = `${API_URL}/home-content.php/getall`;
-  let result = await (await fetch(url)).json();
-  result = result.data;
+  let result = [];
+/*
+  try {
+    const url = `${API_URL}/home-content.php/getall`;
+    let result = await (await fetch(url)).json();
+    result = result.data;
+  } catch(e) {
+    console.error('Not able to access', API_URL);
+  }
+*/
 
   const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(
