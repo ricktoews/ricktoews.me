@@ -1,214 +1,117 @@
-@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
-
-body, html {
+/* Reset the default margin/padding */
+* {
   margin: 0;
   padding: 0;
-}
-
-.root {
-}
-
-body {
-  font-family: Lato;
-}
-
-.App {
-  width: 100vw;
   box-sizing: border-box;
 }
 
-.app-picture-label-container {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  padding: 3px;
-  border: 1px solid white;
-  background-color: rgba(128, 128, 128, .5);
-}
-.app-picture-label-container .location {
-  color: white;
-  font-size: 16px;
-}
-.app-picture-label-container .description {
-  color: white;
-  font-size: 30px;
-}
-
-.app-upper-background-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: black;
-}
-.app-upper-background-picture-container {
-  position: absolute;
-  top:0;
-  left:0;
-  width: 100%;
-  height: 100%;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 70%);
-  background-color: white;
-}
-.app-upper-background-picture {
-  position: relative;
-  top: 0;
-  width: 100%;
-  height: calc(100% - 2px);
-  background-size: cover;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 70%);
-}
-
-.app-lower-background-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: black;
-}
-.app-lower-background-picture-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  clip-path: polygon(0 30%, 100% 0, 100% 100%, 0% 100%);
-  background-color: white;
-}
-.app-lower-background-picture {
-  position: relative;
-  top: 2px;
-  width: 100%;
-  height: calc(100% - 2px);
-  background-size: cover;
-  clip-path: polygon(0 30%, 100% 0, 100% 100%, 0% 100%);
-}
-
-/* Home page images */
-.app-upper-background-picture-oceanario {
-  background-image: url(../images/reduced-portugal-aquarium.jpg);
-  background-position: center;
-}
-.app-lower-background-picture-oceanario {
-  background-image: url(../images/reduced-portugal-aquarium-lower.jpg);
-  background-position: center;
-}
-
-.app-upper-background-picture-westminster {
-  background-image: url(../images/reduced-westminster.jpg);
-  background-position: center;
-}
-.app-lower-background-picture-westminster {
-  background-image: url(../images/reduced-westminster-2.jpg);
-  background-position: center;
-}
-
-.app-upper-background-picture-beaufort-castle {
-  background-image: url(../images/reduced-beaufort-castle-2.jpg);
-  background-position: center;
-}
-.app-lower-background-picture-beaufort-castle {
-  background-image: url(../images/reduced-beaufort-castle-5.jpg);
-  background-position: center;
-}
-
-.app-upper-background-picture-alaska-cruise {
-  background-image: url(../images/reduced-alaska-cruise.jpg);
-  background-position: center;
-}
-.app-lower-background-picture-alaska-cruise {
-  background-image: url(../images/reduced-alaska-cruise-2.jpg);
-  background-position: center;
-}
-.places-transition {
-  transition-property: background-image;
-  transition-duration: 3s;
-}
-/* End Home page images */
-
-.home-container {
-/* Because we need a wrapper tag in Home.js */
-}
-
-.home-content {
-  position: absolute;
-  bottom: calc(50% - 8%);
-  padding-left: 10px;
+.container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  width: 50%;
-  height: 16%;
-  margin: 0;
-  color: white;
-}
-.home-content .title {
-  font-size: 25px;
-  margin-bottom: 10px;
-}
-.home-content .tag-line {
-  font-size: 13px;
+  min-height: 100vh;
+  /* Ensure the container takes full viewport height */
 }
 
-
-.app-container {
-  position: relative;
-  padding: 20px;
-  padding-top: 75px;
-}
-
-.inner-banner-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background-color: rgb(45, 202, 176);
-}
-.header-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.header {
   display: flex;
   align-items: center;
-}
-h1 {
-  margin: 0;
-  padding-left: 20px;
-  font-size: 24px;
-  color: white;
-}
-h2 {
-  font-size: 12pt;
-  color: #006666;
-}
-.inner-banner-background {
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-bottom: 30px solid transparent;
-  border-top: 30px solid transparent;
-  border-left: 100vw solid black;
+  height: 100px;
+  width: 100%;
+  background-color: #999;
+  /*
+  background-image: url(../images/reduced-portugal-aquarium.jpg);
+  background-position-y: 55%;
+  background-size: 100%;
+  */
 }
 
-.mosaic-container {
-  display: flex;
-  align-content: flex-start;
-  flex-wrap: wrap;
-  width: 80px;
+.header h1 {
+  padding-left: 50px;
+  color: white;
 }
-.mosaic-container div {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
-  margin: 1px;
-  background-color:rgb(249, 177, 105)
+
+.content {
+  display: flex;
+  flex-grow: 1;
+  /* Make the content area grow to fill remaining space */
+  background-color: white;
+  position: relative;
+}
+
+.left-content {
+  flex: 0 0 25%;
+  padding: 50px;
+  /* Left content takes 33% of the width */
+  background-color: white;
+}
+
+.divider {
+  position: absolute;
+  /* Absolute positioning to control exact placement */
+  top: 30px;
+  /* Start 30px from the top of the container */
+  bottom: 30px;
+  /* End 30px before the bottom */
+  left: 25%;
+  /* Place the divider 33% from the left (after the left content) */
+  width: 1px;
+  /* Thin vertical line */
+  background-color: #ccc;
+}
+
+.right-content {
+  flex: 1;
+  padding: 50px;
+  /* Right content takes up the remaining space */
+  background-color: white;
+}
+
+.scrollable-content {
+  flex: 1;
+  /* Allow the content to take all available space */
+  overflow-y: auto;
+  /* Enable vertical scrolling */
+  padding: 10px;
+  height: calc(100vh - 200px);
+  /* Optional, for better readability */
+}
+
+
+.portfolio-link {
+  cursor: pointer;
+  color: #8FC93A;
+  line-height: 200%;
+}
+
+.portfolio-link:hover {
+  text-decoration: underline;
+}
+
+.portfolio-link .screenshot {
+  box-sizing: content-box;
+
+  width: 120px;
+  height: 80px;
+  float: left;
+  padding: 0 20px;
+}
+
+.portfolio-content {
+  line-height: 200%;
+  display: none;
+}
+
+.portfolio-content.active {
+  display: block;
+}
+
+.portfolio-content h2 {
+  color: #E18335;
+  padding-bottom: 15px;
+}
+
+.portfolio-content p {
+  padding-bottom: 10px;
 }
 
 .nav-mechanism {
@@ -220,6 +123,7 @@ h2 {
   width: 200px;
   height: 100%;
 }
+
 .nav-mechanism .nav-button {
   position: absolute;
   z-index: 10;
@@ -230,12 +134,12 @@ h2 {
   height: 40px;
   border-radius: 50%;
   background-color: black;
-  border: 1px solid white;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 }
+
 .nav-button .hamburger-container {
   position: absolute;
   width: 25px;
@@ -245,6 +149,7 @@ h2 {
   align-items: center;
   flex-wrap: wrap;
 }
+
 .nav-button .hamburger {
   position: relative;
   height: 3px;
@@ -259,10 +164,11 @@ h2 {
   transition-duration: 1s;
   transition-timing-function: ease-out;
 }
+
 .nav-element.nav-show {
   right: 0;
-  transition-property:right;
-  transition-duration:1s;
+  transition-property: right;
+  transition-duration: 1s;
   transition-timing-function: ease-out;
 }
 
@@ -274,26 +180,28 @@ h2 {
   background-color: black;
   color: white;
 }
+
 .nav-element nav {
   right: 0;
 }
+
 .nav-element nav ul {
   list-style: none;
   margin: 0;
   margin-top: 80px;
   padding-left: 0;
 }
+
 nav ul li {
-  background-color: rgb(128,128,128);
+  background-color: rgb(128, 128, 128);
   margin: 20px 0;
   padding: 5px;
   display: flex;
   justify-content: center;
 }
+
 .nav-element nav a {
   color: white;
   text-decoration: none;
 
 }
-
-
