@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { capitalize } from "./utils/utils";
 import FormatArticle from "./FormatArticle";
 
-import "./assets/css/App.css";
+import "./assets/css/App.scss";
 
 const mosaicColors = [
   "rgb(249, 143, 250)",
@@ -84,7 +84,7 @@ const Articles = (props, state) => {
           <article key={ndx}>
             <h2 className={`content-${category}`}>{article.title}</h2>
 
-            <FormatArticle text={articleContent}/>
+            <FormatArticle text={articleContent} />
           </article>
         );
       })}

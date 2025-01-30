@@ -1,0 +1,229 @@
+$left-column-bg: #a7a2a9;
+$right-column-bg: #f4f7f5;
+$portfolio-menu-heading-bg: #575a5e;
+$header-bg: #222823;
+$header-h1-size: 24px;
+$portfolio-link: #f4f7f5;
+$portfolio-link-size: 16px;
+$portfolio-heading: #222823;
+$resume-button-bg: #86bbd8;
+$resume-font-size: 16px;
+$content-heading-bg: #f4f7f5;
+$content-text: #a7a2a9;
+
+/* Reset the default margin/padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* Ensure the container takes full viewport height */
+}
+
+header {
+  position: absolute;
+  bottom: 70px;
+  z-index: 10;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 10px;
+  height: 50px;
+  width: 100%;
+  background-color: $header-bg;
+}
+
+header>div:first-child {
+  display: flex;
+  flex-wrap: no-wrap;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+}
+
+h1 {
+  color: white;
+  font-size: 24px;
+  font-variant: small-caps;
+}
+
+header>div:last-child {
+  display: flex;
+  flex-wrap: no-wrap;
+  align-items: center;
+  gap: 10px;
+
+  height: 100%;
+}
+
+header .vertical-bar {
+  width: 2px;
+  height: 100%;
+  background: white;
+}
+
+.resume a {
+  padding: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: $resume-button-bg;
+  color: white;
+  font-size: $resume-font-size;
+  cursor: pointer;
+}
+
+
+.mosaic-container {
+  width: 80px;
+  height: 60px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mosaic-container div {
+  width: 20px;
+  height: 20px;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  font-size: .7em;
+  height: 25px;
+  width: 100%;
+  background-color: #26547c;
+  padding-left: 50px;
+  color: white;
+}
+
+.content {
+  display: flex;
+  flex-grow: 1;
+  /* Make the content area grow to fill remaining space */
+  background-color: transparent;
+  position: relative;
+}
+
+.left-content {
+  flex: 0 0 20%;
+  background-color: $left-column-bg;
+}
+
+.right-content {
+  flex: 1;
+  background-color: $right-column-bg;
+}
+
+.scrollable-content {
+  flex: 1;
+  /* Allow the content to take all available space */
+  overflow-y: auto;
+  /* Enable vertical scrolling */
+  padding: 10px;
+  height: calc(100vh - 180px);
+  /* Optional, for better readability */
+}
+
+.portfolio-content a {
+  text-decoration: none;
+  cursor: pointer;
+  color: $portfolio-link;
+}
+
+.portfolio-content a:hover {
+  text-decoration: underline;
+  color: $portfolio-link;
+}
+
+.portfolio-menu-heading {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  font-family: poppins;
+  font-weight: 1000;
+  font-size: 24px;
+  letter-spacing: 7px;
+  background-color: $portfolio-menu-heading-bg;
+  width: 100%;
+  color: white;
+}
+
+.portfolio-links {
+  padding: 20px;
+}
+
+.portfolio-link {
+  font-size: $portfolio-link-size;
+  line-height: 300%;
+}
+
+.portfolio-link a {
+  text-decoration: none;
+  color: $portfolio-link;
+}
+
+.portfolio-link a:hover {
+  text-decoration: underline;
+}
+
+.portfolio-link .screenshot {
+  box-sizing: content-box;
+
+  width: 120px;
+  height: 80px;
+  float: left;
+  padding: 0 20px;
+}
+
+.portfolio-content {
+  line-height: 200%;
+  display: block;
+}
+
+.portfolio-content h2 {
+  color: $portfolio-heading;
+  font-size: 24px;
+  font-weight: 1000;
+  letter-spacing: 7px;
+  padding: 10px;
+}
+
+.portfolio-content p {
+  padding-bottom: 10px;
+  line-height: 2.5;
+  font-size: 20px;
+  color: $content-text;
+}
+
+.portfolio-content .tech-stuff {
+  border: 1px solid gray;
+  background: #ccc;
+  padding: 10px;
+
+  p {
+    font-size: 16px;
+    font-family: sans-serif;
+    color: black;
+    line-height: 120%;
+  }
+}
+
+.content-heading {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-family: poppins;
+  font-weight: 1000;
+  font-size: 24px;
+  letter-spacing: 7px;
+  background-color: $content-heading-bg;
+  width: 100%;
+}

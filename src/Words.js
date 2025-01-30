@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import "./assets/css/App.css";
+import "./assets/css/App.scss";
 
 const mosaicColors = [
   "rgb(249, 143, 250)",

@@ -1,29 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-const API_URL = `https://rest.toewsweb.net`;
 const initialContentLoad = async () => {
   let result = [];
-/*
-  try {
-    const url = `${API_URL}/home-content.php/getall`;
-    let result = await (await fetch(url)).json();
-    result = result.data;
-  } catch(e) {
-    console.error('Not able to access', API_URL);
-  }
-*/
 
   const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(
     <React.StrictMode>
-      <BrowserRouter>
-        <App content={result} />
-      </BrowserRouter>
+      <App content={result} />
     </React.StrictMode>
   );
 };
