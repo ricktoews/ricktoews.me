@@ -45,6 +45,7 @@ const MathToysAPI = () => {
         <p><b>Decimal expansion</b> for the reciprocal of a denominator.</p>
         <div className="tech-stuff">
             <p>Example of decimal expansions: <a data-portfolio="api-recip" onClick={showPortfolioSite}>https://api.math-toys.app/recip/109</a>. This does exactly the same thing as the /dc/[denom], but it only does it for the reciprocal. This allows you to inspect the decimal expansio for, say, 1/109 without also receiving the other 107 expansions.</p>
+            <p>Why 109, you ask? (You're simply dying of curiosity, I know.) From right to left, the decimal expansion starts out like this: 112358. If that looks familiar, it's probably because you have a very proper acquaintance with the famed Fibonacci series.</p>
         </div>
 
     </>
